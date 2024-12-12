@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { useLocation, useNavigate } from "react-router-dom";
 // import { PinInput } from 'react-input-pin-code';
 import IMG from "../../Assets/Images/Receipt.gif";
-import logo from "../../Assets/Images/mainlogo.png";
+import logo from "../../Assets/Images/Estimate_White.png";
 // import useApi from '../../Hooks/useApi';
 import useAPI from "../../Hooks/useApi";
 import { Message } from "../../Components/Message";
