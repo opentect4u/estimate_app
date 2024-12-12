@@ -1,0 +1,23 @@
+table {
+  /* text-align: center; */
+  border: none;
+  padding: 10px;
+}
+
+table .texAlignLeft {
+  text-align: left;
+}
+
+table .texAlignRight {
+  text-align: right;
+}
+
+table tr.texAlignCenter td {
+  text-align: center;
+}
+
+.tot_section {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
