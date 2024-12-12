@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "item": "Emami Rice Bran Oil",
+    "description": "Item description",
+    "unit_price": 240,
+    "unit": "Lt"
+  },
+  {
+    "id": 2,
+    "item": "Lux Soap",
+    "description": "Item description",
+    "unit_price": 65,
+    "unit": "Pc"
+  },
+  {
+    "id": 3,
+    "item": "Mung Daal",
+    "description": "Item description",
+    "unit_price": 160,
+    "unit": "Kg"
+  },
+  {
+    "id": 4,
+    "item": "Cadbury Dairy Milk",
+    "description": "Item description",
+    "unit_price": 110,
+    "unit": "Pc"
+  },
+  {
+    "id": 5,
+    "item": "Amul Chocolate Dark",
+    "description": "Item description",
+    "unit_price": 120,
+    "unit": "Pc"
+  },
+  {
+    "id": 6,
+    "item": "Amul Chocolate Milk",
+    "description": "Item description",
+    "unit_price": 140,
+    "unit": "Pc"
+  },
+  {
+    "id": 7,
+    "item": "Cadbury Dairy Milk Gold",
+    "description": "Item description",
+    "unit_price": 110,
+    "unit": "Pc"
+  },
+  {
+    "id": 8,
+    "item": "Amul Chocolate Peanut",
+    "description": "Item description",
+    "unit_price": 120,
+    "unit": "Pc"
+  },
+  {
+    "id": 9,
+    "item": "Amul Milk",
+    "description": "Item description",
+    "unit_price": 140,
+    "unit": "Lt"
+  },
+  {
+    "id": 10,
+    "item": "Sprite 700ml",
+    "description": "Item description",
+    "unit_price": 40,
+    "unit": "Lt"
+  },
+  {
+    "id": 11,
+    "item": "Coca Cola 700ml",
+    "description": "Item description",
+    "unit_price": 50,
+    "unit": "Lt"
+  },
+  {
+    "id": 12,
+    "item": "Fortune Soya Chunks",
+    "description": "Item description",
+    "unit_price": 50,
+    "unit": "Kg"
+  }
+]
