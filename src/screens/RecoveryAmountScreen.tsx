@@ -121,15 +121,7 @@ function RecoveryAmountScreen() {
     //     setNetAmt(netAmt)
     // }
 
-    const getDueAmount = async (tnxResponse?: {
-        pay_txn_id: "",
-        pay_amount: 0,
-        pay_amount_original: 0,
-        currency_code: "",
-        payment_mode: "",
-        pay_status: "",
-        receipt_url: "",
-    }) => {
+    const getDueAmount = async (tnxResponse?: string) => {
         if ((dueAmount > (recoveryDetailsData[0]?.net_amt - recoveryDetailsData[0]?.paid_amt) || dueAmount === 0)) {
             ToastAndroid.show("Please provide valid amount!", ToastAndroid.SHORT)
             return
@@ -146,13 +138,13 @@ function RecoveryAmountScreen() {
             ///////////////////////////////////////////
 
             customer_mobile: search || "",
-            "pay_txn_id": tnxResponse?.pay_txn_id || "",
-            "pay_amount": tnxResponse?.pay_amount || 0,
-            "pay_amount_original": tnxResponse?.pay_amount_original || 0,
-            "currency_code": tnxResponse?.currency_code || "",
-            "payment_mode": tnxResponse?.payment_mode || "",
-            "pay_status": tnxResponse?.pay_status || "",
-            "receipt_url": tnxResponse?.receipt_url || "",
+            pay_txn_id: JSON.parse(tnxResponse)?.pay_txn_id || "",
+            pay_amount: JSON.parse(tnxResponse)?.pay_amount || 0,
+            pay_amount_original: JSON.parse(tnxResponse)?.pay_amount_original || 0,
+            currency_code: JSON.parse(tnxResponse)?.currency_code || "",
+            payment_mode: JSON.parse(tnxResponse)?.payment_mode || "",
+            pay_status: JSON.parse(tnxResponse)?.pay_status || "",
+            receipt_url: JSON.parse(tnxResponse)?.receipt_url || "",
         }
 
         await recoveryUpdate(recoverUpdateCreds)
@@ -264,7 +256,7 @@ function RecoveryAmountScreen() {
                 )
                 if (JSON.parse(tnxResponse)?.status === "success") {
 
-                    await getDueAmount(JSON.parse(tnxResponse))
+                    await getDueAmount(tnxResponse)
                     // await handlePrintReceipt(flag)
 
                     // const creds: TxnDetailsCreds = {
