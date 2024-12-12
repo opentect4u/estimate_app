@@ -9,18 +9,16 @@ from fastapi.staticfiles import StaticFiles
 app = FastAPI()
 app.mount("/uploads", StaticFiles(directory="upload_file"), name="uploads")
 
-
-
 origins = [
     "*",
 ]
 
 if __name__ == "__main__":
-   uvicorn.run("main:app", host="0.0.0.0", port=3013, reload=True)
+   uvicorn.run("main:app", host="0.0.0.0", port=3001, reload=True)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
