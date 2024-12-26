@@ -348,7 +348,7 @@ function SearchBillsByDateScreen() {
                 color: theme.colors.vanillaSecondary,
               }}
               key={i}
-              title={`Bill ${item?.receipt_no}`}
+              title={`${item?.receipt_no}`}
               description={`₹${item?.net_amt}`}
               onPress={() => handleBillListClick(item?.receipt_no)}
               left={props => <List.Icon {...props} icon="basket" />}

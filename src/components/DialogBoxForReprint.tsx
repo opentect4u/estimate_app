@@ -182,7 +182,7 @@ export default function DialogBoxForReprint({
           />
           <View style={{ paddingTop: normalize(10) }}>
             <ButtonPaper icon="cancel" mode="contained-tonal" onPress={() => handleCancelBill(currentReceiptNo)} buttonColor={theme.colors.error} textColor={theme.colors.onError} disabled={cancelledBillStatus === "Y"}>
-              CANCEL BILL
+              CANCEL ESTIMATE
             </ButtonPaper>
           </View>
           <View

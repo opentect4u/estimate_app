@@ -1937,7 +1937,7 @@ export const useBluetoothPrint = () => {
     toDate: string,
   ) => {
     let text =
-      `[C]PRODUCTWISE SALE\n` +
+      `[C]PRODUCTWISE ESTIMATES\n` +
       `[C]PRINT AT: ${new Date().toLocaleString("en-GB")}\n` +
       `[C]=============================\n` +
       `[L]FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}[R]TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
@@ -1989,7 +1989,7 @@ export const useBluetoothPrint = () => {
 
     // ["SL.", "QTY", "PRC", "DIS", "", "NET"],
     let text =
-      `[C]SALE REPORT\n` +
+      `[C]ESTIMATES REPORT\n` +
       `[C]PRINT AT: ${new Date().toLocaleString("en-GB")}\n` +
       `[C]=============================\n` +
       `[L]FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}[R]TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
@@ -2031,7 +2031,7 @@ export const useBluetoothPrint = () => {
 
     // ["MODE", "RCPTs", "NET", "CNCL"],
     let text =
-      `[C]SALE SUMMARY\n` +
+      `[C]ESTIMATE SUMMARY\n` +
       `[C]PRINT AT: ${new Date().toLocaleString("en-GB")}\n` +
       `[C]=============================\n` +
       `[L]FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}[R]TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +

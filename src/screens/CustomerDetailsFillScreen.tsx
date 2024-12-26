@@ -264,7 +264,7 @@ const CustomerDetailsFillScreen = () => {
             kotNumber,
           )
 
-          Alert.alert("Success", "Bill Uploaded Successfully.")
+          Alert.alert("Success", "Estimate Uploaded Successfully.")
 
           // navigation.dispatch(
           //   CommonActions.navigate({
@@ -571,129 +571,129 @@ const CustomerDetailsFillScreen = () => {
   //   init()
   // }, [])
 
-  var tnxResponse
+  // var tnxResponse
 
-  const handleRazorpayClient = async () => {
-    let json = {
-      username: "9903044748",
-      amount: +cashAmount,
-      externalRefNumber: "",
-    }
+  // const handleRazorpayClient = async () => {
+  //   let json = {
+  //     username: "9903044748",
+  //     amount: +cashAmount,
+  //     externalRefNumber: "",
+  //   }
 
-    let jsonUPI = {
-      username: "9903044748",
-      amount: params?.net_total,
-      externalRefNumber: "",
-    }
+  //   let jsonUPI = {
+  //     username: "9903044748",
+  //     amount: params?.net_total,
+  //     externalRefNumber: "",
+  //   }
 
-    // Convert json object to string
-    let jsonString = JSON.stringify(checked !== "U" ? json : jsonUPI)
+  //   // Convert json object to string
+  //   let jsonString = JSON.stringify(checked !== "U" ? json : jsonUPI)
 
-    // await RNEzetapSdk.initialize(jsonString)
-    //   .then(res => {
-    //     console.log(">>>>>>>>>>>>>>>>>", res)
-    //   })
-    //   .catch(err => {
-    //     console.log("<<<<<<<<<<<<<<<<<", err)
-    //   })
+  //   // await RNEzetapSdk.initialize(jsonString)
+  //   //   .then(res => {
+  //   //     console.log(">>>>>>>>>>>>>>>>>", res)
+  //   //   })
+  //   //   .catch(err => {
+  //   //     console.log("<<<<<<<<<<<<<<<<<", err)
+  //   //   })
 
-    // var res = await RNEzetapSdk.prepareDevice()
-    // console.log("RAZORPAY===PREPARE DEVICE", res)
+  //   // var res = await RNEzetapSdk.prepareDevice()
+  //   // console.log("RAZORPAY===PREPARE DEVICE", res)
 
-    await RNEzetapSdk.pay(jsonString)
-      .then(res => {
-        console.log(">>>>>>>>>>>>>>>>>", res)
+  //   await RNEzetapSdk.pay(jsonString)
+  //     .then(res => {
+  //       console.log(">>>>>>>>>>>>>>>>>", res)
 
-        // if (res?.status == "success") {
-        //   handleSave()
-        //   Alert.alert("Txn ID", res?.txnId)
-        // } else {
-        //   Alert.alert("Error in Tnx", res?.error)
-        // }
-        tnxResponse = res
-        // setTnxResponse(res)
-      })
-      .catch(err => {
-        console.log("<<<<<<<<<<<<<<<<<", err)
-      })
-  }
+  //       // if (res?.status == "success") {
+  //       //   handleSave()
+  //       //   Alert.alert("Txn ID", res?.txnId)
+  //       // } else {
+  //       //   Alert.alert("Error in Tnx", res?.error)
+  //       // }
+  //       tnxResponse = res
+  //       // setTnxResponse(res)
+  //     })
+  //     .catch(err => {
+  //       console.log("<<<<<<<<<<<<<<<<<", err)
+  //     })
+  // }
 
-  const initializePaymentRequest = async () => {
-    // var withAppKey =
-    //   '{"userName":' +
-    //   "9903044748" +
-    //   ',"demoAppKey":"a40c761a-b664-4bc6-ab5a-bf073aa797d5","prodAppKey":"a40c761a-b664-4bc6-ab5a-bf073aa797d5","merchantName":"SYNERGIC_SOFTEK_SOLUTIONS","appMode":"DEMO","currencyCode":"INR","captureSignature":false,"prepareDevice":false}'
-    // var response = await RNEzetapSdk.initialize(withAppKey)
-    // console.log(response)
-    // var jsonData = JSON.parse(response)
+  // const initializePaymentRequest = async () => {
+  //   // var withAppKey =
+  //   //   '{"userName":' +
+  //   //   "9903044748" +
+  //   //   ',"demoAppKey":"a40c761a-b664-4bc6-ab5a-bf073aa797d5","prodAppKey":"a40c761a-b664-4bc6-ab5a-bf073aa797d5","merchantName":"SYNERGIC_SOFTEK_SOLUTIONS","appMode":"DEMO","currencyCode":"INR","captureSignature":false,"prepareDevice":false}'
+  //   // var response = await RNEzetapSdk.initialize(withAppKey)
+  //   // console.log(response)
+  //   // var jsonData = JSON.parse(response)
 
-    let razorpayInitializationJson = JSON.parse(
-      ezetapStorage.getString("ezetap-initialization-json"),
-    )
+  //   let razorpayInitializationJson = JSON.parse(
+  //     ezetapStorage.getString("ezetap-initialization-json"),
+  //   )
 
-    console.log("MMMMMMSSSSSSSSSSSS", razorpayInitializationJson)
+  //   console.log("MMMMMMSSSSSSSSSSSS", razorpayInitializationJson)
 
-    if (razorpayInitializationJson.status == "success") {
-      await handleRazorpayClient()
-        .then(async res => {
-          console.log("###################", res)
-          // var res = await RNEzetapSdk.close()
-          // console.log("CLOSEEEEE TNXXXXX", res)
-          // var json = JSON.parse(res)
-        })
-        .catch(err => {
-          console.log("==================", err)
-        })
-    } else {
-      console.log("XXXXXXXXXXXXXXXXXXX ELSE PART")
-    }
-  }
+  //   if (razorpayInitializationJson.status == "success") {
+  //     await handleRazorpayClient()
+  //       .then(async res => {
+  //         console.log("###################", res)
+  //         // var res = await RNEzetapSdk.close()
+  //         // console.log("CLOSEEEEE TNXXXXX", res)
+  //         // var json = JSON.parse(res)
+  //       })
+  //       .catch(err => {
+  //         console.log("==================", err)
+  //       })
+  //   } else {
+  //     console.log("XXXXXXXXXXXXXXXXXXX ELSE PART")
+  //   }
+  // }
 
-  const handleSaveBillRazorpay = async (flag?: boolean) => {
-    await initializePaymentRequest()
-      .then(async () => {
-        console.log(
-          "TRANSACTION RES DATA================",
-          tnxResponse,
-        )
-        if (JSON.parse(tnxResponse)?.status === "success") {
+  // const handleSaveBillRazorpay = async (flag?: boolean) => {
+  //   await initializePaymentRequest()
+  //     .then(async () => {
+  //       console.log(
+  //         "TRANSACTION RES DATA================",
+  //         tnxResponse,
+  //       )
+  //       if (JSON.parse(tnxResponse)?.status === "success") {
 
-          await handlePrintReceipt(flag)
+  //         await handlePrintReceipt(flag)
 
-          const creds: TxnDetailsCreds = {
-            receipt_no: receiptNumber?.toString(),
-            pay_txn_id: JSON.parse(tnxResponse)?.result?.txn?.txnId,
-            pay_amount: +JSON.parse(tnxResponse)?.result?.txn?.amount,
-            pay_amount_original: +JSON.parse(tnxResponse)?.result?.txn?.amountOriginal,
-            currency_code: JSON.parse(tnxResponse)?.result?.txn?.currencyCode,
-            payment_mode: JSON.parse(tnxResponse)?.result?.txn?.paymentMode,
-            pay_status: JSON.parse(tnxResponse)?.result?.txn?.status,
-            receipt_url: JSON.parse(tnxResponse)?.result?.receipt?.receiptUrl,
-            created_by: loginStore?.user_id
-          }
+  //         const creds: TxnDetailsCreds = {
+  //           receipt_no: receiptNumber?.toString(),
+  //           pay_txn_id: JSON.parse(tnxResponse)?.result?.txn?.txnId,
+  //           pay_amount: +JSON.parse(tnxResponse)?.result?.txn?.amount,
+  //           pay_amount_original: +JSON.parse(tnxResponse)?.result?.txn?.amountOriginal,
+  //           currency_code: JSON.parse(tnxResponse)?.result?.txn?.currencyCode,
+  //           payment_mode: JSON.parse(tnxResponse)?.result?.txn?.paymentMode,
+  //           pay_status: JSON.parse(tnxResponse)?.result?.txn?.status,
+  //           receipt_url: JSON.parse(tnxResponse)?.result?.receipt?.receiptUrl,
+  //           created_by: loginStore?.user_id
+  //         }
 
-          console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::", creds)
+  //         console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::", creds)
 
-          await sendTxnDetails(creds).then(res => {
-            console.log("Txn details sent done.", res)
-          }).catch(err => {
-            console.log("Txn send failed.", err)
-          })
+  //         await sendTxnDetails(creds).then(res => {
+  //           console.log("Txn details sent done.", res)
+  //         }).catch(err => {
+  //           console.log("Txn send failed.", err)
+  //         })
 
-        } else {
-          console.log("tnxResponse value error...")
-        }
-      })
-      .catch(err => {
-        console.error("TNX Response Error!", err)
+  //       } else {
+  //         console.log("tnxResponse value error...")
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.error("TNX Response Error!", err)
 
-        console.log(
-          "PPPPPPPPPPPPKKKKKKKKKKKKK",
-          ezetapStorage.contains("ezetap-initialization-json"),
-          ezetapStorage.getString("ezetap-initialization-json"),
-        )
-      })
-  }
+  //       console.log(
+  //         "PPPPPPPPPPPPKKKKKKKKKKKKK",
+  //         ezetapStorage.contains("ezetap-initialization-json"),
+  //         ezetapStorage.getString("ezetap-initialization-json"),
+  //       )
+  //     })
+  // }
 
 
   return (
@@ -897,7 +897,7 @@ const CustomerDetailsFillScreen = () => {
                   </Text>
                 </View> */}
 
-                <View style={styles.eachRadioBtn}>
+                {/* <View style={styles.eachRadioBtn}>
                   <RadioButton
                     value="U"
                     status={checked === "U" ? "checked" : "unchecked"}
@@ -913,7 +913,7 @@ const CustomerDetailsFillScreen = () => {
                     }>
                     UPI
                   </Text>
-                </View>
+                </View> */}
 
                 <View style={styles.eachRadioBtn}>
                   <RadioButton
@@ -1066,7 +1066,7 @@ const CustomerDetailsFillScreen = () => {
             } */}
 
             <View style={{ padding: normalize(20), flexDirection: "row", gap: 10, alignSelf: "center" }}>
-              {checked !== "U" ? <ButtonPaper
+              {/* {checked !== "U" ? <ButtonPaper
                 mode="contained"
                 buttonColor={theme.colors.primary}
                 textColor={theme.colors.onPrimary}
@@ -1085,7 +1085,17 @@ const CustomerDetailsFillScreen = () => {
                   loading={isLoading}
                   disabled={isDisabled}>
                   SAVE / PRINT
-                </ButtonPaper>}
+                </ButtonPaper>} */}
+              <ButtonPaper
+                mode="contained"
+                buttonColor={theme.colors.primary}
+                textColor={theme.colors.onPrimary}
+                onPress={() => handlePrintReceipt(true)}
+                icon="cloud-print-outline"
+                loading={isLoading}
+                disabled={isDisabled}>
+                SAVE / PRINT
+              </ButtonPaper>
               {/* {checked !== "U" ? <ButtonPaper
                 mode="contained"
                 buttonColor={theme.colors.purple}

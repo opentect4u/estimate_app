@@ -126,7 +126,7 @@ function ProductwiseSaleReportScreen() {
             imgDark={blurReportDark}
             borderRadius={30}
             blur={10}>
-            Productwise Sale Report
+            Productwise Estimates
           </HeaderImage>
         </View>
         <View

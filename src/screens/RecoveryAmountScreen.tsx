@@ -137,14 +137,23 @@ function RecoveryAmountScreen() {
 
             ///////////////////////////////////////////
 
+            // customer_mobile: search || "",
+            // pay_txn_id: JSON.parse(tnxResponse)?.pay_txn_id || "",
+            // pay_amount: JSON.parse(tnxResponse)?.pay_amount || 0,
+            // pay_amount_original: JSON.parse(tnxResponse)?.pay_amount_original || 0,
+            // currency_code: JSON.parse(tnxResponse)?.currency_code || "",
+            // payment_mode: JSON.parse(tnxResponse)?.payment_mode || "",
+            // pay_status: JSON.parse(tnxResponse)?.pay_status || "",
+            // receipt_url: JSON.parse(tnxResponse)?.receipt_url || "",
+
             customer_mobile: search || "",
-            pay_txn_id: JSON.parse(tnxResponse)?.pay_txn_id || "",
-            pay_amount: JSON.parse(tnxResponse)?.pay_amount || 0,
-            pay_amount_original: JSON.parse(tnxResponse)?.pay_amount_original || 0,
-            currency_code: JSON.parse(tnxResponse)?.currency_code || "",
-            payment_mode: JSON.parse(tnxResponse)?.payment_mode || "",
-            pay_status: JSON.parse(tnxResponse)?.pay_status || "",
-            receipt_url: JSON.parse(tnxResponse)?.receipt_url || "",
+            pay_txn_id: "",
+            pay_amount: 0,
+            pay_amount_original: 0,
+            currency_code: "",
+            payment_mode: "",
+            pay_status: "",
+            receipt_url: "",
         }
 
         await recoveryUpdate(recoverUpdateCreds)
@@ -448,7 +457,7 @@ function RecoveryAmountScreen() {
                                     marginVertical: normalize(10),
                                     flexWrap: "wrap"
                                 }}>
-                                <RadioButton
+                                {/* <RadioButton
                                     value="C"
                                     status={checked === "C" ? "checked" : "unchecked"}
                                     color={theme.colors.onTertiaryContainer}
@@ -462,7 +471,7 @@ function RecoveryAmountScreen() {
                                         }
                                     }>
                                     Cash
-                                </Text>
+                                </Text> */}
                                 {/* <RadioButton
                                     value="D"
                                     status={checked === "D" ? "checked" : "unchecked"}
@@ -478,7 +487,7 @@ function RecoveryAmountScreen() {
                                     }>
                                     Card
                                 </Text> */}
-                                <RadioButton
+                                {/* <RadioButton
                                     value="U"
                                     status={checked === "U" ? "checked" : "unchecked"}
                                     color={theme.colors.onTertiaryContainer}
@@ -492,7 +501,7 @@ function RecoveryAmountScreen() {
                                         }
                                     }>
                                     UPI
-                                </Text>
+                                </Text> */}
                             </View>
                         )}
 
@@ -516,7 +525,7 @@ function RecoveryAmountScreen() {
                             justifyContent: "space-between",
                             gap: 10
                         }}>
-                            {checked === "C" ?
+                            {/* {checked === "C" ?
                                 <ButtonPaper
                                     onPress={handleGetDueAmount}
                                     mode="elevated"
@@ -540,7 +549,18 @@ function RecoveryAmountScreen() {
                                     Get Due Amount
                                 </ButtonPaper>
                                     : <Text>No proper checked flag got. Contact to developer.</Text>
-                            }
+                            } */}
+                            <ButtonPaper
+                                onPress={handleGetDueAmount}
+                                mode="elevated"
+                                textColor={theme.colors.vanilla}
+                                icon={"arrow-u-down-left"}
+                                style={{
+                                    backgroundColor: theme.colors.vanillaSurface
+                                }}
+                                disabled={!dueAmount}>
+                                Get Due Amount
+                            </ButtonPaper>
                             <ButtonPaper
                                 onPress={handlePrint}
                                 mode="elevated"
