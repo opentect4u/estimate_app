@@ -179,7 +179,7 @@ function CancelBillsScreen() {
     await fetchSearchedBillsByCustomerName(reqCreds)
       .then(res => {
         if (res?.data?.length === 0) {
-          ToastAndroid.show("No bills found.", ToastAndroid.SHORT)
+          ToastAndroid.show("No estimates found.", ToastAndroid.SHORT)
           return
         }
 
@@ -187,7 +187,7 @@ function CancelBillsScreen() {
         setFetchedBillsData(res?.data)
       })
       .catch(err => {
-        ToastAndroid.show("Error during fetching bills...", ToastAndroid.SHORT)
+        ToastAndroid.show("Error during fetching estimates...", ToastAndroid.SHORT)
         console.log("EEEEEEEEEEEERRRRRRRRRRRRRRRRRRRR", err)
       })
 
@@ -224,7 +224,7 @@ function CancelBillsScreen() {
         setCancelledBillStatus(res?.cancel_flag)
       })
       .catch(err => {
-        ToastAndroid.show("Error during fetching bills.", ToastAndroid.SHORT)
+        ToastAndroid.show("Error during fetching estimates.", ToastAndroid.SHORT)
       })
   }
 
@@ -360,9 +360,9 @@ function CancelBillsScreen() {
   }
 
   const handleCancelBill = (rcptNo: number) => {
-    Alert.alert("Cancelling Bill", `Are you sure you want to cancel this bill?`, [
+    Alert.alert("Cancelling Estimate", `Are you sure you want to cancel this estimate?`, [
       { text: "BACK", onPress: () => ToastAndroid.show("Operation cancelled by user.", ToastAndroid.SHORT) },
-      { text: "CANCEL BILL", onPress: () => handleCancellingBill(rcptNo) },
+      { text: "CANCEL ESTIMATE", onPress: () => handleCancellingBill(rcptNo) },
     ],
       { cancelable: false },
     )

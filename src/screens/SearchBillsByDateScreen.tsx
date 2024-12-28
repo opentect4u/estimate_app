@@ -243,11 +243,11 @@ function SearchBillsByDateScreen() {
 
   const handleCancelBill = (rcptNo: number) => {
     Alert.alert(
-      "Cancelling Bill",
-      `Are you sure you want to cancel this bill?`,
+      "Cancelling Estimate",
+      `Are you sure you want to cancel this estimate?`,
       [
         { text: "BACK", onPress: () => null },
-        { text: "CANCEL BILL", onPress: () => handleCancellingBill(rcptNo) },
+        { text: "CANCEL ESTIMATE", onPress: () => handleCancellingBill(rcptNo) },
       ],
       { cancelable: false },
     )

@@ -161,12 +161,12 @@ function SearchBillsByItemScreen() {
         console.log("XXXXXXXXXXXXXXXXX", res?.data)
 
         if (res?.data?.length === 0) {
-          ToastAndroid.show("No Bills Found.", ToastAndroid.SHORT)
+          ToastAndroid.show("No Estimates Found.", ToastAndroid.SHORT)
           return
         }
       })
       .catch(err => {
-        ToastAndroid.show("Error fetching item bills.", ToastAndroid.SHORT)
+        ToastAndroid.show("Error fetching item estimates.", ToastAndroid.SHORT)
       })
     setIsDisabled(false)
     setIsLoading(false)
@@ -179,7 +179,7 @@ function SearchBillsByItemScreen() {
         setCancelledBillStatus(res?.cancel_flag)
       })
       .catch(err => {
-        ToastAndroid.show("Error during fetching bills.", ToastAndroid.SHORT)
+        ToastAndroid.show("Error during fetching estimates.", ToastAndroid.SHORT)
       })
   }
 
@@ -309,18 +309,18 @@ function SearchBillsByItemScreen() {
         setVisible(!visible)
       }
     }).catch(err => {
-      ToastAndroid.show(`Error occurred during cancelling bill. ${err}`, ToastAndroid.SHORT)
+      ToastAndroid.show(`Error occurred during cancelling estimate. ${err}`, ToastAndroid.SHORT)
       setVisible(!visible)
     })
   }
 
   const handleCancelBill = (rcptNo: number) => {
     Alert.alert(
-      "Cancelling Bill",
-      `Are you sure you want to cancel this bill?`,
+      "Cancelling Estimate",
+      `Are you sure you want to cancel this estimate?`,
       [
         { text: "BACK", onPress: () => null },
-        { text: "CANCEL BILL", onPress: () => handleCancellingBill(rcptNo) },
+        { text: "CANCEL ESTIMATE", onPress: () => handleCancellingBill(rcptNo) },
       ],
       { cancelable: false },
     )
