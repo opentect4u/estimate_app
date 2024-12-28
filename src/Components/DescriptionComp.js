@@ -202,10 +202,10 @@ function DescriptionComp({
               {title} from {moment(from).format("DD/MM/YYYY")} to{" "}
               {moment(to).format("DD/MM/YYYY")}{" "}
             </span>
-            <span>{localStorage.getItem("company_name")} </span>
+            {/* <span>{localStorage.getItem("company_name")} </span>
             <span>{localStorage.getItem("phone_no")} </span>
             <span>{localStorage.getItem("address")} </span>
-            <span>{localStorage.getItem("email_id")} </span>
+            <span>{localStorage.getItem("email_id")} </span> */}
             <span>{location} </span>
           </div>
           <div className="card hidden w-full shadow-2xl">

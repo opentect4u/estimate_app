@@ -29,7 +29,7 @@ export const reportHeaders = {
     span: 3,
   },
   cancelbill: {
-    title: "Cancelled Bill Report",
+    title: "Cancelled Estimate Report",
     headers: [
       { name: "receipt_no", value: "Receipt No." },
       { name: "trn_date", value: "Date" },
@@ -46,7 +46,7 @@ export const reportHeaders = {
     span: 3,
   },
   itemwisereport: {
-    title: "Productwise Sale Report",
+    title: "Productwise Estimate Report",
     headers: [
       // { name: "receipt_no", value: "Receipt No." },
       { name: "item_name", value: "Item name" },

@@ -154,7 +154,7 @@ function SidebarComp() {
                   ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
                   : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
               }>
-              <Link to={"report/itemwisereport"}>Productwise Sale</Link>
+              <Link to={"report/itemwisereport"}>Productwise Estimate</Link>
             </div>
           ),
         },
@@ -176,7 +176,7 @@ function SidebarComp() {
                   ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
                   : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
               }>
-              <Link to={"report/cancelbill"}>Cancelled Bill Report</Link>
+              <Link to={"report/cancelbill"}>Cancelled Estimate Report</Link>
             </div>
           ),
         },
@@ -224,28 +224,28 @@ function SidebarComp() {
         //     </div>
         //   ),
         // },
-        {
-          key: "8",
-          icon: (
-            <CreditCardOutlined
-              className={
-                location.pathname.includes("report/paymode")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("report/paymode")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"report/paymode"}>Summary Report</Link>
-            </div>
-          ),
-        },
+        // {
+        //   key: "8",
+        //   icon: (
+        //     <CreditCardOutlined
+        //       className={
+        //         location.pathname.includes("report/paymode")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }
+        //     />
+        //   ),
+        //   label: (
+        //     <div
+        //       className={
+        //         location.pathname.includes("report/paymode")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }>
+        //       <Link to={"report/paymode"}>Summary Report</Link>
+        //     </div>
+        //   ),
+        // },
         {
           key: "81",
           icon: (
@@ -290,28 +290,28 @@ function SidebarComp() {
             </div>
           ),
         },
-        {
-          key: "83",
-          icon: (
-            <UserSwitchOutlined
-              className={
-                location.pathname.includes("report/customerledger")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("report/customerledger")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"report/customerledger"}>Customer Ledger</Link>
-            </div>
-          ),
-        },
+        // {
+        //   key: "83",
+        //   icon: (
+        //     <UserSwitchOutlined
+        //       className={
+        //         location.pathname.includes("report/customerledger")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }
+        //     />
+        //   ),
+        //   label: (
+        //     <div
+        //       className={
+        //         location.pathname.includes("report/customerledger")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }>
+        //       <Link to={"report/customerledger"}>Customer Ledger</Link>
+        //     </div>
+        //   ),
+        // },
         // {
         //   key: "84",
         //   icon: (
@@ -368,7 +368,7 @@ function SidebarComp() {
                   ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
                   : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
               }>
-              <Link to={"search/bydate"}> By Date</Link>
+              <Link to={"search/bydate"}>By Date</Link>
             </div>
           ),
         },
@@ -480,109 +480,109 @@ function SidebarComp() {
       ],
     },
 
-    {
-      key: "sub4",
-      label: "Master",
-      icon: (
-        <ProfileOutlined
-          className={
-            location.pathname.includes("master")
-              ? "font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-              : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-          }
-        />
-      ),
-      children: [
-        {
-          key: "unit",
-          icon: (
-            <MoneyCollectOutlined
-              className={
-                location.pathname.includes("master/unit")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("master/unit")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"master/unit"}>Unit</Link>
-            </div>
-          ),
-        },
-        {
-          key: "category",
-          icon: (
-            <AppstoreOutlined
-              className={
-                location.pathname.includes("master/category")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("master/category")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"master/category/view"}>Category</Link>
-            </div>
-          ),
-        },
-        {
-          key: "brand",
-          icon: (
-            <MoneyCollectOutlined
-              className={
-                location.pathname.includes("master/brand/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("master/brand/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"master/brand/view"}>Brand</Link>
-            </div>
-          ),
-        },
-        {
-          key: "itemdetails",
-          icon: (
-            <ProfileOutlined
-              className={
-                location.pathname.includes("master/itemdetails/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("master/itemdetails/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"master/itemdetails/view"}>Item Details</Link>
-            </div>
-          ),
-        },
-      ],
-    },
+    // {
+    //   key: "sub4",
+    //   label: "Master",
+    //   icon: (
+    //     <ProfileOutlined
+    //       className={
+    //         location.pathname.includes("master")
+    //           ? "font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //       }
+    //     />
+    //   ),
+    //   children: [
+    //     {
+    //       key: "unit",
+    //       icon: (
+    //         <MoneyCollectOutlined
+    //           className={
+    //             location.pathname.includes("master/unit")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("master/unit")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"master/unit"}>Unit</Link>
+    //         </div>
+    //       ),
+    //     },
+    //     {
+    //       key: "category",
+    //       icon: (
+    //         <AppstoreOutlined
+    //           className={
+    //             location.pathname.includes("master/category")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("master/category")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"master/category/view"}>Category</Link>
+    //         </div>
+    //       ),
+    //     },
+    //     {
+    //       key: "brand",
+    //       icon: (
+    //         <MoneyCollectOutlined
+    //           className={
+    //             location.pathname.includes("master/brand/view")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("master/brand/view")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"master/brand/view"}>Brand</Link>
+    //         </div>
+    //       ),
+    //     },
+    //     {
+    //       key: "itemdetails",
+    //       icon: (
+    //         <ProfileOutlined
+    //           className={
+    //             location.pathname.includes("master/itemdetails/view")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("master/itemdetails/view")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"master/itemdetails/view"}>Item Details</Link>
+    //         </div>
+    //       ),
+    //     },
+    //   ],
+    // },
 
     {
       key: "sub33",
@@ -866,110 +866,110 @@ function SidebarComp() {
       ],
     },
 
-    {
-      key: "sub5",
-      label: "Manage",
-      icon: (
-        <TableOutlined
-          className={
-            location.pathname.includes("manage")
-              ? "  font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white hover:duration-100  dark:hover:bg-gray-700 group"
-              : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-          }
-        />
-      ),
-      children: [
-        // {
-        //   key: "stock",
-        //   icon: (
-        //     <DatabaseOutlined
-        //       className={
-        //         location.pathname.includes("manage/stock/view")
-        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-        //       }
-        //     />
-        //   ),
-        //   label: (
-        //     <div
-        //       className={
-        //         location.pathname.includes("manage/stock/view")
-        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-        //       }>
-        //       <Link to={"manage/stock/view"}>Stock</Link>
-        //     </div>
-        //   ),
-        // },
+    // {
+    //   key: "sub5",
+    //   label: "Manage",
+    //   icon: (
+    //     <TableOutlined
+    //       className={
+    //         location.pathname.includes("manage")
+    //           ? "  font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white hover:duration-100  dark:hover:bg-gray-700 group"
+    //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //       }
+    //     />
+    //   ),
+    //   children: [
+    //     // {
+    //     //   key: "stock",
+    //     //   icon: (
+    //     //     <DatabaseOutlined
+    //     //       className={
+    //     //         location.pathname.includes("manage/stock/view")
+    //     //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //     //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //     //       }
+    //     //     />
+    //     //   ),
+    //     //   label: (
+    //     //     <div
+    //     //       className={
+    //     //         location.pathname.includes("manage/stock/view")
+    //     //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //     //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //     //       }>
+    //     //       <Link to={"manage/stock/view"}>Stock</Link>
+    //     //     </div>
+    //     //   ),
+    //     // },
 
-        {
-          key: "outlet",
-          icon: (
-            <GlobalOutlined
-              className={
-                location.pathname.includes("manage/outlet/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("manage/outlet/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"manage/outlet/view"}>Outlet Managment</Link>
-            </div>
-          ),
-        },
-        {
-          key: "user",
-          icon: (
-            <UsergroupAddOutlined
-              className={
-                location.pathname.includes("manage/usermng/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("manage/usermng/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"manage/usermng/view"}>User Management</Link>
-            </div>
-          ),
-        },
-        // {
-        //   key: "customer",
-        //   icon: (
-        //     <UserOutlined
-        //       className={
-        //         location.pathname.includes("manage/customer/view")
-        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-        //       }
-        //     />
-        //   ),
-        //   label: (
-        //     <div
-        //       className={
-        //         location.pathname.includes("manage/customer/view")
-        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 text-xs text-wrap group"
-        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 text-xs text-wrap group"
-        //       }>
-        //       <Link to={"manage/customer/view"}>Customer Management</Link>
-        //     </div>
-        //   ),
-        // },
-      ],
-    },
+    //     {
+    //       key: "outlet",
+    //       icon: (
+    //         <GlobalOutlined
+    //           className={
+    //             location.pathname.includes("manage/outlet/view")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("manage/outlet/view")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"manage/outlet/view"}>Outlet Managment</Link>
+    //         </div>
+    //       ),
+    //     },
+    //     {
+    //       key: "user",
+    //       icon: (
+    //         <UsergroupAddOutlined
+    //           className={
+    //             location.pathname.includes("manage/usermng/view")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("manage/usermng/view")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"manage/usermng/view"}>User Management</Link>
+    //         </div>
+    //       ),
+    //     },
+    //     // {
+    //     //   key: "customer",
+    //     //   icon: (
+    //     //     <UserOutlined
+    //     //       className={
+    //     //         location.pathname.includes("manage/customer/view")
+    //     //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //     //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //     //       }
+    //     //     />
+    //     //   ),
+    //     //   label: (
+    //     //     <div
+    //     //       className={
+    //     //         location.pathname.includes("manage/customer/view")
+    //     //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 text-xs text-wrap group"
+    //     //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 text-xs text-wrap group"
+    //     //       }>
+    //     //       <Link to={"manage/customer/view"}>Customer Management</Link>
+    //     //     </div>
+    //     //   ),
+    //     // },
+    //   ],
+    // },
     // {
     //   key: "sub55",
     //   label: "Stock",
