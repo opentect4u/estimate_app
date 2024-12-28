@@ -45,35 +45,35 @@ const AppContext = ({ children }) => {
   const { getOtp } = useSendOtp2()
   const { fetchCategories } = useCategories()
 
-  const initRazorpay = async () => {
-    var withAppKey =
-      '{"userName":' +
-      "9903044748" +
-      ',"demoAppKey":"a40c761a-b664-4bc6-ab5a-bf073aa797d5","prodAppKey":"a40c761a-b664-4bc6-ab5a-bf073aa797d5","merchantName":"SYNERGIC_SOFTEK_SOLUTIONS","appMode":"DEMO","currencyCode":"INR","captureSignature":false,"prepareDevice":false}'
-    var response = await RNEzetapSdk.initialize(withAppKey)
-    console.log("XXXXXXXXXXCCCCCCCCCCCCCC========RES", response)
-    // var jsonData = JSON.parse(response)
-    // setRazorpayInitializationJson(jsonData)
-    ezetapStorage.set("ezetap-initialization-json", response)
-  }
+  // const initRazorpay = async () => {
+  //   var withAppKey =
+  //     '{"userName":' +
+  //     "9903044748" +
+  //     ',"demoAppKey":"a40c761a-b664-4bc6-ab5a-bf073aa797d5","prodAppKey":"a40c761a-b664-4bc6-ab5a-bf073aa797d5","merchantName":"SYNERGIC_SOFTEK_SOLUTIONS","appMode":"DEMO","currencyCode":"INR","captureSignature":false,"prepareDevice":false}'
+  //   var response = await RNEzetapSdk.initialize(withAppKey)
+  //   console.log("XXXXXXXXXXCCCCCCCCCCCCCC========RES", response)
+  //   // var jsonData = JSON.parse(response)
+  //   // setRazorpayInitializationJson(jsonData)
+  //   ezetapStorage.set("ezetap-initialization-json", response)
+  // }
 
-  const init = async () => {
-    console.log(
-      "PPPPPPPPPPPPKKKKKKKKKKKKK",
-      ezetapStorage.contains("ezetap-initialization-json"),
-      ezetapStorage.getString("ezetap-initialization-json"),
-    )
-    // if (!ezetapStorage.contains("ezetap-initialization-json")) {
-    await initRazorpay()
+  // const init = async () => {
+  //   console.log(
+  //     "PPPPPPPPPPPPKKKKKKKKKKKKK",
+  //     ezetapStorage.contains("ezetap-initialization-json"),
+  //     ezetapStorage.getString("ezetap-initialization-json"),
+  //   )
+  //   // if (!ezetapStorage.contains("ezetap-initialization-json")) {
+  //   await initRazorpay()
 
-    var res = await RNEzetapSdk.prepareDevice()
-    console.warn("RAZORPAY===PREPARE DEVICE", res)
-    // }
-  }
+  //   var res = await RNEzetapSdk.prepareDevice()
+  //   console.warn("RAZORPAY===PREPARE DEVICE", res)
+  //   // }
+  // }
 
-  useEffect(() => {
-    init()
-  }, [])
+  // useEffect(() => {
+  //   init()
+  // }, [])
 
   // useEffect(() => {
   //   const handleAppStateChange = (nextAppState) => {
@@ -278,7 +278,7 @@ const AppContext = ({ children }) => {
         handleGetCategories,
         units,
         handleGetUnits,
-        init
+        // init
       }}>
       {children}
     </AppStore.Provider>
