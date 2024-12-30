@@ -451,7 +451,7 @@ export type UserwiseReportData = {
   "created_by": string
   "net_amt": number
   "cancelled_amt": number
-  "no_of_receipts": number
+  "receipt_no_count": number
   "user_name": string
 }
 

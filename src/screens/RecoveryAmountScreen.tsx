@@ -38,6 +38,7 @@ import { AppStoreContext } from "../models/custom_types"
 import useCancelBill from "../hooks/api/useCancelBill"
 import RNEzetapSdk from "react-native-ezetap-sdk"
 import { Dropdown } from 'react-native-element-dropdown'
+import useFetchCreditCustomers from "../hooks/api/useFetchCreditCustomers"
 
 function RecoveryAmountScreen() {
     const theme = usePaperColorScheme()
@@ -66,8 +67,31 @@ function RecoveryAmountScreen() {
 
     const [checked, setChecked] = useState<string>(() => "C")
 
+    const [custData, setCustData] = useState(() => [])
+
     const { fetchRecoveryDetails } = useRecoveryAmount()
     const { recoveryUpdate } = useRecoveryUpdate()
+    const { fetchCreditCustomers } = useFetchCreditCustomers()
+
+
+    const getCreditCustomer = async () => {
+        const creds = {
+            comp_id: loginStore?.comp_id,
+        }
+
+        await fetchCreditCustomers(creds).then(res => {
+            console.log("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM", res?.data)
+            setCustData(res?.data?.map((item, i) => (
+                { label: `${item?.cust_name}\n${item?.phone_no}`, value: `${item?.phone_no}` }
+            )))
+        }).catch(err => {
+            console.log("ERRRRRRRRRRRRRRRRRRRR", err)
+        })
+    }
+
+    useEffect(() => {
+        getCreditCustomer()
+    }, [])
 
     const handleGetDetails = async (mobile: string) => {
         setIsDisabled(true)
@@ -218,16 +242,18 @@ function RecoveryAmountScreen() {
 
     const [value, setValue] = useState("")
 
-    const data = [
-        { label: 'Soumyadeep Mondal\n8910792003', value: '8910792003' },
-        { label: 'Rupsha Chatterjee\n6295825458', value: '6295825458' },
-        { label: 'Somnath Thakur\n7563884733', value: '7563884733' },
-        { label: 'Shubham Samanta\n4344244533', value: '4344244533' },
-        { label: 'Item 5', value: '5' },
-        { label: 'Item 6', value: '6' },
-        { label: 'Item 7', value: '7' },
-        { label: 'Item 8', value: '8' },
-    ]
+    // const data = [
+    //     { label: 'Soumyadeep Mondal\n8910792003', value: '8910792003' },
+    //     { label: 'Rupsha Chatterjee\n6295825458', value: '6295825458' },
+    //     { label: 'Somnath Thakur\n7563884733', value: '7563884733' },
+    //     { label: 'Shubham Samanta\n4344244533', value: '4344244533' },
+    //     { label: 'Item 5', value: '5' },
+    //     { label: 'Item 6', value: '6' },
+    //     { label: 'Item 7', value: '7' },
+    //     { label: 'Item 8', value: '8' },
+    // ]
+
+    // const data = 
 
     return (
         <SafeAreaView
@@ -277,7 +303,7 @@ function RecoveryAmountScreen() {
                             selectedTextStyle={styles.selectedTextStyle}
                             inputSearchStyle={styles.inputSearchStyle}
                             iconStyle={styles.iconStyle}
-                            data={data}
+                            data={custData}
                             search
                             maxHeight={300}
                             labelField="label"

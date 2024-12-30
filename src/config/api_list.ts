@@ -64,6 +64,8 @@ export const ADDRESSES = {
 
   PRODUCTWISE_SALE_REPORT: `${BASE_URL}/api/productwise_report`,
 
+  GET_CREDIT_CUST: `${BASE_URL}/api/get_credit_cust`,
+
   /**
    * @deprecated @var EDIT_RECEIPT_SETTINGS
    */

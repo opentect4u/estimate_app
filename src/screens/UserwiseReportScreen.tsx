@@ -14,7 +14,7 @@ import { usePaperColorScheme } from "../theme/theme"
 import { DataTable, Text } from "react-native-paper"
 import DatePicker from "react-native-date-picker"
 import ButtonPaper from "../components/ButtonPaper"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import normalize from "react-native-normalize"
 import { formattedDate } from "../utils/dateFormatter"
 import { loginStorage } from "../storage/appStorage"
@@ -27,6 +27,9 @@ import {
 import SurfacePaper from "../components/SurfacePaper"
 import { useBluetoothPrint } from "../hooks/printables/useBluetoothPrint"
 import useUserwiseReport from "../hooks/api/useUserwiseReport"
+import useFetchCreditCustomers from "../hooks/api/useFetchCreditCustomers"
+import axios from "axios"
+import { ADDRESSES } from "../config/api_list"
 
 function UserwiseReportScreen() {
   const theme = usePaperColorScheme()
@@ -207,12 +210,12 @@ function UserwiseReportScreen() {
               <DataTable.Title textStyle={titleTextStyle}>Username</DataTable.Title>
               <DataTable.Title textStyle={titleTextStyle} numeric>RCPTs</DataTable.Title>
               <DataTable.Title textStyle={titleTextStyle} numeric>Net Amt.</DataTable.Title>
-              <DataTable.Title textStyle={titleTextStyle} numeric>Cncl Amt.</DataTable.Title>
+              {/* <DataTable.Title textStyle={titleTextStyle} numeric>Cncl Amt.</DataTable.Title> */}
             </DataTable.Header>
 
             {userwiseReport?.map((item, i) => {
               totalSummary += item?.net_amt
-              totalReceipts += item?.no_of_receipts
+              totalReceipts += item?.receipt_no_count
               totalCancelled += item?.cancelled_amt
 
               return (
@@ -222,16 +225,16 @@ function UserwiseReportScreen() {
                   <DataTable.Cell>
                     {item?.user_name}
                   </DataTable.Cell>
-                  <DataTable.Cell numeric>{item?.no_of_receipts}</DataTable.Cell>
+                  <DataTable.Cell numeric>{item?.receipt_no_count}</DataTable.Cell>
                   <DataTable.Cell numeric>{item?.net_amt}</DataTable.Cell>
-                  <DataTable.Cell numeric>{item?.cancelled_amt}</DataTable.Cell>
+                  {/* <DataTable.Cell numeric>{item?.cancelled_amt}</DataTable.Cell> */}
                 </DataTable.Row>
               )
             })}
           </DataTable>
           <View style={{ padding: normalize(10) }}>
             <Text variant="labelMedium" style={{ color: theme.colors.primary }}>
-              {totalReceipts} Bills, NET: ₹{totalSummary?.toFixed(2)}, CANCELLED: ₹{totalCancelled}
+              {totalReceipts} Bills, NET: ₹{totalSummary?.toFixed(2)}
             </Text>
           </View>
         </SurfacePaper>
