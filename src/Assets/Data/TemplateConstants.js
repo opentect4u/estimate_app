@@ -61,10 +61,10 @@ export const reportHeaders = {
     title: "Userwise Summary",
     headers: [
       { name: "user_name", value: "User" },
-      { name: "no_of_receipts", value: "No. of Receipts" },
+      { name: "receipt_no_count", value: "No. of Receipts" },
       { name: "net_amt", value: "Amount" },
-      { name: "cancelled_amt", value: "Cancelled Amount" },
-      { name: "created_by", value: "Created By" },
+      { name: "cancelled_amount", value: "Cancelled Amount" },
+      { name: "user_id", value: "Created By" },
     ],
     span: 1,
   },

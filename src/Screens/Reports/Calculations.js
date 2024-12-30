@@ -69,8 +69,8 @@ export function calculate(data, flag) {
     );
   } else if (flag == "userwise") {
     data?.forEach((e) => (initpay += e.net_amt));
-    data?.forEach((e) => (can_amt += e.cancelled_amt));
-    data?.forEach((e) => (no_of_bills += e.no_of_receipts));
+    data?.forEach((e) => (can_amt += e.cancelled_amount));
+    data?.forEach((e) => (no_of_bills += e.receipt_no_count));
     totals.push(no_of_bills, initpay.toFixed(0), can_amt.toFixed(0));
   } else if (flag == "paymode") {
     // data?.forEach((e) => (initpay += e.net_amt));

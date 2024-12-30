@@ -80,6 +80,7 @@ function ManageShopsAddEdit() {
         u_active_flag: response?.data?.msg[0].active_flag,
         u_login_flag: response?.data?.msg[0].login_flag,
         u_created_by: response?.data?.msg[0].created_by,
+        u_device_id: response?.data?.msg[0]?.device_id,
       };
       setValues(rsp);
       //  setBill(response?.data?.msg[0].bill_address)
@@ -139,6 +140,7 @@ function ManageShopsAddEdit() {
             password: values?.u_password || "",
             active_flag: values?.u_active_flag,
             login_flag: values?.u_login_flag,
+            device_id: values?.u_device_id,
             created_by: userId,
           }
         : {
@@ -153,6 +155,7 @@ function ManageShopsAddEdit() {
             active_flag: "Y",
             login_flag: "N",
             password: values?.u_password || "",
+            device_id: values?.u_device_id,
             created_by: userId,
           };
 
@@ -168,11 +171,12 @@ function ManageShopsAddEdit() {
     // u_phone_no: Yup.string().required("Phone number is required."),
     // u_email_id: Yup.string().required("Email id is required."),
     // u_password: Yup.string().required("Password is required."),
-    u_password: Yup.string().when("u_user_type", {
-      is: (val) => val === "A",
-      then: () => Yup.string().required("Password is required"),
-      otherwise: () => Yup.string().optional(),
-    }),
+    // u_password: Yup.string().when("u_user_type", {
+    //   is: (val) => val === "A",
+    //   then: () => Yup.string().required("Password is required"),
+    //   otherwise: () => Yup.string().optional(),
+    // }),
+    u_password: Yup.string().required("Password is required"),
     // u_active_flag: Yup.string().required("Active flag is required."),
     // u_login_flag: Yup.string().required("Login flag is required."),
     // u_created_by: Yup.string().required(" is required."),
@@ -341,7 +345,7 @@ function ManageShopsAddEdit() {
                   for="u_user_id"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   {userTypeText === "PHONE_NO"
-                    ? "User ID (Phone Number)"
+                    ? "User ID"
                     : userTypeText === "EMAIL"
                     ? "User ID (Email)"
                     : "User ID"}
@@ -365,10 +369,10 @@ function ManageShopsAddEdit() {
                   }
                   required=""
                 />
-                <div className="text-blue-600 text-xs">
+                {/* <div className="text-blue-600 text-xs">
                   For Admin User, write Email. For normal User/Manager, write
-                  Phone Number.
-                </div>
+                  any.
+                </div> */}
                 {formik.errors.u_user_id && formik.touched.u_user_id ? (
                   <div className="text-red-500 text-sm">
                     {formik.errors.u_user_id}
@@ -421,7 +425,7 @@ function ManageShopsAddEdit() {
                   </div>
                 ) : null}
               </div> */}
-              {formik.values.u_user_type === "A" && (
+              {/* {formik.values.u_user_type === "A" && (
                 <div class="w-full">
                   <label
                     for="u_password"
@@ -445,8 +449,31 @@ function ManageShopsAddEdit() {
                     </div>
                   ) : null}
                 </div>
-              )}
-              {params.id != 0 && (
+              )} */}
+              <div class="w-full">
+                <label
+                  for="u_password"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="u_password"
+                  id="u_password"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.u_password}
+                  placeholder="qwerty1234..."
+                  required=""
+                />
+                {formik.errors.u_password && formik.touched.u_password ? (
+                  <div className="text-red-500 text-sm">
+                    {formik.errors.u_password}
+                  </div>
+                ) : null}
+              </div>
+              {/* {params.id != 0 && (
                 <>
                   <div>
                     <label
@@ -498,8 +525,106 @@ function ManageShopsAddEdit() {
                       </div>
                     ) : null}
                   </div>
+                  <div class="sm:col-span-2">
+                    <label
+                      for="u_device_id"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      Device ID
+                    </label>
+                    <input
+                      type="text"
+                      name="u_device_id"
+                      id="u_device_id"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.u_device_id}
+                      placeholder="Enter Device ID"
+                      required=""
+                    />
+                    {formik.errors.u_device_id && formik.touched.u_device_id ? (
+                      <div className="text-red-500 text-sm">
+                        {formik.errors.u_device_id}
+                      </div>
+                    ) : null}
+                  </div>
                 </>
-              )}
+              )} */}
+
+              <>
+                <div>
+                  <label
+                    for="u_active_flag"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Active Flag
+                  </label>
+                  <select
+                    id="u_active_flag"
+                    name="u_active_flag"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.u_active_flag}>
+                    <option selected="">Select Active Status</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                  </select>
+                  {formik.errors.u_active_flag &&
+                  formik.touched.u_active_flag ? (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.u_active_flag}
+                    </div>
+                  ) : null}
+                </div>
+                <div>
+                  <label
+                    for="u_login_flag"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Login Flag
+                  </label>
+                  <select
+                    id="u_login_flag"
+                    name="u_login_flag"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.u_login_flag}>
+                    <option>Select Login Status</option>
+                    <option value="Y">Yes</option>
+                    <option selected value="N">
+                      No
+                    </option>
+                  </select>
+                  {formik.errors.u_login_flag && formik.touched.u_login_flag ? (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.u_login_flag}
+                    </div>
+                  ) : null}
+                </div>
+                <div class="sm:col-span-2">
+                  <label
+                    for="u_device_id"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Device ID
+                  </label>
+                  <input
+                    type="text"
+                    name="u_device_id"
+                    id="u_device_id"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.u_device_id}
+                    placeholder="Enter Device ID"
+                    required=""
+                  />
+                  {formik.errors.u_device_id && formik.touched.u_device_id ? (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.u_device_id}
+                    </div>
+                  ) : null}
+                </div>
+              </>
             </div>
             <div className="flex justify-center">
               {params.id == 0 && (
