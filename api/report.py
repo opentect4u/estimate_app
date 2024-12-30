@@ -391,7 +391,7 @@ async def userwise_report(data:UserwiseReport):
     # query = f"Select c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no_count from td_receipt a, md_user c,td_item_sale b where a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id} and c.user_id='{data.user_id}'  group by c.user_name,a.created_by"
 
 
-    query = f"Select c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no_count from td_receipt a, md_user c where a.created_by=c.user_id and a.trn_date BETWEEN  '{data.from_date}' and '{data.to_date}' and a.comp_id ={data.comp_id} AND a.br_id = {data.br_id} and c.user_id='{data.user_id}' group by c.user_name,a.created_by"
+    query = f"Select c.user_name user_name,a.created_by user_id,(select sum(net_amt) from td_item_sale t,td_receipt r where t.cancel_flag=1 and t.receipt_no=r.receipt_no) cancelled_amt, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no_count from td_receipt a, md_user c where a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and a.comp_id ={data.comp_id} AND a.br_id = {data.br_id} and c.user_id='{data.user_id}' group by c.user_name,a.created_by"
     print(query)
     cursor.execute(query)
     records = cursor.fetchall()
