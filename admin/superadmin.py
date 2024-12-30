@@ -105,7 +105,7 @@ async def add_edit_shop(data:AddEditCompany):
 # --------------Select All Users-------------
 @superadminRouter.get('/S_Admin/select_user')
 async def select_user(id:int):
-    select = "id,comp_id,br_id,user_name,user_type,user_id,phone_no,email_id,active_flag,login_flag"
+    select = "id,comp_id,br_id,user_name,user_type,user_id,device_id,phone_no,email_id,active_flag,login_flag"
     table_name = "md_user"
     where = f"id={id}" if id>0 else f""
     order = f"ORDER BY comp_id,br_id,user_type"
