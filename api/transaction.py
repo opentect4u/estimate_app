@@ -26,6 +26,7 @@ async def register(rcpt:list[Receipt]):
         tcgst_amt += i.cgst_amt
         tsgst_amt += i.sgst_amt
         receipt=i.created_by[0,3]+str(i.br_id)+receipt_time
+        print('receipt='+receipt)
         conn = connect()
         cursor = conn.cursor()
         # print(i)
