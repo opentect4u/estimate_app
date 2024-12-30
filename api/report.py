@@ -433,7 +433,7 @@ async def customer_ledger(data:CustomerLedger):
 async def recovery_report(data:RecveryReport):
     conn = connect()
     cursor = conn.cursor()
-    query = f"select ifnull(b.cust_name,'NA')cust_name, a.phone_no, a.recover_dt, Sum(a.paid_amt)recovery_amt from td_recovery_new a,md_customer b where a.comp_id = b.comp_id and a.phone_no = b.phone_no and a.comp_id = {data.comp_id} and a.br_id = {data.br_id} and a.recover_dt between '{data.from_date}' and '{data.to_date}' GROUP BY b.cust_name,a.phone_no,a.recover_dt order by a.recover_dt"
+    query = f"select if null(b.cust_name,'NA')cust_name, a.phone_no, a.recover_dt, Sum(a.paid_amt)recovery_amt from td_recovery_new a,md_customer b where a.comp_id = b.comp_id and a.phone_no = b.phone_no and a.comp_id = {data.comp_id} and a.br_id = {data.br_id} and a.recover_dt between '{data.from_date}' and '{data.to_date}' GROUP BY b.cust_name,a.phone_no,a.recover_dt order by a.recover_dt"
     cursor.execute(query)
     records = cursor.fetchall()
     result = createResponse(records, cursor.column_names, 1)
@@ -498,3 +498,27 @@ async def Productwise_report(item_rep:ItemReport):
         "data":result
         }
     return resData
+
+
+# Recovery report between 2 dates
+
+@repoRouter.post('/get_credit_cust')
+async def recovery_report(data:RecveryReport):
+    conn = connect()
+    cursor = conn.cursor()
+    query = f"select cust_name, phone_no from md_customer where pay_mode='R'"
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if records==[]:
+        resData= {"status":0, "data":[]}
+    else:
+        resData= {
+        "status":1,
+        "data":result
+        }
+    return resData
+
+# =====================================================================================================
