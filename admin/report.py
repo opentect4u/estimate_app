@@ -104,9 +104,9 @@ async def userwise_sale_report(data:UserWiseReport):
     # where = f""
     # order = "GROUP BY created_by,user_name"
 
-    select = f"c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no_count, (select sum(t.net_amt) from td_receipt t, td_receipt_cancel_new n where n.receipt_no=t.receipt_no) as cancelled_amt "
-    table_name = f"td_receipt a, md_user c,td_item_sale b,"
-    where = f"a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id} group by c.user_name,a.created_by "
+    select = f"c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no_count, sum(a.net_amt) cancelled_amount"
+    table_name = f"td_receipt a, md_user c,td_item_sale b,td_receipt_cancel_new n"
+    where = f"a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id} and n.receipt_no=a.receipt_no group by c.user_name,a.created_by "
     order = f" order by c.user_name,a.created_by" if data.br_id>0 else f" order by a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} "
     # order = f"c.user_name,a.created_by"
     # order = f""
@@ -267,7 +267,7 @@ async def productwise_report(item_rep:ItemReport):
     select = f"b.item_name,a.item_id,d.unit_name as unit_name,SUM(a.qty)as tot_item_qty,c.price as unit_price,sum(a.price*a.qty)as tot_item_price"
     table_name = "td_item_sale a, md_items b, md_item_rate c,md_unit d"
     where = f"a.item_id = b.id and a.item_id=c.item_id  and b.unit_id = d.sl_no and a.comp_id = {item_rep.comp_id} and a.br_id = {item_rep.br_id} and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' and a.cancel_flag = 0" if item_rep.br_id>0 else f"a.item_id = b.id and a.item_id=c.item_id  and b.unit_id = d.sl_no and a.comp_id = {item_rep.comp_id} and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' and a.cancel_flag = 0"
-    order = "group by b.item_name,a.item_id,d.unit_name,c.price"
+    order = "order by b.item_name,a.item_id,d.unit_name,c.price"
     flag = 1
     res_dt = await db_select(select,table_name,where,order,flag)
     
