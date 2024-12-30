@@ -25,7 +25,7 @@ async def register(rcpt:list[Receipt]):
     for i in rcpt:
         tcgst_amt += i.cgst_amt
         tsgst_amt += i.sgst_amt
-        receipt=f'{i.created_by[0:3]}{str(i.br_id)}{receipt_time}'
+        receipt=f'{i.created_by[-1:-3]}{str(i.br_id)}{receipt_time}'
         print('receipt='+receipt)
         conn = connect()
         cursor = conn.cursor()
