@@ -106,10 +106,10 @@ async def userwise_sale_report(data:UserWiseReport):
 
     select = f"c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no"
     table_name = f"td_receipt a, md_user c,td_item_sale b"
-    where = f"a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id}"
-    order = f"c.user_name,a.created_by" if data.br_id>0 else f"a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} group by c.user_name,a.created_by "
+    where = f"a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id} group by c.user_name,a.created_by "
+    order = f"c.user_name,a.created_by" if data.br_id>0 else f"a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} "
     # order = f"c.user_name,a.created_by"
-    order = f""
+    # order = f""
     flag = 1
     res_dt = await db_select(select,table_name,where,order,flag)
     
