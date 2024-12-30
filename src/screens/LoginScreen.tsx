@@ -33,12 +33,14 @@ import { AppStoreContext } from "../models/custom_types"
 import useUpdateLoginFlag from "../hooks/api/useUpdateLoginFlag"
 import { UpdateLoginFlagCredentials } from "../models/api_types"
 // import RNEzetapSdk from "react-native-ezetap-sdk"
+import DeviceInfo from 'react-native-device-info'
 
 function LoginScreen() {
   const navigation = useNavigation()
 
   const {
     handleLogin,
+    deviceId
     // loginDataMessage,
     // otp: fetchedOtp,
     // setOtp: setFetchedOtp,
@@ -212,6 +214,13 @@ function LoginScreen() {
   //   };
   // }, []);
 
+  // const [deviceId, setDeviceId] = useState(() => "")
+
+  // useEffect(() => {
+  //   const uniqueId = DeviceInfo.getUniqueIdSync()
+  //   setDeviceId(uniqueId)
+  // }, [])
+
 
   return (
     <SafeAreaView>
@@ -302,6 +311,14 @@ function LoginScreen() {
                       </Text>
                     </TouchableOpacity>
                   </View> */}
+                  <View>
+                    <Text style={{
+                      color: theme.colors.secondary
+                    }}>Device ID</Text>
+                    <Text variant="bodyLarge" style={{
+                      color: theme.colors.primary
+                    }}>{deviceId}</Text>
+                  </View>
                 </View>
               )}
 

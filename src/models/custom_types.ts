@@ -52,6 +52,7 @@ export type AppStoreContext = {
   units: UnitData[]
   handleGetUnits: () => Promise<void>
   init?: () => Promise<void>
+  deviceId: string
 }
 
 export type Bill = {

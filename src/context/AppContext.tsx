@@ -21,6 +21,7 @@ import useCategories from "../hooks/api/useCategories"
 import useSendOtp2 from "../hooks/api/useSendOtp2"
 import { AppStoreContext } from "../models/custom_types"
 import RNEzetapSdk from "react-native-ezetap-sdk"
+import DeviceInfo from "react-native-device-info"
 
 export const AppStore = createContext<AppStoreContext>(null)
 
@@ -44,6 +45,13 @@ const AppContext = ({ children }) => {
   // const { getOtp } = useSendOtp()
   const { getOtp } = useSendOtp2()
   const { fetchCategories } = useCategories()
+
+  const [deviceId, setDeviceId] = useState(() => "")
+
+  useEffect(() => {
+    const uniqueId = DeviceInfo.getUniqueIdSync()
+    setDeviceId(uniqueId)
+  }, [])
 
   // const initRazorpay = async () => {
   //   var withAppKey =
@@ -115,9 +123,14 @@ const AppContext = ({ children }) => {
           //   phone: loginData?.msg?.user_id,
           // }
 
-          loginStorage.set("login-data", JSON.stringify(loginData?.msg))
+          if (loginData?.msg?.device_id === deviceId) {
+            loginStorage.set("login-data", JSON.stringify(loginData?.msg))
 
-          setIsLogin(true)
+            setIsLogin(true)
+          } else {
+            Alert.alert("Device Not Registered", "This device is not registered yet.")
+          }
+
           // getOtp(otpCreds)
           //   .then(res => {
           //     setOtp(res?.otp)
@@ -278,6 +291,7 @@ const AppContext = ({ children }) => {
         handleGetCategories,
         units,
         handleGetUnits,
+        deviceId
         // init
       }}>
       {children}
