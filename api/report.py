@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from config.database import connect
 from models.master_model import createResponse
-from models.form_model import DashBoard,SaleReport,GSTStatement,GSTSummary,ItemReport,RefundBillReport,BillList,SearchByItem,CreditReport,CancelReport,DaybookReport,SearchByRcpt,SearchByName,UserwiseReport,CustomerLedger,RecveryReport,DueReport
+from models.form_model import DashBoard,SaleReport,GSTStatement,GSTSummary,ItemReport,RefundBillReport,BillList,SearchByItem,CreditReport,CancelReport,DaybookReport,SearchByRcpt,SearchByName,UserwiseReport,CustomerLedger,RecveryReport,DueReport,CreditCust
 
 # testing git
 repoRouter = APIRouter()
@@ -503,10 +503,10 @@ async def Productwise_report(item_rep:ItemReport):
 # Recovery report between 2 dates
 
 @repoRouter.post('/get_credit_cust')
-async def recovery_report(data:RecveryReport):
+async def recovery_report(data:CreditCust):
     conn = connect()
     cursor = conn.cursor()
-    query = f"select cust_name, phone_no from md_customer where pay_mode='R'"
+    query = f"select cust_name, phone_no from md_customer where pay_mode='R' and comp_id={data.comp_id}"
     cursor.execute(query)
     records = cursor.fetchall()
     result = createResponse(records, cursor.column_names, 1)

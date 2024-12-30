@@ -386,3 +386,8 @@ class AddEditTXN(BaseModel):
 	pay_status:str	
 	receipt_url:str	
 	created_by:str
+
+
+class CreditCust(BaseModel):
+    comp_id:int
+    
