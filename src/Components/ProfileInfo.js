@@ -53,35 +53,35 @@ function ProfileInfo({ flag }) {
                       : "none",
                     span: 2,
                   },
-                  {
-                    key: "2",
-                    label: (
-                      <div className=" text-blue-900 font-bold">Phone</div>
-                    ),
-                    children: items[0]?.phone_no ? items[0]?.phone_no : "none",
-                    span: 2,
-                  },
-                  {
-                    key: "3",
-                    label: (
-                      <div className=" text-blue-900 font-bold">
-                        {" "}
-                        Contact person
-                      </div>
-                    ),
-                    children: items[0]?.contact_person
-                      ? items[0]?.contact_person
-                      : "none",
-                    span: 2,
-                  },
-                  {
-                    key: "4",
-                    label: (
-                      <div className=" text-blue-900 font-bold"> Email</div>
-                    ),
-                    children: items[0]?.email_id ? items[0]?.email_id : "none",
-                    span: 2,
-                  },
+                  // {
+                  //   key: "2",
+                  //   label: (
+                  //     <div className=" text-blue-900 font-bold">Phone</div>
+                  //   ),
+                  //   children: items[0]?.phone_no ? items[0]?.phone_no : "none",
+                  //   span: 2,
+                  // },
+                  // {
+                  //   key: "3",
+                  //   label: (
+                  //     <div className=" text-blue-900 font-bold">
+                  //       {" "}
+                  //       Contact person
+                  //     </div>
+                  //   ),
+                  //   children: items[0]?.contact_person
+                  //     ? items[0]?.contact_person
+                  //     : "none",
+                  //   span: 2,
+                  // },
+                  // {
+                  //   key: "4",
+                  //   label: (
+                  //     <div className=" text-blue-900 font-bold"> Email</div>
+                  //   ),
+                  //   children: items[0]?.email_id ? items[0]?.email_id : "none",
+                  //   span: 2,
+                  // },
                   {
                     key: "5",
                     label: (
