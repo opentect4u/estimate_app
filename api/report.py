@@ -388,7 +388,10 @@ async def userwise_report(data:UserwiseReport):
 
     # query = f"select created_by, sum(net_amt)net_amt, sum(cancelled_amt)cancelled_amt, COUNT(receipt_no)no_of_receipts, user_name from( Select a.created_by created_by, a.net_amt net_amt, 0 cancelled_amt, c.user_name user_name, a.receipt_no receipt_no from td_receipt a, md_user c where a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' AND '{data.to_date}' and a.created_by='{data.user_id}' and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id} UNION Select a.created_by created_by, 0 net_amt, a.net_amt cancelled_amt, c.user_name user_name, b.receipt_no receipt_no from td_receipt a, md_user c,td_receipt_cancel_new b where a.receipt_no = b.receipt_no and a.created_by=c.user_id and date(b.cancelled_dt) BETWEEN '{data.from_date}' AND '{data.to_date}' and b.cancelled_by = '{data.user_id}' and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id})a group by created_by,user_name"
 
-    query = f"Select c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no_count from td_receipt a, md_user c,td_item_sale b where a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id} and c.user_id='{data.user_id}'  group by c.user_name,a.created_by"
+    # query = f"Select c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no_count from td_receipt a, md_user c,td_item_sale b where a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id} and c.user_id='{data.user_id}'  group by c.user_name,a.created_by"
+
+
+    query = f"Select c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no_count from td_receipt a, md_user c where a.created_by=c.user_id and a.trn_date BETWEEN  '{data.from_date}' and '{data.to_date}' and a.comp_id ={data.comp_id} AND a.br_id = {data.br_id} and c.user_id='{data.user_id}' group by c.user_name,a.created_by"
     print(query)
     cursor.execute(query)
     records = cursor.fetchall()
