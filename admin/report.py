@@ -104,7 +104,7 @@ async def userwise_sale_report(data:UserWiseReport):
     # where = f""
     # order = "GROUP BY created_by,user_name"
 
-    select = f"c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no"
+    select = f"c.user_name user_name,a.created_by user_id, sum(a.net_amt) net_amt, count(a.receipt_no) receipt_no_count"
     table_name = f"td_receipt a, md_user c,td_item_sale b"
     where = f"a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} AND a.br_id = {data.br_id} group by c.user_name,a.created_by "
     order = f" order by c.user_name,a.created_by" if data.br_id>0 else f" order by a.receipt_no = b.receipt_no and a.created_by=c.user_id and a.trn_date BETWEEN '{data.from_date}' and '{data.to_date}' and b.cancel_flag = 0 and a.comp_id = {data.comp_id} "
