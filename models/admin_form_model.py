@@ -376,7 +376,7 @@ class AddEditUser(BaseModel):
     user_id:str
     # phone_no:int
     # email_id:str
-    # device_id:str | None
+    device_id:str | None
     password:str| None
     active_flag:str
     login_flag:str
