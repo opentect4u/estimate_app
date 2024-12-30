@@ -16,7 +16,7 @@ tnxRouter = APIRouter()
 async def register(rcpt:list[Receipt]):
     # return rcpt
     current_datetime = datetime.now()
-    receipt = int(round(current_datetime.timestamp()))
+    receipt_time = int(round(current_datetime.timestamp()))
     formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
     curr_date = current_datetime.strftime("%Y-%m-%d")
     values = []
@@ -25,6 +25,7 @@ async def register(rcpt:list[Receipt]):
     for i in rcpt:
         tcgst_amt += i.cgst_amt
         tsgst_amt += i.sgst_amt
+        receipt=i.created_by[0,3]+str(i.br_id)+receipt_time
         conn = connect()
         cursor = conn.cursor()
         # print(i)
