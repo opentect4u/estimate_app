@@ -390,7 +390,7 @@ async def Productwise_report(item_rep:ItemReport):
     conn = connect()
     cursor = conn.cursor()
 
-    query = f"SELECT b.id as store_id,b.branch_name as store_name,s.receipt_no,s.item_id,IF(t.pay_mode='C','Cash',IF(t.pay_mode='U','UPI',IF(t.pay_mode='D','Card','Credit'))) pay_mode,i.item_name,t.net_amt,t.trn_date,s.qty from md_branch b,td_item_sale s,md_items i,td_receipt t where s.br_id=b.id and s.item_id=i.id and s.receipt_no=t.receipt_no and t.comp_id = {item_rep.comp_id} and t.br_id = {item_rep.br_id} and t.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'"
+    query = f"SELECT b.id as store_id,b.branch_name as store_name,u.unit_name,s.receipt_no,s.item_id,IF(t.pay_mode='C','Cash',IF(t.pay_mode='U','UPI',IF(t.pay_mode='D','Card','Credit'))) pay_mode,i.item_name,t.net_amt,t.trn_date,s.qty from md_branch b,td_item_sale s,md_items i,td_receipt t where s.br_id=b.id and s.item_id=i.id and s.receipt_no=t.receipt_no and i.unit_id=u.sl_no and t.comp_id = {item_rep.comp_id} and t.br_id = {item_rep.br_id} and t.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'"
    
     print(query)
     cursor.execute(query)
