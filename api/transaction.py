@@ -19,7 +19,7 @@ def user_info(comp_id,br_id):
     conn = connect()
     cursor = conn.cursor()
 
-    query=f"select cust_name from md_customer where comp_id={comp_id} and phone_no='{br_id}'"
+    query=f"select user_name from md_user where comp_id={comp_id} and br_id='{br_id}'"
     # print(query)
 
     cursor.execute(query)
