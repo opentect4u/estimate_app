@@ -90,7 +90,7 @@ async def cancel_bill_two(del_bill: CancelBill):
 
     # query = f"SELECT a.receipt_no, b.qty FROM td_receipt a, td_item_sale b WHERE a.receipt_no = b.receipt_no AND a.receipt_no={del_bill.receipt_no}"
 
-    query = f"SELECT receipt_no FROM td_receipt WHERE receipt_no={del_bill.receipt_no}"
+    query = f"SELECT receipt_no FROM td_receipt WHERE receipt_no='{del_bill.receipt_no}'"
 
     cursor.execute(query)
     record = cursor.fetchone()
@@ -120,7 +120,7 @@ async def cancel_bill_two(del_bill: CancelBill):
                 # print(rec,"44444")
                 conn = connect()
                 cursor = conn.cursor()
-                query2 = f"UPDATE td_item_sale SET cancel_flag=1, modified_by='{del_bill.user_id}', modified_dt='{current_datetime}' WHERE receipt_no={del_bill.receipt_no}"               
+                query2 = f"UPDATE td_item_sale SET cancel_flag=1, modified_by='{del_bill.user_id}', modified_dt='{current_datetime}' WHERE receipt_no='{del_bill.receipt_no}'"               
                 cursor.execute(query2)
                 conn.commit()
                 print(query2,"555555555")

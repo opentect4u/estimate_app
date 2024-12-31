@@ -25,7 +25,7 @@ async def refund_item(refund:list[RefundItem]):
         conn = connect()
         cursor = conn.cursor()
     
-        query = f"INSERT INTO td_refund_item (receipt_no,refund_dt,refund_rcpt_no,comp_id,br_id,item_id,price,dis_pertg,discount_amt,cgst_prtg,cgst_amt,sgst_prtg,sgst_amt,qty,refund_by,refund_at) VALUES ({i.receipt_no},'{formatted_datetime}','{receipt}',{i.comp_id},{i.br_id},{i.item_id},{i.price},{i.dis_pertg},{i.discount_amt},{i.cgst_prtg},{i.cgst_amt},{i.sgst_prtg},{i.sgst_amt},{i.qty},'{i.user_id}','{formatted_datetime}')"
+        query = f"INSERT INTO td_refund_item (receipt_no,refund_dt,refund_rcpt_no,comp_id,br_id,item_id,price,dis_pertg,discount_amt,cgst_prtg,cgst_amt,sgst_prtg,sgst_amt,qty,refund_by,refund_at) VALUES ('{i.receipt_no}','{formatted_datetime}','{receipt}',{i.comp_id},{i.br_id},{i.item_id},{i.price},{i.dis_pertg},{i.discount_amt},{i.cgst_prtg},{i.cgst_amt},{i.sgst_prtg},{i.sgst_amt},{i.qty},'{i.user_id}','{formatted_datetime}')"
 
         cursor.execute(query)
         conn.commit()
@@ -55,7 +55,7 @@ async def refund_item(refund:list[RefundItem]):
     conn = connect()
     cursor = conn.cursor()
     
-    query = f"INSERT INTO td_refund_bill (receipt_no, refund_dt, refund_rcpt_no, price, discount_amt, cgst_amt, sgst_amt, amount, round_off, net_amt, pay_mode, received_amt, cust_name, phone_no, gst_flag, gst_type, discount_flag, discount_type, discount_position, refund_by, refund_at) VALUES ({refund[0].receipt_no},'{formatted_datetime}','{receipt}',{refund[0].tprice},{refund[0].tdiscount_amt},{tcgst_amt},{tsgst_amt},{refund[0].tot_refund_amt},{refund[0].round_off},{refund[0].net_amt},'{refund[0].pay_mode}','{refund[0].received_amt}','{refund[0].cust_name}','{refund[0].phone_no}','{refund[0].gst_flag}','{refund[0].gst_type}','{refund[0].discount_flag}','{refund[0].discount_type}','{refund[0].discount_position}','{refund[0].user_id}','{formatted_datetime}')"
+    query = f"INSERT INTO td_refund_bill (receipt_no, refund_dt, refund_rcpt_no, price, discount_amt, cgst_amt, sgst_amt, amount, round_off, net_amt, pay_mode, received_amt, cust_name, phone_no, gst_flag, gst_type, discount_flag, discount_type, discount_position, refund_by, refund_at) VALUES ('{refund[0].receipt_no}','{formatted_datetime}','{receipt}',{refund[0].tprice},{refund[0].tdiscount_amt},{tcgst_amt},{tsgst_amt},{refund[0].tot_refund_amt},{refund[0].round_off},{refund[0].net_amt},'{refund[0].pay_mode}','{refund[0].received_amt}','{refund[0].cust_name}','{refund[0].phone_no}','{refund[0].gst_flag}','{refund[0].gst_type}','{refund[0].discount_flag}','{refund[0].discount_type}','{refund[0].discount_position}','{refund[0].user_id}','{formatted_datetime}')"
     # print(query)
     cursor.execute(query)
     conn.commit()

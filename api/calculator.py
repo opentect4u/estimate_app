@@ -70,7 +70,7 @@ async def calculator(rcpt:list[CalReceipt]):
 async def show_bill(recp_no:int):
     conn = connect()
     cursor = conn.cursor()
-    query = f"SELECT a.receipt_no, a.comp_id, a.br_id,a.trn_date, a.price,a.qty, a.created_by, a.created_dt, a.modified_by, a.modified_dt, b.price AS tprice,b.round_off, b.net_amt, b.created_by AS tcreated_by, b.created_dt AS tcreated_dt, b.modified_by AS tmodified_by, b.modified_dt AS tmodified_dt FROM td_item_sale a, td_receipt b WHERE a.receipt_no=b.receipt_no and a.trn_date=b.trn_date and a.receipt_no={recp_no}"
+    query = f"SELECT a.receipt_no, a.comp_id, a.br_id,a.trn_date, a.price,a.qty, a.created_by, a.created_dt, a.modified_by, a.modified_dt, b.price AS tprice,b.round_off, b.net_amt, b.created_by AS tcreated_by, b.created_dt AS tcreated_dt, b.modified_by AS tmodified_by, b.modified_dt AS tmodified_dt FROM td_item_sale a, td_receipt b WHERE a.receipt_no=b.receipt_no and a.trn_date=b.trn_date and a.receipt_no='{recp_no}'"
     cursor.execute(query)
     records = cursor.fetchall()
     result = createResponse(records, cursor.column_names, 1)
