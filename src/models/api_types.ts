@@ -315,7 +315,7 @@ export type SearchBillsData = {
 }
 
 export type SearchedBills = {
-  receipt_no: number
+  receipt_no: string
   trn_date: string
   price: number
   discount_amt: number
@@ -872,7 +872,7 @@ export type SearchBillsByItemResponse = {
 }
 
 export type SearchBillsByItemData = {
-  receipt_no: number
+  receipt_no: string
   item_id: number
   qty: number
   price: number

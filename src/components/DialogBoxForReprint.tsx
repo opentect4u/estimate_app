@@ -23,11 +23,11 @@ type DialogBoxProps = {
   titleStyle?: {}
   buttonSuccessIcon?: string
   dismissable?: boolean
-  currentReceiptNo?: number
+  currentReceiptNo?: string
   billedSaleData?: ShowBillData[]
   cancelledBillStatus?: string
   netTotalButtonColors?: Array<string>
-  handleCancelBill?: (rcptNo: number) => void
+  handleCancelBill?: (rcptNo: string) => void
 
   onDialogFailure?: () => void
   onDialogSuccecss?: () => void

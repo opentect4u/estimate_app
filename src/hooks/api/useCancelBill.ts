@@ -3,7 +3,7 @@ import { ADDRESSES } from "../../config/api_list"
 import { BasicResponse } from "../../models/api_types"
 
 export default function useCancelBill() {
-  const cancelBill = async (receiptNo: number, userId: string) => {
+  const cancelBill = async (receiptNo: string, userId: string) => {
     return new Promise<BasicResponse>((resolve, reject) => {
       axios
         .post(`${ADDRESSES.CANCEL_BILL_TWO}`, {

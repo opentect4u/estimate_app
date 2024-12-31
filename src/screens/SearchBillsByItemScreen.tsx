@@ -78,7 +78,7 @@ function SearchBillsByItemScreen() {
   const [toDate, setToDate] = useState(() => new Date())
   const [openFromDate, setOpenFromDate] = useState(() => false)
   const [openToDate, setOpenToDate] = useState(() => false)
-  const [currentReceiptNo, setCurrentReceiptNo] = useState<number | undefined>()
+  const [currentReceiptNo, setCurrentReceiptNo] = useState<string | undefined>()
 
   const [isLoading, setIsLoading] = useState(() => false)
   const [isDisabled, setIsDisabled] = useState(() => false)
@@ -172,7 +172,7 @@ function SearchBillsByItemScreen() {
     setIsLoading(false)
   }
 
-  const handleGetBill = async (rcptNo: number) => {
+  const handleGetBill = async (rcptNo: string) => {
     await fetchBill(rcptNo)
       .then(res => {
         setBilledSaleData(res?.data)
@@ -183,7 +183,7 @@ function SearchBillsByItemScreen() {
       })
   }
 
-  const handleBillListClick = (rcptNo: number) => {
+  const handleBillListClick = (rcptNo: string) => {
     setVisible(!visible)
     handleGetBill(rcptNo)
     setCurrentReceiptNo(rcptNo)
@@ -301,7 +301,7 @@ function SearchBillsByItemScreen() {
     }
   }
 
-  const handleCancellingBill = async (rcptNo: number) => {
+  const handleCancellingBill = async (rcptNo: string) => {
     await cancelBill(rcptNo, loginStore.user_id).then(res => {
       if (res?.status === 1) {
         ToastAndroid.show(res?.data, ToastAndroid.SHORT)
@@ -314,7 +314,7 @@ function SearchBillsByItemScreen() {
     })
   }
 
-  const handleCancelBill = (rcptNo: number) => {
+  const handleCancelBill = (rcptNo: string) => {
     Alert.alert(
       "Cancelling Estimate",
       `Are you sure you want to cancel this estimate?`,
@@ -368,6 +368,8 @@ function SearchBillsByItemScreen() {
             modal
             mode="date"
             // minimumDate={toDate.setMonth(toDate.getMonth() - 1)}
+            maximumDate={new Date(fromDate)}
+            minimumDate={new Date(new Date(fromDate).setDate(new Date(fromDate).getDate() - 1))}
             open={openFromDate}
             date={fromDate}
             onConfirm={date => {
@@ -381,6 +383,8 @@ function SearchBillsByItemScreen() {
           <DatePicker
             modal
             mode="date"
+            maximumDate={new Date(toDate)}
+            minimumDate={new Date(new Date(toDate).setDate(new Date(toDate).getDate() - 1))}
             open={openToDate}
             date={toDate}
             onConfirm={date => {
