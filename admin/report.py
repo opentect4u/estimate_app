@@ -399,11 +399,11 @@ async def Productwise_report(item_rep:ItemReport):
     conn.close()
     cursor.close()
     if records==[]:
-        resData= {"status":0, "data":[]}
+        resData= {"status":0, "msg":[]}
     else:
         resData= {
         "status":1,
-        "data":result
+        "msg":result
         }
     return resData
 
