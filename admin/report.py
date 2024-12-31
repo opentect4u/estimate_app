@@ -268,7 +268,7 @@ async def productwise_report(item_rep:ItemReport):
     select = f"b.item_name,a.item_id,d.unit_name as unit_name,SUM(a.qty)as tot_item_qty,c.price as unit_price,sum(a.price*a.qty)as tot_item_price,catg.category_name,brn.brand_name, max(a.trn_date) to_dt,min(a.trn_date) from_dt, concat(min(a.trn_date),' - ',max(a.trn_date)) as range_dt"
     table_name = "td_item_sale a, md_items b, md_item_rate c,md_unit d,md_category catg,md_brand brn"
     where = f"b.brand_id=brn.brand_id and b.catg_id=catg.sl_no and a.item_id = b.id and a.item_id=c.item_id  and b.unit_id = d.sl_no and a.comp_id = {item_rep.comp_id} and a.br_id = {item_rep.br_id} and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' and a.cancel_flag = 0" if item_rep.br_id>0 else f"a.item_id = b.id and a.item_id=c.item_id  and b.unit_id = d.sl_no and a.comp_id = {item_rep.comp_id} and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' and a.cancel_flag = 0"
-    order = "group by b.item_name,a.item_id,d.unit_name,c.price"
+    order = "group by b.item_name,a.item_id,d.unit_name,c.price,catg.category_name"
     flag = 1
     res_dt = await db_select(select,table_name,where,order,flag)
     
