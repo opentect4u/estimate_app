@@ -14,7 +14,7 @@ tnxRouter = APIRouter()
 
 # Get user_info
 
-async def user_info(comp_id,br_id):
+def user_info(comp_id,br_id):
 
     conn = connect()
     cursor = conn.cursor()
