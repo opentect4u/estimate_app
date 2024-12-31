@@ -72,7 +72,7 @@ class SearchBill(BaseModel):
 class SearchByRcpt(BaseModel):
     comp_id:int
     br_id:int
-    receipt_no:int
+    receipt_no:str
 
 class SearchByName(BaseModel):
     comp_id:int
@@ -189,7 +189,7 @@ class AddItem(BaseModel):
     sgst:float
 
 class CancelBill(BaseModel):
-    receipt_no:int
+    receipt_no:str
     user_id:str
 
 class AddUnit(BaseModel):
@@ -234,7 +234,7 @@ class StockReport(BaseModel):
 
 class RefundItem(BaseModel):
     user_id:str
-    receipt_no:int
+    receipt_no:str
     comp_id:int
     br_id:int
     item_id:int
