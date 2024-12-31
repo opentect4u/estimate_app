@@ -55,7 +55,7 @@ function CancelBillsScreen() {
   const [visible, setVisible] = useState(() => false)
   const hideDialog = () => setVisible(() => false)
 
-  const [currentReceiptNo, setCurrentReceiptNo] = useState<number | undefined>(
+  const [currentReceiptNo, setCurrentReceiptNo] = useState<string | undefined>(
     () => undefined,
   )
   const [cancelledBillStatus, setCancelledBillStatus] = useState<"Y" | "N">()
@@ -74,7 +74,7 @@ function CancelBillsScreen() {
 
   const [search, setSearch] = useState<string>(() => "")
   const onChangeSearch = (query: string) => {
-    if (checked === "R" || checked === "M") {
+    if (checked === "M") {
       if (/^\d*$/.test(query)) {
         setSearch(query)
       }
@@ -131,7 +131,7 @@ function CancelBillsScreen() {
     const reqCreds: SearchBillsByReceiptCredentials = {
       comp_id: loginStore?.comp_id,
       br_id: loginStore?.br_id,
-      receipt_no: parseInt(rcptNo)
+      receipt_no: rcptNo
     }
 
     console.log(
@@ -201,7 +201,7 @@ function CancelBillsScreen() {
       return
     }
 
-    if (checked === "R" || checked === "M") {
+    if (checked === "M") {
       if (search.length !== 10) {
         ToastAndroid.show("Enter valid number.", ToastAndroid.SHORT)
         return
@@ -217,7 +217,7 @@ function CancelBillsScreen() {
     }
   }
 
-  const handleGetBill = async (rcptNo: number) => {
+  const handleGetBill = async (rcptNo: string) => {
     await fetchBill(rcptNo)
       .then(res => {
         setBilledSaleData(res?.data)
@@ -228,7 +228,7 @@ function CancelBillsScreen() {
       })
   }
 
-  const handleBillListClick = (rcptNo: number) => {
+  const handleBillListClick = (rcptNo: string) => {
     setVisible(!visible)
     handleGetBill(rcptNo)
     setCurrentReceiptNo(rcptNo)
@@ -346,7 +346,7 @@ function CancelBillsScreen() {
     }
   }
 
-  const handleCancellingBill = async (rcptNo: number) => {
+  const handleCancellingBill = async (rcptNo: string) => {
     await cancelBill(rcptNo, loginStore.user_id).then(res => {
       if (res?.status === 1) {
         ToastAndroid.show(res?.data, ToastAndroid.SHORT)
@@ -359,7 +359,7 @@ function CancelBillsScreen() {
     })
   }
 
-  const handleCancelBill = (rcptNo: number) => {
+  const handleCancelBill = (rcptNo: string) => {
     Alert.alert("Cancelling Estimate", `Are you sure you want to cancel this estimate?`, [
       { text: "BACK", onPress: () => ToastAndroid.show("Operation cancelled by user.", ToastAndroid.SHORT) },
       { text: "CANCEL ESTIMATE", onPress: () => handleCancellingBill(rcptNo) },
@@ -481,8 +481,8 @@ function CancelBillsScreen() {
               onChangeText={onChangeSearch}
               value={search}
               elevation={search ? 2 : 0}
-              keyboardType={checked === "R" ? "numeric" : checked === "M" ? "numeric" : "default"}
-              maxLength={10}
+              keyboardType={checked === "R" ? "default" : checked === "M" ? "numeric" : "default"}
+              maxLength={16}
               style={{
                 backgroundColor: theme.colors.vanillaSecondaryContainer,
                 color: theme.colors.onVanillaSecondaryContainer,

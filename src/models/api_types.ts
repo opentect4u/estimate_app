@@ -805,14 +805,14 @@ export type SearchBillsByMobileResponse = {
 }
 
 export type SearchBillsByMobileResponseData = {
-  receipt_no: number
+  receipt_no: string
   trn_date: string
   net_amt: number
   phone_no: string
 }
 
 export type CommonSearchResponseData = {
-  receipt_no: number
+  receipt_no: string
   trn_date: string
   net_amt: number
 }
@@ -829,7 +829,7 @@ export type CommonSearchResponseData = {
 export type SearchBillsByReceiptCredentials = {
   comp_id: number
   br_id: number
-  receipt_no: number
+  receipt_no: string
 }
 
 export type SearchBillsResponse = {
@@ -838,7 +838,7 @@ export type SearchBillsResponse = {
 }
 
 export type SearchBillsByReceiptAndCustomerNameResponseData = {
-  receipt_no: number
+  receipt_no: string
   trn_date: string
   net_amt: number
   pay_mode: string
