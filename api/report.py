@@ -211,26 +211,26 @@ async def collection_report(col_rep:SaleReport):
 #======================================================================================================
 # Search Bills by item name
 
-# @repoRouter.post('/billsearch_by_item')
-# async def billsearch_by_item(item:SearchByItem):
-#     conn = connect()
-#     cursor = conn.cursor()
-#     query = f"SELECT a.receipt_no,a.item_id,a.qty,a.price,b.item_name FROM td_item_sale a, md_items b WHERE a.item_id=b.id AND a.comp_id=b.comp_id AND a.comp_id={item.comp_id} AND a.br_id={item.br_id} AND b.id={item.item_id} AND a.trn_date BETWEEN '{item.from_date}' AND '{item.to_date}'"
-#     cursor.execute(query)
-#     records = cursor.fetchall()
-#     result = createResponse(records, cursor.column_names, 1)
-#     conn.close()
-#     cursor.close()
-#     if cursor.rowcount>0:
-#         resData= {
-#         "status":1, 
-#         "data":result}
-#     else:
-#         resData= {
-#         "status":0,
-#         "data":[]
-#         }
-#     return resData
+@repoRouter.post('/billsearch_by_item')
+async def billsearch_by_item(item:SearchByItem):
+    conn = connect()
+    cursor = conn.cursor()
+    query = f"SELECT a.receipt_no,a.item_id,a.qty,a.price,b.item_name FROM td_item_sale a, md_items b WHERE a.item_id=b.id AND a.comp_id=b.comp_id AND a.comp_id={item.comp_id} AND a.br_id={item.br_id} AND b.id={item.item_id} AND a.trn_date BETWEEN '{item.from_date}' AND '{item.to_date}'"
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if cursor.rowcount>0:
+        resData= {
+        "status":1, 
+        "data":result}
+    else:
+        resData= {
+        "status":0,
+        "data":[]
+        }
+    return resData
 #==================================================================================================
 # Search by Receipt No
 
