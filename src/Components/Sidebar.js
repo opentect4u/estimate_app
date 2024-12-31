@@ -163,7 +163,7 @@ function SidebarComp() {
           icon: (
             <OrderedListOutlined
               className={
-                location.pathname.includes("report/itemwise")
+                location.pathname.includes("report/itemwisereport")
                   ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
                   : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
               }
@@ -172,11 +172,35 @@ function SidebarComp() {
           label: (
             <div
               className={
-                location.pathname.includes("report/itemwise")
+                location.pathname.includes("report/itemwisereport")
                   ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
                   : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
               }>
               <Link to={"report/itemwisereport"}>Productwise Estimate</Link>
+            </div>
+          ),
+        },
+        {
+          key: "62",
+          icon: (
+            <OrderedListOutlined
+              className={
+                location.pathname.includes("report/employeewisereport")
+                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+              }
+            />
+          ),
+          label: (
+            <div
+              className={
+                location.pathname.includes("report/employeewisereport")
+                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+              }>
+              <Link to={"report/employeewisereport"}>
+                Employeewise Estimate
+              </Link>
             </div>
           ),
         },

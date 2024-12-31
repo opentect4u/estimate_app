@@ -15,6 +15,7 @@ import BrandDetailsView from "./Screens/Master/Brand/BrandDetailsView";
 import AddBrand from "./Screens/Master/Brand/AddBrand";
 import BrandDetailsComp from "./Screens/Master/Brand/BrandDetailsComp";
 import PioReport from "./Screens/Reports/PioReport";
+import EmployeewiseSaleReport from "./Screens/Reports/EmployeewiseSaleReport";
 
 const CategorywiseItemsComp = lazy(() =>
   import("./Screens/SuperAdmin/CategorywiseItems/CategorywiseItemsComp")
@@ -302,6 +303,10 @@ const router = createBrowserRouter([
               {
                 path: "pioreport",
                 element: <PioReport />,
+              },
+              {
+                path: "employeewisereport",
+                element: <EmployeewiseSaleReport />,
               },
             ],
           },
