@@ -151,8 +151,8 @@ function CancelledBillsReportScreen() {
             modal
             mode="date"
             // minimumDate={toDate.setMonth(toDate.getMonth() - 1)}
-            maximumDate={new Date()}
-            minimumDate={new Date(new Date().setDate(new Date().getDate() - 1))}
+            maximumDate={new Date(fromDate)}
+            minimumDate={new Date(new Date(fromDate).setDate(new Date(fromDate).getDate() - 1))}
             open={openFromDate}
             date={fromDate}
             onConfirm={date => {
@@ -166,8 +166,8 @@ function CancelledBillsReportScreen() {
           <DatePicker
             modal
             mode="date"
-            maximumDate={new Date()}
-            minimumDate={new Date(new Date().setDate(new Date().getDate() - 1))}
+            maximumDate={new Date(toDate)}
+            minimumDate={new Date(new Date(toDate).setDate(new Date(toDate).getDate() - 1))}
             open={openToDate}
             date={toDate}
             onConfirm={date => {
