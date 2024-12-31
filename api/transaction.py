@@ -235,7 +235,7 @@ async def show_bill(recp_no:str):
         try:
             conn1 = connect()
             cursor1 = conn1.cursor()
-            query1 = f"SELECT count(*)Count FROM td_receipt_cancel_new WHERE receipt_no = {recp_no}"
+            query1 = f"SELECT count(*)Count FROM td_receipt_cancel_new WHERE receipt_no = '{recp_no}'"
             cursor1.execute(query1)
             records1 = cursor1.fetchall()
             result1 = createResponse(records1, cursor1.column_names, 1)
