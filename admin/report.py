@@ -416,7 +416,7 @@ async def Productwise_report(item_rep:ItemReport):
     conn = connect()
     cursor = conn.cursor()
 
-    query = f"SELECT r.created_by as user_id,u.user_name from td_receipt r, md_user u where u.phone_no=r.created_by and r.comp_id = {item_rep.comp_id} and r.br_id={item_rep.br_id} and r.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'" 
+    query = f"SELECT s.created_by as user_id,u.user_name from md_user u,td_item_sale where  rt.item_id=i.id and s.comp_id = {item_rep.comp_id} and s.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'" 
     # if item_rep.br_id>0 else  f"SELECT b.id as store_id,b.branch_name as store_name,u.unit_name,t.trn_date,t.created_by as user_id,n.user_name,d.brand_name,rt.price,rt.mrp,c.category_name,s.receipt_no as invoice_no,s.item_id,IF(t.pay_mode='C','Cash',IF(t.pay_mode='U','UPI',IF(t.pay_mode='D','Card','Credit'))) pay_mode,i.item_name,t.net_amt,t.trn_date,s.qty from md_branch b,md_item_rate rt,td_item_sale s,md_items i,td_receipt t,md_unit u,md_category c,md_brand d,md_user n where s.br_id=b.id and s.item_id=i.id and s.receipt_no=t.receipt_no and i.unit_id=u.sl_no and i.catg_id=c.sl_no and d.brand_id=i.brand_id and n.phone_no=t.created_by and rt.item_id=i.id and t.comp_id = {item_rep.comp_id} and t.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'"
    
     print(query)
