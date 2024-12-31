@@ -279,6 +279,10 @@ class CustInfo(BaseModel):
     comp_id:int
     phone_no:str
 
+class UserInfo(BaseModel):
+    comp_id:int
+    br_id:int
+
 class BillList(BaseModel):
     comp_id:int
     br_id:int

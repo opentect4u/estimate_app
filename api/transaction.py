@@ -4,11 +4,40 @@ from config.database import connect
 import mysql.connector
 
 from models.master_model import createResponse
-from models.form_model import Receipt,SearchBill,AddEditTXN
+from models.form_model import Receipt,SearchBill,AddEditTXN,UserInfo
 from datetime import datetime
 
 # testing git
 tnxRouter = APIRouter()
+
+
+
+# Get user_info
+
+async def user_info(comp_id,br_id):
+
+    conn = connect()
+    cursor = conn.cursor()
+
+    query=f"select cust_name from md_customer where comp_id={comp_id} and phone_no='{br_id}'"
+    # print(query)
+
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    print('res=',result)
+    conn.close()
+    cursor.close()
+    if cursor.rowcount>0:
+        resData= {"status":1, "data":result}
+    else:
+        resData= {
+        "status":0,
+        # "data":result[0]
+        "data":[]
+        }
+    return resData
+# ====================================================================
 
 # Item Sale
 #---------------------------------------------------------------------------------------------------------------------------
@@ -16,17 +45,18 @@ tnxRouter = APIRouter()
 async def register(rcpt:list[Receipt]):
     # return rcpt
     current_datetime = datetime.now()
-    receipt_time = int(round(current_datetime.timestamp()))
+    receipt= int(round(current_datetime.timestamp()))
     formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
     curr_date = current_datetime.strftime("%Y-%m-%d")
     values = []
     tcgst_amt = 0
     tsgst_amt = 0
+    print('data=',user_info(rcpt[0].comp_id,rcpt[0].br_id))
     for i in rcpt:
         tcgst_amt += i.cgst_amt
         tsgst_amt += i.sgst_amt
-        receipt=f'{i.created_by[::-1][0:3]}{str(i.br_id)}{receipt_time}'
-        print('receipt='+receipt)
+        # receipt=f'{i.created_by[::-1][0:3]}{str(i.br_id)}{receipt_time}'
+        # print('receipt='+receipt)
         conn = connect()
         cursor = conn.cursor()
         # print(i)

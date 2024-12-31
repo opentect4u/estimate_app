@@ -66,3 +66,7 @@ async def cust_info(info:CustInfo):
         "data":[]
         }
     return resData
+
+
+
+
