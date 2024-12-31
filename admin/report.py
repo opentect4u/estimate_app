@@ -385,7 +385,7 @@ async def stock_report(data:UserList):
 
 # storewise_report (name can be changed)
 
-@reportRouter.post('/storewise_report')
+@reportRouter.post('/pio_report')
 async def Productwise_report(item_rep:ItemReport):
     conn = connect()
     cursor = conn.cursor()
