@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from config.database import connect
 from models.master_model import createResponse
 from models.masterApiModel import db_select, db_Insert
 from models.admin_form_model import UserList,SaleReport,CollectionReport,PayModeReport,UserWiseReport,GSTstatement,RefundReport,CreditReport,ItemReport,CancelReport,DaybookReport,CustomerLedger,RecveryReport,DueReport,dashboard
@@ -381,3 +382,29 @@ async def stock_report(data:UserList):
     res_dt = await db_select(select,table_name,where,order,flag)
 
     return res_dt
+
+# storewise_report (name can be changed)
+
+@reportRouter.post('/storewise_report')
+async def Productwise_report(item_rep:ItemReport):
+    conn = connect()
+    cursor = conn.cursor()
+
+    query = f"SELECT b.id,b.branch_name,s.receipt_no,s.item_id,i.item_name,t.net_amt,t.trn_date,s.qty from md_branch b,td_item_sale s,md_items i,td_receipt t where s.br_id=b.id and s.item_id=i.id and s.receipt_no=t.receipt_no and t.comp_id = {item_rep.comp_id} and t.br_id = {item_rep.br_id} and t.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'"
+   
+    print(query)
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if records==[]:
+        resData= {"status":0, "data":[]}
+    else:
+        resData= {
+        "status":1,
+        "data":result
+        }
+    return resData
+
+# ===============================================

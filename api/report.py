@@ -533,24 +533,24 @@ async def recovery_report(data:CreditCust):
 
 # // Estimate App //
 
-@repoRouter.post('/storewise_report')
-async def Productwise_report(item_rep:ItemReport):
-    conn = connect()
-    cursor = conn.cursor()
+# @repoRouter.post('/storewise_report')
+# async def Productwise_report(item_rep:ItemReport):
+#     conn = connect()
+#     cursor = conn.cursor()
 
-    query = f"SELECT b.id,b.branch_name,s.receipt_no,s.item_id,i.item_name,t.net_amt,t.trn_date,s.qty from md_branch b,td_item_sale s,md_items i,td_receipt t where s.br_id=b.id and s.item_id=i.id and s.receipt_no=t.receipt_no and t.comp_id = {item_rep.comp_id} and t.br_id = {item_rep.br_id} and t.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'"
+#     query = f"SELECT b.id,b.branch_name,s.receipt_no,s.item_id,i.item_name,t.net_amt,t.trn_date,s.qty from md_branch b,td_item_sale s,md_items i,td_receipt t where s.br_id=b.id and s.item_id=i.id and s.receipt_no=t.receipt_no and t.comp_id = {item_rep.comp_id} and t.br_id = {item_rep.br_id} and t.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'"
    
-    print(query)
-    cursor.execute(query)
-    records = cursor.fetchall()
-    result = createResponse(records, cursor.column_names, 1)
-    conn.close()
-    cursor.close()
-    if records==[]:
-        resData= {"status":0, "data":[]}
-    else:
-        resData= {
-        "status":1,
-        "data":result
-        }
-    return resData
+#     print(query)
+#     cursor.execute(query)
+#     records = cursor.fetchall()
+#     result = createResponse(records, cursor.column_names, 1)
+#     conn.close()
+#     cursor.close()
+#     if records==[]:
+#         resData= {"status":0, "data":[]}
+#     else:
+#         resData= {
+#         "status":1,
+#         "data":result
+#         }
+#     return resData
