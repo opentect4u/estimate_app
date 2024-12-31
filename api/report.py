@@ -185,28 +185,28 @@ async def collection_report(col_rep:SaleReport):
 # Search Bill by Phone no.
 # ------------------------------------------------------------------------------------------------------------
 
-# @repoRouter.post('/search_bill_by_phone')
-# async def search_bill_by_phone(bill:BillList):
-#     conn = connect()
-#     cursor = conn.cursor()
-#     query = f"SELECT DISTINCT a.receipt_no, a.trn_date, a.net_amt, a.phone_no FROM td_receipt a, td_item_sale b WHERE a.receipt_no=b.receipt_no AND b.comp_id = {bill.comp_id} AND b.br_id = {bill.br_id} AND a.phone_no = '{bill.phone_no}'"
-#     cursor.execute(query)
-#     records = cursor.fetchall()
-#     result = createResponse(records, cursor.column_names, 1)
-#     conn.close()
-#     cursor.close()
-#     if cursor.rowcount>0:
-#         resData = {
-#             "status":1,
-#             "data":result
-#         }
-#     else:
-#         resData = {
-#             "status":0,
-#             "data":[]
-#         }
+@repoRouter.post('/search_bill_by_phone')
+async def search_bill_by_phone(bill:BillList):
+    conn = connect()
+    cursor = conn.cursor()
+    query = f"SELECT DISTINCT a.receipt_no, a.trn_date, a.net_amt, a.phone_no FROM td_receipt a, td_item_sale b WHERE a.receipt_no=b.receipt_no AND b.comp_id = {bill.comp_id} AND b.br_id = {bill.br_id} AND a.phone_no = '{bill.phone_no}'"
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if cursor.rowcount>0:
+        resData = {
+            "status":1,
+            "data":result
+        }
+    else:
+        resData = {
+            "status":0,
+            "data":[]
+        }
 
-#     return resData
+    return resData
 
 #======================================================================================================
 # Search Bills by item name
