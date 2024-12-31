@@ -51,7 +51,7 @@ async def register(rcpt:list[Receipt]):
     values = []
     tcgst_amt = 0
     tsgst_amt = 0
-    print('data=',user_info(rcpt[0].comp_id,rcpt[0].br_id))
+    print('data=',rcpt[0].branch_name,rcpt[0].user_name)
     for i in rcpt:
         tcgst_amt += i.cgst_amt
         tsgst_amt += i.sgst_amt

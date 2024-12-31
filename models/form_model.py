@@ -53,6 +53,8 @@ class Receipt(BaseModel):
     stock_flag:str
     kot_flag:str
     table_no:int
+    branch_name:str
+    user_name:str
 
 class DashBoard(BaseModel):
     trn_date:date
