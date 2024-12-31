@@ -45,13 +45,14 @@ def user_info(comp_id,br_id):
 async def register(rcpt:list[Receipt]):
     # return rcpt
     current_datetime = datetime.now()
-    receipt= int(round(current_datetime.timestamp()))
+    receipt_time= int(round(current_datetime.timestamp()))
     formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
     curr_date = current_datetime.strftime("%Y-%m-%d")
     values = []
     tcgst_amt = 0
     tsgst_amt = 0
-    print('data=',rcpt[0].branch_name,rcpt[0].user_name)
+    # print('data=',rcpt[0].branch_name,rcpt[0].user_name)
+    receipt=f'{rcpt[0].user_name[::-1][0:3]}{rcpt[0].branch_name[::-1][0:3]}{receipt_time}'
     for i in rcpt:
         tcgst_amt += i.cgst_amt
         tsgst_amt += i.sgst_amt
