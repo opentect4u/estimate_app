@@ -137,6 +137,28 @@ function SidebarComp() {
         //   ),
         // },
         {
+          key: "61",
+          icon: (
+            <OrderedListOutlined
+              className={
+                location.pathname.includes("report/pioreport")
+                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+              }
+            />
+          ),
+          label: (
+            <div
+              className={
+                location.pathname.includes("report/pioreport")
+                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+              }>
+              <Link to={"report/pioreport"}>Products In Order</Link>
+            </div>
+          ),
+        },
+        {
           key: "6",
           icon: (
             <OrderedListOutlined

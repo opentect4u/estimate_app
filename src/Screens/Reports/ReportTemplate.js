@@ -24,7 +24,7 @@ function ReportTemplate({ templateData, template, _url }) {
   useEffect(() => {
     console.log(response, templateData);
     if (!isCalled) setRestp(response?.data?.msg);
-    if (response?.data?.suc == 0 || response?.data?.msg.length <= 0) {
+    if (response?.data?.suc == 0 || response?.data?.msg?.length <= 0) {
       Message("error", "No data!");
       setIsReport(false);
     } else {

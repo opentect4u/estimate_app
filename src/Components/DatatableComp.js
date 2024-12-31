@@ -15,7 +15,7 @@ function DatatableComp({ headers, data, span, totals }) {
     <ColumnGroup>
       <Row>
         <Column
-          footer="Totals:"
+          footer={span !== 0 && "Totals:"}
           colSpan={span}
           footerStyle={{ textAlign: "center" }}
         />
@@ -28,7 +28,7 @@ function DatatableComp({ headers, data, span, totals }) {
   return (
     <div className="card w-full ">
       <DataTable
-        footerColumnGroup={totals ? footerGroup : ""}
+        footerColumnGroup={totals || span !== 0 ? footerGroup : ""}
         value={data}
         showGridlines={true}
         sortMode="multiple"
