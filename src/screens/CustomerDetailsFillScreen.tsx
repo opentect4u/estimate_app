@@ -218,6 +218,9 @@ const CustomerDetailsFillScreen = () => {
     const branchId = loginStore.br_id
     const createdBy = loginStore.user_id
 
+    const branchName = loginStore?.branch_name
+    const userName = loginStore?.user_name
+
     let filteredData: FilteredItem[]
 
     filteredData = (params?.added_products).map(item =>
@@ -241,7 +244,11 @@ const CustomerDetailsFillScreen = () => {
         customerInfoFlag,
         receiptSettings?.stock_flag,
 
-        discountBillwise || 0
+        discountBillwise || 0,
+
+        /////////////////////////////////////
+        branchName,
+        userName
       ),
     )
 

@@ -34,6 +34,10 @@ export type FilteredItem = {
   "kot_flag": string
   "table_no": number
   "rcv_cash_flag": string
+
+  // ///////////////////
+  branch_name: string
+  user_name: string
 }
 
 export type AppStoreContext = {

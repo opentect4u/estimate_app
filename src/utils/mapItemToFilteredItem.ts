@@ -23,7 +23,9 @@ export function mapItemToFilteredItem(
   customerInfoFlag: number,
   stockFlag: "Y" | "N",
 
-  discountBillwise: number
+  discountBillwise: number,
+  branchName: string,
+  userName: string
 ): FilteredItem {
   const {
     netTotalWithGSTInclCalculate,
@@ -159,6 +161,9 @@ export function mapItemToFilteredItem(
     stock_flag: stockFlag,
     kot_flag: receiptSettings?.kot_flag,
     table_no: params.table_no || (0).toString(),
-    rcv_cash_flag: receiptSettings?.rcv_cash_flag
+    rcv_cash_flag: receiptSettings?.rcv_cash_flag,
+    // /////////////////////////
+    branch_name: branchName,
+    user_name: userName
   }
 }
