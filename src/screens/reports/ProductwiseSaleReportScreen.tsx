@@ -153,6 +153,9 @@ function ProductwiseSaleReportScreen() {
             modal
             mode="date"
             // minimumDate={toDate.setMonth(toDate.getMonth() - 1)}
+            // minimumDate={new Date(fromDate.setDate(fromDate.getDate() - 2))}
+            maximumDate={new Date()}
+            minimumDate={new Date(new Date().setDate(new Date().getDate() - 1))}
             open={openFromDate}
             date={fromDate}
             onConfirm={date => {
@@ -166,6 +169,8 @@ function ProductwiseSaleReportScreen() {
           <DatePicker
             modal
             mode="date"
+            maximumDate={new Date()}
+            minimumDate={new Date(new Date().setDate(new Date().getDate() - 1))}
             open={openToDate}
             date={toDate}
             onConfirm={date => {

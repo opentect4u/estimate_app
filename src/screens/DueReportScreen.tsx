@@ -149,6 +149,8 @@ function DueReportScreen() {
                     <DatePicker
                         modal
                         mode="date"
+                        maximumDate={new Date()}
+                        minimumDate={new Date(new Date().setDate(new Date().getDate() - 1))}
                         open={openToDate}
                         date={toDate}
                         onConfirm={date => {
