@@ -149,6 +149,7 @@ async def cancel_bill_new(del_bill: CancelBill):
     records = cursor.fetchall()
     # print(records)
     result = createResponse(records, cursor.column_names, 1)
+    print(result)
     conn.close()
     cursor.close()
     if records:
@@ -161,15 +162,17 @@ async def cancel_bill_new(del_bill: CancelBill):
          records = cursor.fetchall()
     # print(records)
          result = createResponse(records, cursor.column_names, 1)
+         print(result)
+
          conn.close()
          cursor.close()
-    if records==[(0,None)]:
-        resData= {"status":0, "data":"no data"}
-    else:
-        resData= {
-        "status":1,
-        "data":result
-        }
+         if records==[(0,None)]:
+             resData= {"status":0, "data":"no data"}
+         else:
+             resData= {
+                "status":1,
+                "data":result
+          }
 
 
     return resData
