@@ -262,17 +262,17 @@ async def collection_report(item_rep:ItemReport):
     return res_dt
 
 
-# @reportRouter.post('/productwise_report')
-# async def productwise_report(item_rep:ItemReport):
+@reportRouter.post('/productwise_report')
+async def productwise_report(item_rep:ItemReport):
     
-#     select = f"b.item_name,a.item_id,d.unit_name as unit_name,SUM(a.qty)as tot_item_qty,c.price as unit_price,sum(a.price*a.qty)as tot_item_price,catg.category_name,brn.brand_name, max(a.trn_date) to_dt,min(a.trn_date) from_dt, concat(min(a.trn_date),' - ',max(a.trn_date)) as range_dt"
-#     table_name = "td_item_sale a, md_items b, md_item_rate c,md_unit d,md_category catg,md_brand brn"
-#     where = f"b.brand_id=brn.brand_id and b.catg_id=catg.sl_no and a.item_id = b.id and a.item_id=c.item_id  and b.unit_id = d.sl_no and a.comp_id = {item_rep.comp_id} and a.br_id = {item_rep.br_id} and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' and a.cancel_flag = 0" if item_rep.br_id>0 else f"b.brand_id=brn.brand_id and b.catg_id=catg.sl_no and a.item_id = b.id and a.item_id=c.item_id  and b.unit_id = d.sl_no and a.comp_id = {item_rep.comp_id} and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' and a.cancel_flag = 0"
-#     order = "group by b.item_name,a.item_id,d.unit_name,c.price,catg.category_name,brn.brand_name"
-#     flag = 1
-#     res_dt = await db_select(select,table_name,where,order,flag)
+    select = f"b.item_name,a.item_id,d.unit_name as unit_name,SUM(a.qty)as tot_item_qty,c.price as unit_price,sum(a.price*a.qty)as tot_item_price,catg.category_name,brn.brand_name, max(a.trn_date) to_dt,min(a.trn_date) from_dt, concat(min(a.trn_date),' - ',max(a.trn_date)) as range_dt"
+    table_name = "td_item_sale a, md_items b, md_item_rate c,md_unit d,md_category catg,md_brand brn"
+    where = f"b.brand_id=brn.brand_id and b.catg_id=catg.sl_no and a.item_id = b.id and a.item_id=c.item_id  and b.unit_id = d.sl_no and a.comp_id = {item_rep.comp_id} and a.br_id = {item_rep.br_id} and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' and a.cancel_flag = 0" if item_rep.br_id>0 else f"b.brand_id=brn.brand_id and b.catg_id=catg.sl_no and a.item_id = b.id and a.item_id=c.item_id  and b.unit_id = d.sl_no and a.comp_id = {item_rep.comp_id} and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' and a.cancel_flag = 0"
+    order = "group by b.item_name,a.item_id,d.unit_name,c.price,catg.category_name,brn.brand_name"
+    flag = 1
+    res_dt = await db_select(select,table_name,where,order,flag)
     
-#     return res_dt
+    return res_dt
 
 #=================================================================================================
 # Cancel Report
@@ -411,33 +411,33 @@ async def Productwise_report(item_rep:ItemReport):
 
 
 
-@reportRouter.post('/employeewise_report')
-async def Productwise_report(item_rep:ItemReport):
-    conn = connect()
-    cursor = conn.cursor()
+# @reportRouter.post('/employeewise_report')
+# async def Productwise_report(item_rep:ItemReport):
+#     conn = connect()
+#     cursor = conn.cursor()
 
-    query = f"SELECT r.created_by as user_id,count(r.receipt_no) as receipt_no_count,sum(s.qty) as item_count,sum(r.round_off) as tot_round_off,sum(r.net_amt) as net_sale,sum(r.net_amt)+sum(r.round_off) as gross_sale,SUM(CASE When r.pay_mode='C' Then r.net_amt Else 0 End ) as tot_cash_amt, SUM(CASE When r.pay_mode='R' Then r.net_amt Else 0 End ) as tot_credit_amt,SUM(CASE When r.pay_mode='U' Then r.net_amt Else 0 End ) as tot_upi_amt,u.user_name,b.branch_name from md_user u,td_receipt r,md_branch b,td_item_sale s where u.phone_no=r.created_by and b.id = r.br_id and s.receipt_no=r.receipt_no and r.comp_id = {item_rep.comp_id} and r.br_id={item_rep.br_id} and s.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'  group by r.created_by,u.user_name,b.branch_name" if item_rep.br_id>0 else f"SELECT r.created_by as user_id,count(r.receipt_no) as receipt_no_count,sum(s.qty) as item_count,sum(r.round_off) as tot_round_off,sum(r.net_amt) as net_sale,sum(r.net_amt)+sum(r.round_off) as gross_sale,SUM(CASE When r.pay_mode='C' Then r.net_amt Else 0 End ) as tot_cash_amt, SUM(CASE When r.pay_mode='R' Then r.net_amt Else 0 End ) as tot_credit_amt,SUM(CASE When r.pay_mode='U' Then r.net_amt Else 0 End ) as tot_upi_amt,u.user_name,b.branch_name from md_user u,td_receipt r,md_branch b,td_item_sale s where u.phone_no=r.created_by and b.id = r.br_id and s.receipt_no=r.receipt_no and r.comp_id = {item_rep.comp_id} and s.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'  group by r.created_by,u.user_name,b.branch_name"
-    # if item_rep.br_id>0 else  f"SELECT b.id as store_id,b.branch_name as store_name,u.unit_name,t.trn_date,t.created_by as user_id,n.user_name,d.brand_name,rt.price,rt.mrp,c.category_name,s.receipt_no as invoice_no,s.item_id,IF(t.pay_mode='C','Cash',IF(t.pay_mode='U','UPI',IF(t.pay_mode='D','Card','Credit'))) pay_mode,i.item_name,t.net_amt,t.trn_date,s.qty from md_branch b,md_item_rate rt,td_item_sale s,md_items i,td_receipt t,md_unit u,md_category c,md_brand d,md_user n where s.br_id=b.id and s.item_id=i.id and s.receipt_no=t.receipt_no and i.unit_id=u.sl_no and i.catg_id=c.sl_no and d.brand_id=i.brand_id and n.phone_no=t.created_by and rt.item_id=i.id and t.comp_id = {item_rep.comp_id} and t.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'"
+#     query = f"SELECT r.created_by as user_id,count(r.receipt_no) as receipt_no_count,sum(s.qty) as item_count,sum(r.round_off) as tot_round_off,sum(r.net_amt) as net_sale,sum(r.net_amt)+sum(r.round_off) as gross_sale,SUM(CASE When r.pay_mode='C' Then r.net_amt Else 0 End ) as tot_cash_amt, SUM(CASE When r.pay_mode='R' Then r.net_amt Else 0 End ) as tot_credit_amt,SUM(CASE When r.pay_mode='U' Then r.net_amt Else 0 End ) as tot_upi_amt,u.user_name,b.branch_name from md_user u,td_receipt r,md_branch b,td_item_sale s where u.phone_no=r.created_by and b.id = r.br_id and s.receipt_no=r.receipt_no and r.comp_id = {item_rep.comp_id} and r.br_id={item_rep.br_id} and s.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'  group by r.created_by,u.user_name,b.branch_name" if item_rep.br_id>0 else f"SELECT r.created_by as user_id,count(r.receipt_no) as receipt_no_count,sum(s.qty) as item_count,sum(r.round_off) as tot_round_off,sum(r.net_amt) as net_sale,sum(r.net_amt)+sum(r.round_off) as gross_sale,SUM(CASE When r.pay_mode='C' Then r.net_amt Else 0 End ) as tot_cash_amt, SUM(CASE When r.pay_mode='R' Then r.net_amt Else 0 End ) as tot_credit_amt,SUM(CASE When r.pay_mode='U' Then r.net_amt Else 0 End ) as tot_upi_amt,u.user_name,b.branch_name from md_user u,td_receipt r,md_branch b,td_item_sale s where u.phone_no=r.created_by and b.id = r.br_id and s.receipt_no=r.receipt_no and r.comp_id = {item_rep.comp_id} and s.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'  group by r.created_by,u.user_name,b.branch_name"
+
    
-    print(query)
-    cursor.execute(query)
-    records = cursor.fetchall()
-    result = createResponse(records, cursor.column_names, 1)
-    conn.close()
-    cursor.close()
-    if records==[]:
-        resData= {"status":0, "msg":[]}
-    else:
-        resData= {
-        "status":1,
-        "msg":result
-        }
-    return resData
+#     print(query)
+#     cursor.execute(query)
+#     records = cursor.fetchall()
+#     result = createResponse(records, cursor.column_names, 1)
+#     conn.close()
+#     cursor.close()
+#     if records==[]:
+#         resData= {"status":0, "msg":[]}
+#     else:
+#         resData= {
+#         "status":1,
+#         "msg":result
+#         }
+#     return resData
 
 # ===============================================
 
 
-@reportRouter.post('/productwise_report')
+@reportRouter.post('/employeewise_report')
 async def Productwise_report(item_rep:ItemReport):
     conn = connect()
     cursor = conn.cursor()
