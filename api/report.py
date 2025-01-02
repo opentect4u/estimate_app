@@ -665,10 +665,10 @@ group by created_by,user_name,branch_name
     conn.close()
     cursor.close()
     if records==[]:
-        resData= {"status":0, "msg":[]}
+        resData= {"status":0, "data":[]}
     else:
         resData= {
         "status":1,
-        "msg":result
+        "data":result
         }
     return resData
