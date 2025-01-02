@@ -83,60 +83,50 @@ cancelRouter = APIRouter()
 #=================================================================================================
 # Cancel Bill
 
-@cancelRouter.post('/cancel_bill_two')
-async def cancel_bill_two(del_bill: CancelBill):
-    current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    conn = connect()
-    cursor = conn.cursor()
+# @cancelRouter.post('/cancel_bill_two')
+# async def cancel_bill_two(del_bill: CancelBill):
+#     current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+#     conn = connect()
+#     cursor = conn.cursor()
 
-    # query = f"SELECT a.receipt_no, b.qty FROM td_receipt a, td_item_sale b WHERE a.receipt_no = b.receipt_no AND a.receipt_no={del_bill.receipt_no}"
+ 
+#     query = f"SELECT receipt_no FROM td_receipt WHERE receipt_no='{del_bill.receipt_no}'"
 
-    query = f"SELECT receipt_no FROM td_receipt WHERE receipt_no='{del_bill.receipt_no}'"
+#     cursor.execute(query)
+#     record = cursor.fetchone()
+  
+#     if record:
+#         try:
 
-    cursor.execute(query)
-    record = cursor.fetchone()
-    # conn.close()
-    # cursor.close()
-    # print(list(record[0:1]),"yyyyyyyyyyyy")
+#             rec = list(record)
+#             rec.append(del_bill.user_id)
+#             rec.append(current_datetime)
 
-    if record:
-        try:
-
-            # rec = list(record[0:1])
-            rec = list(record)
-            rec.append(del_bill.user_id)
-            rec.append(current_datetime)
-            # print(rec,"===========", tuple(rec))
-            # conn = connect()
-            # cursor = conn.cursor()
-
-            query1 = """INSERT INTO td_receipt_cancel_new (receipt_no, cancelled_by, cancelled_dt) VALUES (%s, %s, %s)"""
+#             query1 = """INSERT INTO td_receipt_cancel_new (receipt_no, cancelled_by, cancelled_dt) VALUES (%s, %s, %s)"""
             
-            cursor.execute(query1,tuple(rec))
-            conn.commit()
-            # print(query1)
-            cursor.close()
-            conn.close()
-            if cursor.rowcount>0:
-                # print(rec,"44444")
-                conn = connect()
-                cursor = conn.cursor()
-                query2 = f"UPDATE td_item_sale SET cancel_flag=1, modified_by='{del_bill.user_id}', modified_dt='{current_datetime}' WHERE receipt_no='{del_bill.receipt_no}'"               
-                cursor.execute(query2)
-                conn.commit()
-                print(query2,"555555555")
-                cursor.close()
-                conn.close()
-                if cursor.rowcount>0:
-                    res_dt={"status":1, "data":"Bill Cancelled Successfully"}
-                else:
-                    res_dt={"status":1, "data":"td_item_sale is not updated"}
-            else:
-                res_dt={"status":0, "data":"Failed to Cancel Bill"}
-        except:
-            return "Error While Inserting Cancelled Bill"
+#             cursor.execute(query1,tuple(rec))
+#             conn.commit()
+#             cursor.close()
+#             conn.close()
+#             if cursor.rowcount>0:
+#                 conn = connect()
+#                 cursor = conn.cursor()
+#                 query2 = f"UPDATE td_item_sale SET cancel_flag=1, modified_by='{del_bill.user_id}', modified_dt='{current_datetime}' WHERE receipt_no='{del_bill.receipt_no}'"               
+#                 cursor.execute(query2)
+#                 conn.commit()
+#                 print(query2,"555555555")
+#                 cursor.close()
+#                 conn.close()
+#                 if cursor.rowcount>0:
+#                     res_dt={"status":1, "data":"Bill Cancelled Successfully"}
+#                 else:
+#                     res_dt={"status":1, "data":"td_item_sale is not updated"}
+#             else:
+#                 res_dt={"status":0, "data":"Failed to Cancel Bill"}
+#         except:
+#             return "Error While Inserting Cancelled Bill"
 
-    return res_dt
+#     return res_dt
 
 
 
