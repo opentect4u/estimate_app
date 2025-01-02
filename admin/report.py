@@ -442,7 +442,7 @@ async def Productwise_report(item_rep:ItemReport):
     conn = connect()
     cursor = conn.cursor()
 
-    query = f'''select created_by,sum(receipt_no), 
+    query = f'''select created_by,sum(receipt_no),
 sum(Quantity)Quantity,
 (sum(cash_gross_sale) + sum(credit_gross_sale))gross_sale,
 (sum(cash_round_off)  + sum(credit_round_off))round_off,
@@ -461,7 +461,7 @@ from (
     FROM  td_receipt a,td_item_sale b
     where a.receipt_no = b.receipt_no
     and a.comp_id = {item_rep.comp_id} 
-    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'
+    and a.trn_date BETWEEN {item_rep.from_date} and {item_rep.to_date} 
     and a.pay_mode in ('C','U')
     group by a.created_by
     UNION
@@ -476,10 +476,10 @@ from (
     FROM  td_receipt a,td_item_sale b
     where a.receipt_no = b.receipt_no
     and a.comp_id = {item_rep.comp_id} 
-    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'
+    and a.trn_date BETWEEN {item_rep.from_date} and {item_rep.to_date} 
     and a.pay_mode = 'R'
     group by a.created_by)a
-    group by created_by
+group by created_by
    '''
    
     print(query)
