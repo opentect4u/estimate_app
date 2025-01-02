@@ -442,7 +442,8 @@ async def Employeewise_report(item_rep:ItemReport):
     conn = connect()
     cursor = conn.cursor()
 
-    query = f'''select created_by,sum(receipt_no),
+    query = f'''select created_by,user_name,
+    sum(receipt_no),
 sum(Quantity)Quantity,
 (sum(cash_gross_sale) + sum(credit_gross_sale))gross_sale,
 (sum(cash_round_off)  + sum(credit_round_off))round_off,
@@ -450,7 +451,8 @@ sum(Quantity)Quantity,
 sum(cash_net_sale) cash_sale,
 sum(credit_net_sale)credit_sale
 from (
-    SELECT a.created_by,count(distinct a.receipt_no) receipt_no,
+    SELECT a.created_by,c.user_name,
+    count(distinct a.receipt_no) receipt_no,
     sum(distinct a.amount)as cash_gross_sale,
     sum(a.round_off) as cash_round_off,
     sum(distinct a.net_amt) cash_net_sale,
@@ -458,14 +460,16 @@ from (
     0 credit_round_off,
     0 credit_net_sale,
     sum(b.qty)Quantity
-    FROM  td_receipt a,td_item_sale b
+    FROM  td_receipt a,td_item_sale b,md_user c
     where a.receipt_no = b.receipt_no
+    and   a.created_by = c.user_id
     and a.comp_id = {item_rep.comp_id} 
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
     and a.pay_mode in ('C','U')
-    group by a.created_by
+    group by a.created_by,c.user_name
     UNION
-    SELECT a.created_by,count(distinct a.receipt_no) receipt_no,
+    SELECT a.created_by,c.user_name,
+    count(distinct a.receipt_no) receipt_no,
     0 cash_gross_sale,
     0 cash_round_off,
     0 cash_net_sale,
@@ -473,13 +477,14 @@ from (
     sum(a.round_off) as credit_round_off,
     sum(distinct a.net_amt) credit_net_sale,
     sum(b.qty)Quantity
-    FROM  td_receipt a,td_item_sale b
+    FROM  td_receipt a,td_item_sale b,md_user c
     where a.receipt_no = b.receipt_no
+    and   a.created_by = c.user_id
     and a.comp_id = {item_rep.comp_id} 
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
     and a.pay_mode = 'R'
     group by a.created_by)a
-group by created_by
+group by created_by,user_name
    '''
    
     print(query)
