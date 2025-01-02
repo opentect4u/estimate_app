@@ -13,7 +13,7 @@ export const pathMap = {
   gstsummary: "GST Summary",
   refundreport: "Refund Report",
   creditreport: "Credit Report",
-  itemwisereport: "Productwise Sale",
+  itemwisereport: "Productwise Estimate",
   daybook: "Day Book Report",
   stockreport: "Stock Report",
   cancelbill: "Cancelled Bill Report",
@@ -66,4 +66,6 @@ export const pathMap = {
   stockedit: "Edit stock",
   category: "Categories",
   categoryedit: "Add/Edit categories",
+  pioreport: "Products in Estimate",
+  employeewisereport: "Employeewise Report",
 };

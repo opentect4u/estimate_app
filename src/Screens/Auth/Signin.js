@@ -34,7 +34,7 @@ function Signin() {
       }, 1000);
     } else {
       // navigate("home/report/daybook");
-      navigate("home");
+      navigate("home/report/pioreport");
     }
   }, []);
   useEffect(() => {
