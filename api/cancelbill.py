@@ -149,7 +149,7 @@ async def cancel_bill_new(del_bill: CancelBill):
     records = cursor.fetchall()
     # print(records)
     result = createResponse(records, cursor.column_names, 1)
-    print(result)
+    print('result1=',result)
     conn.close()
     cursor.close()
     resData= {
@@ -166,7 +166,7 @@ async def cancel_bill_new(del_bill: CancelBill):
          records = cursor.fetchall()
     # print(records)
          result = createResponse(records, cursor.column_names, 1)
-         print(result)
+         print('result2=',result)
 
          conn.close()
          cursor.close()
