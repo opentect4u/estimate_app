@@ -479,8 +479,7 @@ from (
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'
     and a.pay_mode = 'R'
     group by a.created_by)a
-    group by created_by"
-    
+    group by created_by
    '''
    
     print(query)
