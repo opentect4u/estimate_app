@@ -214,13 +214,15 @@ function UserwiseReportScreen() {
               <DataTable.Title textStyle={titleTextStyle}>Username</DataTable.Title>
               <DataTable.Title textStyle={titleTextStyle} numeric>RCPTs</DataTable.Title>
               <DataTable.Title textStyle={titleTextStyle} numeric>Net Amt.</DataTable.Title>
+              <DataTable.Title textStyle={titleTextStyle} numeric>Cash</DataTable.Title>
+              <DataTable.Title textStyle={titleTextStyle} numeric>Credit</DataTable.Title>
               {/* <DataTable.Title textStyle={titleTextStyle} numeric>Cncl Amt.</DataTable.Title> */}
             </DataTable.Header>
 
             {userwiseReport?.map((item, i) => {
               totalSummary += item?.net_amt
-              totalReceipts += item?.receipt_no_count
-              totalCancelled += item?.cancelled_amt
+              // totalReceipts += item?.receipt_no_count
+              // totalCancelled += item?.cancelled_amt
 
               return (
                 <DataTable.Row key={i}>
@@ -229,18 +231,20 @@ function UserwiseReportScreen() {
                   <DataTable.Cell>
                     {item?.user_name}
                   </DataTable.Cell>
-                  <DataTable.Cell numeric>{item?.receipt_no_count}</DataTable.Cell>
-                  <DataTable.Cell numeric>{item?.net_amt}</DataTable.Cell>
+                  <DataTable.Cell numeric>{item["sum(receipt_no)"]}</DataTable.Cell>
+                  <DataTable.Cell numeric>{item?.net_sale}</DataTable.Cell>
+                  <DataTable.Cell numeric>{item?.cash_sale}</DataTable.Cell>
+                  <DataTable.Cell numeric>{item?.credit_sale}</DataTable.Cell>
                   {/* <DataTable.Cell numeric>{item?.cancelled_amt}</DataTable.Cell> */}
                 </DataTable.Row>
               )
             })}
           </DataTable>
-          <View style={{ padding: normalize(10) }}>
+          {/* <View style={{ padding: normalize(10) }}>
             <Text variant="labelMedium" style={{ color: theme.colors.primary }}>
               {totalReceipts} Bills, NET: ₹{totalSummary?.toFixed(2)}
             </Text>
-          </View>
+          </View> */}
         </SurfacePaper>
         <View
           style={{

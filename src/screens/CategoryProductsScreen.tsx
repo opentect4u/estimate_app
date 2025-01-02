@@ -460,13 +460,13 @@ function CategoryProductsScreen() {
                             justifyContent: "center",
                             alignItems: "center"
                         }}
-                        traileringIcon={"barcode-scan"}
-                        traileringIconColor={theme.colors.purple}
-                        onTraileringIconPress={
-                            () => navigation.dispatch(
-                                CommonActions.navigate(navigationRoutes.cameraScreen)
-                            )
-                        }
+                    // traileringIcon={"barcode-scan"}
+                    // traileringIconColor={theme.colors.purple}
+                    // onTraileringIconPress={
+                    //     () => navigation.dispatch(
+                    //         CommonActions.navigate(navigationRoutes.cameraScreen)
+                    //     )
+                    // }
                     />
                 </View>
 

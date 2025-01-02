@@ -124,7 +124,7 @@ function CancelledBillsReportScreen() {
             imgDark={greenRepDark}
             borderRadius={30}
             blur={10}>
-            Cancelled Bills Report
+            Cancelled Estimate Report
           </HeaderImage>
         </View>
         <View

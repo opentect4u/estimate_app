@@ -2227,7 +2227,8 @@ export const useBluetoothPrint = () => {
       `[L]FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}[R]TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
       `[C]=============================\n` +
       // `[L]RCPT. DATE[R]${new Date().toLocaleDateString("en-GB")}\n` +
-      `[L]User[C]Rcpts[C]Net[R]Cncl\n` +
+      `[L]User[C]Rcpts[R]Net\n` +
+      `[L]Cash[R]Credit\n` +
       `[C]=============================\n`;
 
     let totalNet = 0;
@@ -2236,13 +2237,14 @@ export const useBluetoothPrint = () => {
     for (const item of reportData) {
       // totalDue += item?.cancelled_amt
 
-      text += `[L]${item?.user_name?.slice(0, 5)}[C]${item?.no_of_receipts}[C]${item?.net_amt}[R]${item?.cancelled_amt}\n`;
+      text += `[L]${item?.user_name?.slice(0, 5)}[C]${item["sum(receipt_no)"]}[C]${item?.net_sale}\n` +
+        `[L]${item?.cash_sale}[R]${item?.credit_sale}\n`;
     }
 
-    text += `[C]=============================\n` +
-      `[L]Rows Count[R]${reportData?.length}\n` +
-      // `[L]Total Due[R]${totalDue}\n` +
-      `[C]==============X===============\n\n\n` +
+    // text += `[C]=============================\n` +
+    // `[L]Rows Count[R]${reportData?.length}\n` +
+    // `[L]Total Due[R]${totalDue}\n` +
+    text += `[C]==============X===============\n\n\n` +
       `[C]                                \n\n`;
 
     await ThermalPrinterModule.printBluetooth({

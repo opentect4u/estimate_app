@@ -107,7 +107,7 @@ function HomeScreen() {
   )
   const [recentBills, setRecentBills] = useState<RecentBillsData[]>(() => [])
   const [billedSaleData, setBilledSaleData] = useState<ShowBillData[]>(() => [])
-  const [currentReceiptNo, setCurrentReceiptNo] = useState<number | undefined>(
+  const [currentReceiptNo, setCurrentReceiptNo] = useState<string | undefined>(
     () => undefined,
   )
   const [cancelledBillStatus, setCancelledBillStatus] = useState<"Y" | "N">()
@@ -346,7 +346,7 @@ function HomeScreen() {
     Linking.openURL(updateUrl)
   }
 
-  const handleGetBill = async (rcptNo: number) => {
+  const handleGetBill = async (rcptNo: string) => {
     await fetchBill(rcptNo)
       .then(res => {
         setBilledSaleData(res?.data)
@@ -358,13 +358,13 @@ function HomeScreen() {
       })
   }
 
-  const handleGetBillCalculatorMode = async (rcptNo: number) => {
+  const handleGetBillCalculatorMode = async (rcptNo: string) => {
     await fetchCalcBill(rcptNo).then(res => {
       setCalculatorModeBillArray(res?.data)
     })
   }
 
-  const handleRecentBillListClick = (rcptNo: number) => {
+  const handleRecentBillListClick = (rcptNo: string) => {
     setVisible(true)
     handleGetBill(rcptNo)
     setCurrentReceiptNo(rcptNo)
@@ -372,21 +372,24 @@ function HomeScreen() {
     setGstType(billedSaleData[0]?.gst_type)
   }
 
-  const handleBillListClickCalculatorMode = (rcptNo: number) => {
+  const handleBillListClickCalculatorMode = (rcptNo: string) => {
     setVisible2(true)
     setCurrentReceiptNo(rcptNo)
     handleGetBillCalculatorMode(rcptNo)
   }
 
-  const handleCancellingBill = async (rcptNo: number) => {
+  const handleCancellingBill = async (rcptNo: string) => {
     await cancelBill(rcptNo, loginStore.user_id).then(res => {
       if (res?.status === 1) {
-        ToastAndroid.show(res?.data, ToastAndroid.SHORT)
+        // ToastAndroid.show(res?.data, ToastAndroid.SHORT)
+        Alert.alert("Alert", "Estimate cancelled.")
+        console.log("++++++++++++++++++++++-----------------------", res)
         handleRePrintReceipt(true)
         setVisible(false)
       }
     }).catch(err => {
-      ToastAndroid.show(`Error occurred during cancelling bill. ${err}`, ToastAndroid.SHORT)
+      // ToastAndroid.show(`Error occurred during cancelling bill. ${err}`, ToastAndroid.SHORT)
+      console.log("uireeeeeeeeeeee wtucrsduyrtgsueyctuwe", err)
       setVisible(false)
     })
 
@@ -394,7 +397,7 @@ function HomeScreen() {
     handleGetRecentBills()
   }
 
-  const handleCancelBill = (rcptNo: number) => {
+  const handleCancelBill = (rcptNo: string) => {
     Alert.alert(
       "Cancelling Bill",
       `Are you sure you want to cancel this bill?`,

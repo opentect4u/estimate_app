@@ -191,7 +191,7 @@ export type BillSummaryData = {
 }
 
 export type RecentBillsData = {
-  receipt_no: number
+  receipt_no: string
   trn_date: string
   price: number
   discount_amt: number
@@ -450,9 +450,14 @@ export type UserwiseReportResponse = {
 export type UserwiseReportData = {
   "created_by": string
   "net_amt": number
-  "cancelled_amt": number
-  "receipt_no_count": number
+  // "cancelled_amt": number
+  // "receipt_no_count": number
   "user_name": string
+
+  "sum(receipt_no)": string
+  "net_sale": string
+  "cash_sale": string
+  "credit_sale": string
 }
 
 export type CustomerLedgerCredentials = {

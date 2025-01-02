@@ -12,7 +12,7 @@ import CalculateModeBill from './CalculateModeBill'
 type DialogForBillsInCalculatorModeProps = {
     visible: boolean
     hide: () => void
-    currentReceiptNumber?: number
+    currentReceiptNumber?: string
     showCalculatedBillData: CalculatorShowBillData[]
     onDialogFailure?: () => void
     onDialogSuccecss?: () => void
@@ -21,7 +21,7 @@ type DialogForBillsInCalculatorModeProps = {
 const DialogForBillsInCalculatorMode = ({
     visible,
     hide,
-    currentReceiptNumber = 0,
+    currentReceiptNumber = "0",
     showCalculatedBillData,
     onDialogFailure,
     onDialogSuccecss

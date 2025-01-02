@@ -1005,7 +1005,7 @@ const CustomerDetailsFillScreen = () => {
                   <InputPaper
                     selectTextOnFocus
                     label="Received Amount"
-                    value={cashAmount}
+                    value={0}
                     onChangeText={(cash: number) => setCashAmount(cash)}
                     keyboardType="number-pad"
                     leftIcon="cash-multiple"
