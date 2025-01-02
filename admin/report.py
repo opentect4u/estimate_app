@@ -487,6 +487,53 @@ from (
     and a.pay_mode = 'R'
     group by a.created_by,c.user_name,d.branch_name)a
 group by created_by,user_name,branch_name
+   ''' if item_rep.br_id!=0 else f'''select created_by,user_name,branch_name,
+    sum(receipt_no),
+sum(Quantity)Quantity,
+(sum(cash_gross_sale) + sum(credit_gross_sale))gross_sale,
+(sum(cash_round_off)  + sum(credit_round_off))round_off,
+(sum(cash_net_sale)   + sum(credit_net_sale))net_sale,
+sum(cash_net_sale) cash_sale,
+sum(credit_net_sale)credit_sale
+from (
+    SELECT a.created_by,c.user_name,d.branch_name,
+    count(distinct a.receipt_no) receipt_no,
+    sum(distinct a.amount)as cash_gross_sale,
+    sum(a.round_off) as cash_round_off,
+    sum(distinct a.net_amt) cash_net_sale,
+    0 credit_gross_sale,
+    0 credit_round_off,
+    0 credit_net_sale,
+    sum(b.qty)Quantity
+    FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
+    where a.receipt_no = b.receipt_no
+    and   a.created_by = c.user_id
+    and   a.br_id = d.id
+    and a.comp_id = {item_rep.comp_id} 
+    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
+    and a.br_id = {item_rep.br_id}
+    and a.pay_mode in ('C','U')
+    group by a.created_by,c.user_name,d.branch_name
+    UNION
+    SELECT a.created_by,c.user_name,d.branch_name,
+    count(distinct a.receipt_no) receipt_no,
+    0 cash_gross_sale,
+    0 cash_round_off,
+    0 cash_net_sale,
+    sum(distinct a.amount)as credit_gross_sale,
+    sum(a.round_off) as credit_round_off,
+    sum(distinct a.net_amt) credit_net_sale,
+    sum(b.qty)Quantity
+    FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
+    where a.receipt_no = b.receipt_no
+    and   a.created_by = c.user_id
+    and   a.br_id = d.id
+    and a.comp_id = {item_rep.comp_id} 
+    and a.br_id = {item_rep.br_id}
+    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
+    and a.pay_mode = 'R'
+    group by a.created_by,c.user_name,d.branch_name)a
+group by created_by,user_name,branch_name
    '''
    
     print(query)
