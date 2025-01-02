@@ -635,6 +635,7 @@ from (
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
     and a.br_id = {item_rep.br_id}
     and a.pay_mode in ('C','U')
+    and b.cancel_flag = 0
     group by a.created_by,c.user_name,d.branch_name
     UNION
     SELECT a.created_by,c.user_name,d.branch_name,
@@ -654,6 +655,7 @@ from (
     and a.br_id = {item_rep.br_id}
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
     and a.pay_mode = 'R'
+    and b.cancel_flag = 0
     group by a.created_by,c.user_name,d.branch_name)a
 group by created_by,user_name,branch_name
    '''
