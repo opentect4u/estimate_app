@@ -138,7 +138,9 @@ async def categorywise_item_list(data:CatgId):
     order = f''
     flag = 1
     res_dt = await db_select(select,table_name,where,order,flag)
-    
+
+    print('dt=',res_dt)
+
     return res_dt
 
 # =============================================================================================================
