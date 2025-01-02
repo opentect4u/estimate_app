@@ -479,7 +479,7 @@ from (
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}'
     and a.pay_mode = 'R'
     group by a.created_by)a
-group by created_by;"
+    group by created_by"
     
     #  if item_rep.br_id>0 else  f"SELECT b.id as store_id,b.branch_name as store_name,u.unit_name,t.trn_date,t.created_by as user_id,n.user_name,d.brand_name,rt.price,rt.mrp,c.category_name,s.receipt_no as invoice_no,s.item_id,IF(t.pay_mode='C','Cash',IF(t.pay_mode='U','UPI',IF(t.pay_mode='D','Card','Credit'))) pay_mode,i.item_name,(s.qty * rt.price)net_amt,t.trn_date,s.qty from md_branch b,md_item_rate rt,td_item_sale s,md_items i,td_receipt t,md_unit u,md_category c,md_brand d,md_user n where s.br_id=b.id and s.item_id=i.id and s.receipt_no=t.receipt_no and i.unit_id=u.sl_no and i.catg_id=c.sl_no and d.brand_id=i.brand_id and n.phone_no=t.created_by and rt.item_id=i.id and t.comp_id = {item_rep.comp_id} and t.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' order by t.trn_date,b.id"
    
