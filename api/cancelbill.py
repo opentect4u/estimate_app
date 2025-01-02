@@ -3,8 +3,9 @@ from config.database import connect
 from models.master_model import createResponse
 from models.form_model import CancelBill
 # from models.otp_model import generateOTP
-from datetime import datetime
 
+from datetime import datetime
+import datetime as dt
 # testing git
 cancelRouter = APIRouter()
 
@@ -136,5 +137,56 @@ async def cancel_bill_two(del_bill: CancelBill):
             return "Error While Inserting Cancelled Bill"
 
     return res_dt
+
+
+
+#=================================================================================================
+# Cancel Bill New
+@cancelRouter.post('/cancel_bill_two')
+async def cancel_bill_new(del_bill: CancelBill):
+    conn = connect()
+    cursor = conn.cursor()
+    current_datetime = datetime.now()
+
+    formatted_dt = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+    
+    query = f"INSERT INTO td_receipt_cancel(receipt_no, comp_id, br_id, trn_date, price, discount_amt, cgst_amt, sgst_amt, amount, round_off, net_amt, pay_mode, received_amt, pay_dtls, cust_name, phone_no, rcv_cash_flag, gst_flag, gst_type, discount_flag, discount_type, discount_position, created_by, created_dt, modified_by, modified_dt,cancelled_by,cancelled_at) VALUES  select receipt_no, comp_id, br_id, trn_date, price, discount_amt, cgst_amt, sgst_amt, amount, round_off, net_amt, pay_mode, received_amt, pay_dtls, cust_name, phone_no, rcv_cash_flag, gst_flag, gst_type, discount_flag, discount_type, discount_position, created_by, created_dt, modified_by, modified_dt,'{del_bill.user_id}' cancelled_by,{formatted_dt} cancelled_at from td_receipt where receipt_no = '{del_bill.receipt_no}'"
+    
+    
+    
+
+    cursor.execute(query)
+    records = cursor.fetchall()
+    # print(records)
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if records:
+         conn = connect()
+         cursor = conn.cursor()
+
+         query = f"INSERT INTO td_item_sale_cancel(receipt_no, comp_id, br_id, item_id, trn_date, price, dis_pertg, discount_amt, cgst_prtg, cgst_amt, sgst_prtg, sgst_amt, qty, cancel_flag, created_by, created_dt, modified_by, modified_dt, cancelled_by, cancelled_at) select receipt_no, comp_id, br_id, item_id, trn_date, price, dis_pertg, discount_amt, cgst_prtg, cgst_amt, sgst_prtg, sgst_amt, qty, cancel_flag, created_by, created_dt, modified_by, modified_dt, '{del_bill.user_id}' cancelled_by,{formatted_dt} cancelled_at from td_item_sale where receipt_no = '{del_bill.receipt_no}'"
+
+         cursor.execute(query)
+         records = cursor.fetchall()
+    # print(records)
+         result = createResponse(records, cursor.column_names, 1)
+         conn.close()
+         cursor.close()
+    if records==[(0,None)]:
+        resData= {"status":0, "data":"no data"}
+    else:
+        resData= {
+        "status":1,
+        "data":result
+        }
+
+
+    return resData
+#=================================================================================================
+
+
+
+
 
     
