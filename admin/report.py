@@ -487,7 +487,7 @@ from (
     and a.pay_mode = 'R'
     group by a.created_by,c.user_name,d.branch_name)a
 group by created_by,user_name,branch_name
-   ''' if item_rep.br_id!=0 else f'''select created_by,user_name,branch_name,
+   ''' if item_rep.br_id==0 else f'''select created_by,user_name,branch_name,
     sum(receipt_no),
 sum(Quantity)Quantity,
 (sum(cash_gross_sale) + sum(credit_gross_sale))gross_sale,
