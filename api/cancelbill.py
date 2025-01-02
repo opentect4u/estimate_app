@@ -140,7 +140,7 @@ async def cancel_bill_new(del_bill: CancelBill):
 
     formatted_dt = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
     
-    query = f"INSERT INTO td_receipt_cancel(receipt_no, comp_id, br_id, trn_date, price, discount_amt, cgst_amt, sgst_amt, amount, round_off, net_amt, pay_mode, received_amt, pay_dtls, cust_name, phone_no, rcv_cash_flag, gst_flag, gst_type, discount_flag, discount_type, discount_position, created_by, created_dt, modified_by, modified_dt,cancelled_by,cancelled_at) select receipt_no, comp_id, br_id, trn_date, price, discount_amt, cgst_amt, sgst_amt, amount, round_off, net_amt, pay_mode, received_amt, pay_dtls, cust_name, phone_no, rcv_cash_flag, gst_flag, gst_type, discount_flag, discount_type, discount_position, created_by, created_dt, modified_by, modified_dt,'{del_bill.user_id}' cancelled_by,{formatted_dt} cancelled_at from td_receipt where receipt_no = '{del_bill.receipt_no}'"
+    query = f"INSERT INTO td_receipt_cancel(receipt_no, comp_id, br_id, trn_date, price, discount_amt, cgst_amt, sgst_amt, amount, round_off, net_amt, pay_mode, received_amt, pay_dtls, cust_name, phone_no, rcv_cash_flag, gst_flag, gst_type, discount_flag, discount_type, discount_position, created_by, created_dt, modified_by, modified_dt,cancelled_by,cancelled_at) select receipt_no, comp_id, br_id, trn_date, price, discount_amt, cgst_amt, sgst_amt, amount, round_off, net_amt, pay_mode, received_amt, pay_dtls, cust_name, phone_no, rcv_cash_flag, gst_flag, gst_type, discount_flag, discount_type, discount_position, created_by, created_dt, modified_by, modified_dt,'{del_bill.user_id}' cancelled_by,'{formatted_dt}' cancelled_at from td_receipt where receipt_no='{del_bill.receipt_no}'"
     
     
     
@@ -155,7 +155,7 @@ async def cancel_bill_new(del_bill: CancelBill):
          conn = connect()
          cursor = conn.cursor()
 
-         query = f"INSERT INTO td_item_sale_cancel(receipt_no, comp_id, br_id, item_id, trn_date, price, dis_pertg, discount_amt, cgst_prtg, cgst_amt, sgst_prtg, sgst_amt, qty, cancel_flag, created_by, created_dt, modified_by, modified_dt, cancelled_by, cancelled_at) select receipt_no, comp_id, br_id, item_id, trn_date, price, dis_pertg, discount_amt, cgst_prtg, cgst_amt, sgst_prtg, sgst_amt, qty, cancel_flag, created_by, created_dt, modified_by, modified_dt, '{del_bill.user_id}' cancelled_by,{formatted_dt} cancelled_at from td_item_sale where receipt_no = '{del_bill.receipt_no}'"
+         query = f"INSERT INTO td_item_sale_cancel(receipt_no, comp_id, br_id, item_id, trn_date, price, dis_pertg, discount_amt, cgst_prtg, cgst_amt, sgst_prtg, sgst_amt, qty, cancel_flag, created_by, created_dt, modified_by, modified_dt, cancelled_by, cancelled_at) select receipt_no, comp_id, br_id, item_id, trn_date, price, dis_pertg, discount_amt, cgst_prtg, cgst_amt, sgst_prtg, sgst_amt, qty, cancel_flag, created_by, created_dt, modified_by, modified_dt, '{del_bill.user_id}' cancelled_by,'{formatted_dt}' cancelled_at from td_item_sale where receipt_no = '{del_bill.receipt_no}'"
 
          cursor.execute(query)
          records = cursor.fetchall()
