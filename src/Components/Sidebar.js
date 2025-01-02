@@ -64,20 +64,20 @@ function SidebarComp() {
   var userId;
 
   const items = [
-    {
-      key: "1",
-      icon: <DashboardOutlined />,
-      label: (
-        <div
-          className={
-            location.pathname.includes("home")
-              ? "font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white hover:duration-100  dark:hover:bg-gray-700 group"
-              : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-          }>
-          <Link to={"/home"}>Dashboard</Link>
-        </div>
-      ),
-    },
+    // {
+    //   key: "1",
+    //   icon: <DashboardOutlined />,
+    //   label: (
+    //     <div
+    //       className={
+    //         location.pathname.includes("home")
+    //           ? "font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white hover:duration-100  dark:hover:bg-gray-700 group"
+    //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //       }>
+    //       <Link to={"/home"}>Dashboard</Link>
+    //     </div>
+    //   ),
+    // },
 
     {
       key: "sub1",
@@ -154,7 +154,7 @@ function SidebarComp() {
                   ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
                   : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
               }>
-              <Link to={"report/pioreport"}>Products In Order</Link>
+              <Link to={"report/pioreport"}>Products In Estimate</Link>
             </div>
           ),
         },
@@ -204,50 +204,50 @@ function SidebarComp() {
             </div>
           ),
         },
-        {
-          key: "5",
-          icon: (
-            <CloseCircleOutlined
-              className={
-                location.pathname.includes("report/cancelbill")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("report/cancelbill")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"report/cancelbill"}>Cancelled Estimate Report</Link>
-            </div>
-          ),
-        },
-        {
-          key: "7",
-          icon: (
-            <UserSwitchOutlined
-              className={
-                location.pathname.includes("report/userwise")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("report/userwise")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"report/userwise"}>Userwise Summary</Link>
-            </div>
-          ),
-        },
+        // {
+        //   key: "5",
+        //   icon: (
+        //     <CloseCircleOutlined
+        //       className={
+        //         location.pathname.includes("report/cancelbill")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }
+        //     />
+        //   ),
+        //   label: (
+        //     <div
+        //       className={
+        //         location.pathname.includes("report/cancelbill")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }>
+        //       <Link to={"report/cancelbill"}>Cancelled Estimate Report</Link>
+        //     </div>
+        //   ),
+        // },
+        // {
+        //   key: "7",
+        //   icon: (
+        //     <UserSwitchOutlined
+        //       className={
+        //         location.pathname.includes("report/userwise")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }
+        //     />
+        //   ),
+        //   label: (
+        //     <div
+        //       className={
+        //         location.pathname.includes("report/userwise")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }>
+        //       <Link to={"report/userwise"}>Userwise Summary</Link>
+        //     </div>
+        //   ),
+        // },
         // {
         //   key: "71",
         //   icon: (
@@ -292,50 +292,50 @@ function SidebarComp() {
         //     </div>
         //   ),
         // },
-        {
-          key: "81",
-          icon: (
-            <ProfileOutlined
-              className={
-                location.pathname.includes("report/recoveryreport")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("report/recoveryreport")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"report/recoveryreport"}>Recovery Report</Link>
-            </div>
-          ),
-        },
-        {
-          key: "82",
-          icon: (
-            <MoneyCollectOutlined
-              className={
-                location.pathname.includes("report/duereport")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("report/duereport")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"report/duereport"}>Due Report</Link>
-            </div>
-          ),
-        },
+        // {
+        //   key: "81",
+        //   icon: (
+        //     <ProfileOutlined
+        //       className={
+        //         location.pathname.includes("report/recoveryreport")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }
+        //     />
+        //   ),
+        //   label: (
+        //     <div
+        //       className={
+        //         location.pathname.includes("report/recoveryreport")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }>
+        //       <Link to={"report/recoveryreport"}>Recovery Report</Link>
+        //     </div>
+        //   ),
+        // },
+        // {
+        //   key: "82",
+        //   icon: (
+        //     <MoneyCollectOutlined
+        //       className={
+        //         location.pathname.includes("report/duereport")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }
+        //     />
+        //   ),
+        //   label: (
+        //     <div
+        //       className={
+        //         location.pathname.includes("report/duereport")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }>
+        //       <Link to={"report/duereport"}>Due Report</Link>
+        //     </div>
+        //   ),
+        // },
         // {
         //   key: "83",
         //   icon: (
@@ -466,65 +466,65 @@ function SidebarComp() {
     },
 
     // settings
-    {
-      key: "sub3",
-      label: "Settings",
-      icon: (
-        <SettingOutlined
-          className={
-            location.pathname.includes("settings")
-              ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-              : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-          }
-        />
-      ),
-      children: [
-        {
-          key: "settingsmain",
-          icon: (
-            <SettingOutlined
-              className={
-                location.pathname.includes("settings/settingsmain")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("settings/settingsmain")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"settings/settingsmain"}>Settings Master</Link>
-            </div>
-          ),
-        },
-        // {
-        //   key: "headerfooter",
-        //   icon: (
-        //     <AlignCenterOutlined
-        //       className={
-        //         location.pathname.includes("settings/headerfooter")
-        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-        //       }
-        //     />
-        //   ),
-        //   label: (
-        //     <div
-        //       className={
-        //         location.pathname.includes("settings/headerfooter/view")
-        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-        //       }>
-        //       <Link to={"settings/headerfooter/view"}>Header/Footer</Link>
-        //     </div>
-        //   ),
-        // },
-      ],
-    },
+    // {
+    //   key: "sub3",
+    //   label: "Settings",
+    //   icon: (
+    //     <SettingOutlined
+    //       className={
+    //         location.pathname.includes("settings")
+    //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //       }
+    //     />
+    //   ),
+    //   children: [
+    //     {
+    //       key: "settingsmain",
+    //       icon: (
+    //         <SettingOutlined
+    //           className={
+    //             location.pathname.includes("settings/settingsmain")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("settings/settingsmain")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"settings/settingsmain"}>Settings Master</Link>
+    //         </div>
+    //       ),
+    //     },
+    //     // {
+    //     //   key: "headerfooter",
+    //     //   icon: (
+    //     //     <AlignCenterOutlined
+    //     //       className={
+    //     //         location.pathname.includes("settings/headerfooter")
+    //     //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //     //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //     //       }
+    //     //     />
+    //     //   ),
+    //     //   label: (
+    //     //     <div
+    //     //       className={
+    //     //         location.pathname.includes("settings/headerfooter/view")
+    //     //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //     //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //     //       }>
+    //     //       <Link to={"settings/headerfooter/view"}>Header/Footer</Link>
+    //     //     </div>
+    //     //   ),
+    //     // },
+    //   ],
+    // },
 
     // {
     //   key: "sub4",
