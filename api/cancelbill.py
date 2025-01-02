@@ -152,6 +152,10 @@ async def cancel_bill_new(del_bill: CancelBill):
     print(result)
     conn.close()
     cursor.close()
+    resData= {
+                "status":1,
+                "data":result
+          }
     if records:
          conn = connect()
          cursor = conn.cursor()
