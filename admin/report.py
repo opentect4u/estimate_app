@@ -438,7 +438,7 @@ async def Productwise_report(item_rep:ItemReport):
 
 
 @reportRouter.post('/employeewise_report')
-async def Productwise_report(item_rep:ItemReport):
+async def Employeewise_report(item_rep:ItemReport):
     conn = connect()
     cursor = conn.cursor()
 
@@ -461,7 +461,7 @@ from (
     FROM  td_receipt a,td_item_sale b
     where a.receipt_no = b.receipt_no
     and a.comp_id = {item_rep.comp_id} 
-    and a.trn_date BETWEEN {item_rep.from_date} and {item_rep.to_date} 
+    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
     and a.pay_mode in ('C','U')
     group by a.created_by
     UNION
@@ -476,7 +476,7 @@ from (
     FROM  td_receipt a,td_item_sale b
     where a.receipt_no = b.receipt_no
     and a.comp_id = {item_rep.comp_id} 
-    and a.trn_date BETWEEN {item_rep.from_date} and {item_rep.to_date} 
+    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
     and a.pay_mode = 'R'
     group by a.created_by)a
 group by created_by
