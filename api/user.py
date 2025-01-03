@@ -129,6 +129,7 @@ async def user_login(data_login:Login):
         if(verify_password(data_login.password, result1[0]["password"]) and result2[0]['login_flag']=='N'):
             res_dt = {"suc": 1, "msg": result1[0], "user" : 1}
         else:
+            print('inside else')
             if result2[0]['login_flag']=='N':
                print('inside n')
                res_dt = {"suc": 2, "msg": "Please check your userID or password"}
