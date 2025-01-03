@@ -130,10 +130,10 @@ async def user_login(data_login:Login):
             res_dt = {"suc": 1, "msg": result1[0], "user" : 1}
         else:
             if result2[0]['login_flag']=='N':
-               res_dt = {"suc": 2, "msg": "Please check your userID or password"}
+               res_dt = {"suc": 0, "msg": "Please check your userID or password"}
             else:
                print('inside y')
-               res_dt = {"suc": 2, "msg": "A user with the same device ID has already logged in"}
+               res_dt = {"suc": 0, "msg": "A user with the same device ID has already logged in"}
 
     else:
         res_dt = {"suc": 0, "msg": "No Data Found"}
