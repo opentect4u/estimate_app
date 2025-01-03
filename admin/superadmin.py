@@ -223,18 +223,23 @@ async def add__edit_outlet(data:AddEditOutletS):
 
     # =======================================================================================
 
-    conn = connect()
-    cursor = conn.cursor()
-    stock = 0
-    query = f"insert into td_stock (comp_id,br_id,item_id,stock,created_by,created_dt) select '{data.comp_id}','{res_dt['lastId']}', id, {stock},'{data.created_by}','{formatted_dt}' from md_items"
+    # conn = connect()
+    # cursor = conn.cursor()
+    # stock = 0
+    # query = f"insert into td_stock (comp_id,br_id,item_id,stock,created_by,created_dt) select '{data.comp_id}','{res_dt['lastId']}', id, {stock},'{data.created_by}','{formatted_dt}' from md_items"
    
-    print(query)
-    cursor.execute(query)
-    records = cursor.fetchall()
-    result = createResponse(records, cursor.column_names, 1)
-    print('resooooolt=',result)
-    conn.close()
-    cursor.close()
+    # print(query)
+    # cursor.execute(query)
+    # records = cursor.fetchall()
+    # result = createResponse(records, cursor.column_names, 1)
+    # print('resooooolt=',result)
+    # conn.close()
+    # cursor.close()
+
+    stock=0
+    fields= f'''select '{data.comp_id}','{res_dt['lastId']}', id, {stock},'{data.created_by}','{formatted_dt} from md_items'''
+    table_name = "td_stock"
+    save_stock = await db_Insert(table_name, fields, None, None, 0, True)
     # =======================================================================================
 
     return res_dt
