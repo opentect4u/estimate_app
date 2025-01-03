@@ -107,6 +107,12 @@ const CustomerDetailsFillScreen = () => {
   // ]
 
   useEffect(() => {
+    if (checked === "R") {
+      setCashAmount(0)
+    }
+  }, [checked])
+
+  useEffect(() => {
     // if (receiptSettings?.gst_flag === "Y") {
     //   receiptSettings?.gst_type === "E"
     //     ? setFinalCashAmount(() =>
@@ -1005,7 +1011,7 @@ const CustomerDetailsFillScreen = () => {
                   <InputPaper
                     selectTextOnFocus
                     label="Received Amount"
-                    value={0}
+                    value={cashAmount}
                     onChangeText={(cash: number) => setCashAmount(cash)}
                     keyboardType="number-pad"
                     leftIcon="cash-multiple"

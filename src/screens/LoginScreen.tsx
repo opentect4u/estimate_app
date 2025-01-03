@@ -87,9 +87,9 @@ function LoginScreen() {
   // }, [])
 
   const onChangeCustomerMobileNumber = (mobile: string) => {
-    if (/^\d*$/.test(mobile)) {
-      setLoginText(mobile)
-    }
+    // if (/^\d*$/.test(mobile)) {
+    setLoginText(mobile)
+    // }
   }
 
   // useEffect(() => {
@@ -259,11 +259,11 @@ function LoginScreen() {
                   <View>
                     <InputPaper
                       value={loginText}
-                      label={"Mobile Number"}
+                      label={"User ID"}
                       onChangeText={onChangeCustomerMobileNumber}
                       customStyle={{ backgroundColor: theme.colors.onPrimary }}
                       leftIcon="account-circle-outline"
-                      keyboardType="phone-pad"
+                      keyboardType="default"
                       autoFocus
                     />
                   </View>

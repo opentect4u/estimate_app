@@ -21,6 +21,7 @@ import ButtonPaper from "../components/ButtonPaper"
 import normalize, { SCREEN_HEIGHT } from "react-native-normalize"
 import useShowBill from "../hooks/api/useShowBill"
 import {
+    LoginDataMessage,
     RecoveryAmountCredentials,
     RecoveryAmountResponseData,
     RecoveryUpdateCredentials,
@@ -44,7 +45,7 @@ function RecoveryAmountScreen() {
     const theme = usePaperColorScheme()
     const navigation = useNavigation()
 
-    const loginStore = JSON.parse(loginStorage.getString("login-data"))
+    const loginStore = JSON.parse(loginStorage.getString("login-data")) as LoginDataMessage
 
     const { receiptSettings } = useContext<AppStoreContext>(AppStore)
     const { printRecoveryAmount } = useBluetoothPrint()
@@ -77,6 +78,7 @@ function RecoveryAmountScreen() {
     const getCreditCustomer = async () => {
         const creds = {
             comp_id: loginStore?.comp_id,
+            user_id: loginStore?.user_id
         }
 
         await fetchCreditCustomers(creds).then(res => {
@@ -298,11 +300,11 @@ function RecoveryAmountScreen() {
                         /> */}
 
                         <Dropdown
-                            style={styles.dropdown}
-                            placeholderStyle={styles.placeholderStyle}
-                            selectedTextStyle={styles.selectedTextStyle}
-                            inputSearchStyle={styles.inputSearchStyle}
-                            iconStyle={styles.iconStyle}
+                            style={[styles.dropdown, { backgroundColor: theme.colors.background }]}
+                            placeholderStyle={[styles.placeholderStyle, { backgroundColor: theme.colors.background, color: theme.colors.onBackground }]}
+                            selectedTextStyle={[styles.selectedTextStyle, { backgroundColor: theme.colors.background, color: theme.colors.onBackground }]}
+                            inputSearchStyle={[styles.inputSearchStyle, { backgroundColor: theme.colors.background, color: theme.colors.onBackground }]}
+                            iconStyle={[styles.iconStyle, { backgroundColor: theme.colors.background }]}
                             data={custData}
                             search
                             maxHeight={300}
@@ -456,7 +458,7 @@ function RecoveryAmountScreen() {
                                     backgroundColor: theme.colors.vanillaSurface
                                 }}
                                 disabled={!dueAmount}>
-                                Get Due Amount
+                                SUBMIT
                             </ButtonPaper>
                             <ButtonPaper
                                 onPress={handlePrint}
