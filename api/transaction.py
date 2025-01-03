@@ -164,7 +164,7 @@ async def register(rcpt:list[Receipt]):
 
                 conn = connect()
                 cursor = conn.cursor()
-                query = f"INSERT INTO td_recovery_new (comp_id,br_id,recover_dt,receipt_no,phone_no,paid_amt,due_amt,curr_due_amt,pay_mode,created_by,created_dt) VALUES ({rcpt[0].comp_id}, {rcpt[0].br_id},'{formatted_datetime}', {receipt},'{rcpt[0].phone_no}',0,{rcpt[0].net_amt}, {curr_due_amt},'{rcpt[0].pay_mode}','{rcpt[0].created_by}','{formatted_datetime}')"
+                query = f"INSERT INTO td_recovery_new (comp_id,br_id,recover_dt,receipt_no,phone_no,paid_amt,due_amt,curr_due_amt,pay_mode,created_by,created_dt) VALUES ({rcpt[0].comp_id}, {rcpt[0].br_id},'{formatted_datetime}', '{receipt}','{rcpt[0].phone_no}',0,{rcpt[0].net_amt}, {curr_due_amt},'{rcpt[0].pay_mode}','{rcpt[0].created_by}','{formatted_datetime}')"
                 cursor.execute(query)
                 conn.commit()
                 conn.close()
@@ -175,7 +175,7 @@ async def register(rcpt:list[Receipt]):
 
                         conn = connect()
                         cursor = conn.cursor()
-                        query = f"INSERT INTO td_recovery_new (comp_id,br_id,recover_dt,receipt_no,phone_no,paid_amt,due_amt,curr_due_amt,pay_mode,created_by,created_dt) VALUES ({rcpt[0].comp_id}, {rcpt[0].br_id},'{formatted_datetime}', {receipt},'{rcpt[0].phone_no}',{rcpt[0].received_amt},0,{curr_due_amt},'{rcpt[0].pay_mode}','{rcpt[0].created_by}','{formatted_datetime}')"
+                        query = f"INSERT INTO td_recovery_new (comp_id,br_id,recover_dt,receipt_no,phone_no,paid_amt,due_amt,curr_due_amt,pay_mode,created_by,created_dt) VALUES ({rcpt[0].comp_id}, {rcpt[0].br_id},'{formatted_datetime}', '{receipt}','{rcpt[0].phone_no}',{rcpt[0].received_amt},0,{curr_due_amt},'{rcpt[0].pay_mode}','{rcpt[0].created_by}','{formatted_datetime}')"
                         cursor.execute(query)
                         conn.commit()
                         conn.close()
