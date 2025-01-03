@@ -383,87 +383,87 @@ function SidebarComp() {
       ],
     },
 
-    {
-      key: "sub2",
-      label: "Search",
-      icon: (
-        <FileSearchOutlined
-          className={
-            location.pathname.includes("search")
-              ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-              : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-          }
-        />
-      ),
-      children: [
-        {
-          key: "9",
-          icon: (
-            <CalendarOutlined
-              className={
-                location.pathname.includes("search/bydate")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("search/bydate")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"search/bydate"}>By Date</Link>
-            </div>
-          ),
-        },
-        {
-          key: "10",
-          icon: (
-            <PhoneOutlined
-              className={
-                location.pathname.includes("search/byphone")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("search/byphone")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"search/byphone"}>By Phone</Link>
-            </div>
-          ),
-        },
-        {
-          key: "11",
-          icon: (
-            <ProductOutlined
-              className={
-                location.pathname.includes("search/byproduct")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("search/byproduct")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"search/byproduct"}>By Product</Link>
-            </div>
-          ),
-        },
-      ],
-    },
+    // {
+    //   key: "sub2",
+    //   label: "Search",
+    //   icon: (
+    //     <FileSearchOutlined
+    //       className={
+    //         location.pathname.includes("search")
+    //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //       }
+    //     />
+    //   ),
+    //   children: [
+    //     {
+    //       key: "9",
+    //       icon: (
+    //         <CalendarOutlined
+    //           className={
+    //             location.pathname.includes("search/bydate")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("search/bydate")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"search/bydate"}>By Date</Link>
+    //         </div>
+    //       ),
+    //     },
+    //     {
+    //       key: "10",
+    //       icon: (
+    //         <PhoneOutlined
+    //           className={
+    //             location.pathname.includes("search/byphone")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("search/byphone")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"search/byphone"}>By Phone</Link>
+    //         </div>
+    //       ),
+    //     },
+    //     {
+    //       key: "11",
+    //       icon: (
+    //         <ProductOutlined
+    //           className={
+    //             location.pathname.includes("search/byproduct")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }
+    //         />
+    //       ),
+    //       label: (
+    //         <div
+    //           className={
+    //             location.pathname.includes("search/byproduct")
+    //               ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+    //               : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+    //           }>
+    //           <Link to={"search/byproduct"}>By Product</Link>
+    //         </div>
+    //       ),
+    //     },
+    //   ],
+    // },
 
     // settings
     // {
