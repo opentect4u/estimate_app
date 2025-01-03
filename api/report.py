@@ -513,7 +513,7 @@ async def Productwise_report(item_rep:ItemReport):
 async def recovery_report(data:CreditCust):
     conn = connect()
     cursor = conn.cursor()
-    query = f"select cust_name, phone_no from md_customer where pay_mode='R' and comp_id={data.comp_id}"
+    query = f"select cust_name, phone_no from md_customer where pay_mode='R' and comp_id={data.comp_id} and (created_by='{data.user_id}' or modified_by='{data.user_id}')"
     cursor.execute(query)
     records = cursor.fetchall()
     result = createResponse(records, cursor.column_names, 1)

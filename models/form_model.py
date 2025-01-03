@@ -396,4 +396,5 @@ class AddEditTXN(BaseModel):
 
 class CreditCust(BaseModel):
     comp_id:int
+    user_id:str
     
