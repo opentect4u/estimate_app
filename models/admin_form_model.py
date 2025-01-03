@@ -341,6 +341,9 @@ class UpdatePurchase(BaseModel):
     sgst:float
     unit_name:str
     item_id:int
+# --------------------Check Device ID(Company)----------------
+class Device_Id(BaseModel):
+   device_id:str
 
 # ====================================================================================================
 # Manage Super Admin

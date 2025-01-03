@@ -4,7 +4,7 @@ import mysql.connector
 from pathlib import Path
 from models.master_model import createResponse
 from models.masterApiModel import db_select, db_Insert
-from models.admin_form_model import AddEditLocation,AddEditCompany,AddEditUser,AddEditOutletS,OneOutlet,AddHeaderFooter,AddEditSettings,AddEditUnit,Excel,EditItemDtls,Item
+from models.admin_form_model import AddEditLocation,AddEditCompany,AddEditUser,AddEditOutletS,OneOutlet,AddHeaderFooter,AddEditSettings,AddEditUnit,Excel,EditItemDtls,Item,Device_Id
 from utils import get_hashed_password,verify_password
 from datetime import datetime
 from typing import Annotated, Union, Optional
@@ -123,7 +123,20 @@ async def select_user(comp_id:int,br_id:int):
     res_dt = await db_select(select,table_name,where,order,flag)
     return res_dt
 
+# =============check device id===========================
+
+@superadminRouter.post('/S_Admin/check_device_id')
+async def select_user(device_id:Device_Id):
+    select = "count(*)"
+    table_name = "md_user"
+    where = f"device_id='{device_id.device_id}'"
+    order = f""
+    flag = 1
+    res_dt = await db_select(select,table_name,where,order,flag)
+    return res_dt
+
 # ---------------Add And Edit User---------------
+
 @superadminRouter.post('/S_Admin/add_edit_user')
 async def add_edit_user(data:AddEditUser):
     current_datetime = datetime.now()
