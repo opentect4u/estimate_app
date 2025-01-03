@@ -66,10 +66,10 @@ function ManageUsersView() {
 
   useEffect(() => {
     // comp = localStorage.getItem("comp_id");
-    callApi(
-      `/admin/S_Admin/select_user_by_shop?comp_id=${compId}&br_id=${selectedOutlet}`,
-      0
-    );
+    // callApi(
+    //   `/admin/S_Admin/select_user_by_shop?comp_id=${compId}&br_id=${selectedOutlet}`,
+    //   0
+    // );
   }, [compId, selectedOutlet]);
 
   // useEffect(() => {

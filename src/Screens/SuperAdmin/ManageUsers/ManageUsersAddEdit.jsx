@@ -24,7 +24,7 @@ function ManageShopsAddEdit() {
   const [c_bill, setBill] = useState("");
   const [outlets, setOutlets] = useState(() => []);
   const [shops, setShops] = useState(() => []);
-
+  const [count_device,setCountDevice] = useState(0)
   const [userTypeText, setUserTypeText] = useState(() => "");
 
   var comp, userId;
@@ -74,7 +74,7 @@ function ManageShopsAddEdit() {
         u_user_name: response?.data?.msg[0].user_name,
         u_user_type: response?.data?.msg[0].user_type,
         u_user_id: response?.data?.msg[0].user_id,
-        // u_phone_no: +response?.data?.msg[0].phone_no,
+        u_phone_no: +response?.data?.msg[0].phone_no,
         // u_email_id: response?.data?.msg[0].email_id,
         u_password: response?.data?.msg[0].password,
         u_active_flag: response?.data?.msg[0].active_flag,
@@ -111,12 +111,12 @@ function ManageShopsAddEdit() {
     u_user_name: "",
     u_user_type: "",
     u_user_id: "",
-    // u_phone_no: "",
+    u_phone_no: "",
     // u_email_id: "",
     // device_id: string,
     u_password: "",
     u_active_flag: "",
-    u_login_flag: "",
+    u_login_flag: "N",
     // u_created_by: "",
   };
 
@@ -135,7 +135,7 @@ function ManageShopsAddEdit() {
             user_name: values?.u_user_name,
             user_type: values?.u_user_type,
             user_id: values?.u_user_id,
-            // phone_no: +values?.u_phone_no,
+            phone_no: +values?.u_phone_no,
             // email_id: values?.u_email_id,
             password: values?.u_password || "",
             active_flag: values?.u_active_flag,
@@ -150,7 +150,7 @@ function ManageShopsAddEdit() {
             user_name: values?.u_user_name,
             user_type: values?.u_user_type,
             user_id: values?.u_user_id,
-            // phone_no: +values?.u_phone_no,
+            phone_no: +values?.u_phone_no,
             // email_id: values?.u_email_id,
             active_flag: "Y",
             login_flag: "N",
@@ -292,7 +292,7 @@ function ManageShopsAddEdit() {
                   </div>
                 ) : null}
               </div>
-              <div class="w-full">
+              <div class="w-full sm:col-span-2">
                 <label
                   for="u_user_name"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -344,15 +344,17 @@ function ManageShopsAddEdit() {
                 <label
                   for="u_user_id"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  {userTypeText === "PHONE_NO"
+                  {/* {userTypeText === "PHONE_NO"
                     ? "User ID"
                     : userTypeText === "EMAIL"
                     ? "User ID (Email)"
-                    : "User ID"}
+                    : "User ID"} */}
+                     {"User ID"}
                 </label>
                 <input
                   disabled={userTypeText === "NONE"}
-                  type={userTypeText === "PHONE_NO" ? "text" : "email"}
+                  // type={userTypeText === "PHONE_NO" ? "text" : "email"}
+                  type={"text"}
                   name="u_user_id"
                   id="u_user_id"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -360,12 +362,15 @@ function ManageShopsAddEdit() {
                   onBlur={formik.handleBlur}
                   value={formik.values.u_user_id}
                   // placeholder="98367XXXXX or abc@email.com"
+                  // placeholder={
+                  //   userTypeText === "PHONE_NO"
+                  //     ? "98367XXXXX"
+                  //     : userTypeText === "EMAIL"
+                  //     ? "abc@email.com"
+                  //     : "Choose User Type"
+                  // }
                   placeholder={
-                    userTypeText === "PHONE_NO"
-                      ? "98367XXXXX"
-                      : userTypeText === "EMAIL"
-                      ? "abc@email.com"
-                      : "Choose User Type"
+                   "Enter User ID"
                   }
                   required=""
                 />
@@ -379,7 +384,7 @@ function ManageShopsAddEdit() {
                   </div>
                 ) : null}
               </div>
-              {/* <div class="w-full">
+              <div class="w-full">
                 <label
                   for="u_phone_no"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -396,13 +401,13 @@ function ManageShopsAddEdit() {
                   placeholder="Phone Number"
                   required=""
                 />
-                {formik.errors.u_phone_no && formik.touched.u_phone_no ? (
+                {/* {formik.errors.u_phone_no && formik.touched.u_phone_no ? (
                   <div className="text-red-500 text-sm">
                     {formik.errors.u_phone_no}
                   </div>
-                ) : null}
+                ) : null} */}
               </div>
-              <div class="w-full">
+              {/* <div class="w-full">
                 <label
                   for="u_email_id"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -613,7 +618,18 @@ function ManageShopsAddEdit() {
                     id="u_device_id"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                    onBlur={
+                      e=>{
+                        formik.handleBlur(e)
+                        if(formik.values.u_device_id)
+                        axios.post(`${url}/admin/S_Admin/check_device_id`,{device_id:formik.values.u_device_id}).then(res=>{
+                          console.log(res)
+                          setCountDevice(res?.data?.msg[0].count)
+                        
+                        
+                        })
+                      }
+                    }
                     value={formik.values.u_device_id}
                     placeholder="Enter Device ID"
                     required=""
@@ -623,6 +639,11 @@ function ManageShopsAddEdit() {
                       {formik.errors.u_device_id}
                     </div>
                   ) : null}
+
+{count_device>0 && <div className="text-red-500 text-sm">
+                      Device ID already allotted
+                    </div>
+}
                 </div>
               </>
             </div>
