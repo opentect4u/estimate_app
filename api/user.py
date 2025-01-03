@@ -132,7 +132,6 @@ async def user_login(data_login:Login):
             if result2[0]['login_flag']=='N':
                res_dt = {"suc": 0, "msg": "Please check your userID or password"}
             else:
-               print('inside y')
                res_dt = {"suc": 0, "msg": "A user with the same device ID has already logged in"}
 
     else:
