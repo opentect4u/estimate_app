@@ -1,6 +1,8 @@
 from fastapi import APIRouter, File, UploadFile, Depends, Form
 import pathlib
 import mysql.connector
+from config.database import connect
+
 from pathlib import Path
 from models.master_model import createResponse
 from models.masterApiModel import db_select, db_Insert
@@ -218,6 +220,21 @@ async def add__edit_outlet(data:AddEditOutletS):
     flag = 1 if data.br_id>0 else 0
 
     res_dt = await db_Insert(table_name,fields,values,where,flag)
+
+    # =======================================================================================
+
+    conn = connect()
+    cursor = conn.cursor()
+
+    query = f"insert into td_stock(comp_id,br_id,item_id,stock,created_by,created_dt) select '{data.comp_id},'{data.br_id}', item_id,'0','{data.created_by}','{formatted_dt}'"
+   
+    print(query)
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    # =======================================================================================
 
     return res_dt
 
