@@ -117,7 +117,7 @@ async def user_login(data_login:Login):
 
     conn1 = connect()
     cursor1 = conn1.cursor()
-    query1= F"SELECT login_flag from md_user WHERE device_id='{result2[0]["device_id"]}' and active_flag='Y'"
+    query1= F"SELECT login_flag from md_user WHERE device_id='{result1[0]["device_id"]}' and active_flag='Y'"
     cursor1.execute(query1)
     records1 = cursor1.fetchall()
     result2 = createResponse(records1, cursor1.column_names, 1)
