@@ -127,7 +127,7 @@ async def select_user(comp_id:int,br_id:int):
 
 @superadminRouter.post('/S_Admin/check_device_id')
 async def select_user(device_id:Device_Id):
-    select = "count(*)"
+    select = "count(*) as count"
     table_name = "md_user"
     where = f"device_id='{device_id.device_id}'"
     order = f""
