@@ -232,6 +232,7 @@ async def add__edit_outlet(data:AddEditOutletS):
     cursor.execute(query)
     records = cursor.fetchall()
     result = createResponse(records, cursor.column_names, 1)
+    print('resooooolt=',result)
     conn.close()
     cursor.close()
     # =======================================================================================
