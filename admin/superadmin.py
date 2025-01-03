@@ -137,9 +137,11 @@ async def add_edit_user(data:AddEditUser):
 
     if data.user_type == 'A':
 
-        fields = f"comp_id={data.comp_id}, br_id={data.br_id}, user_name='{data.user_name}', user_type='{data.user_type}', user_id='{data.user_id}', email_id='{data.user_id}',phone_no={data.phone_no}, device_id='{data.device_id}', password='{pwd}',active_flag='{data.active_flag}',login_flag='{data.login_flag}',modified_by='{data.created_by}', modified_dt='{formatted_dt}'" if data.id>0 else f"comp_id,br_id,user_name,user_type,user_id,email_id,device_id,password,phone_no,active_flag,login_flag,created_by, created_dt"
+        # fields = f"comp_id={data.comp_id}, br_id={data.br_id}, user_name='{data.user_name}', user_type='{data.user_type}', user_id='{data.user_id}', email_id='{data.user_id}',phone_no={data.phone_no}, device_id='{data.device_id}', password='{pwd}',active_flag='{data.active_flag}',login_flag='{data.login_flag}',modified_by='{data.created_by}', modified_dt='{formatted_dt}'" if data.id>0 else f"comp_id,br_id,user_name,user_type,user_id,email_id,device_id,password,phone_no,active_flag,login_flag,created_by, created_dt"
+        fields = f"comp_id={data.comp_id}, br_id={data.br_id}, user_name='{data.user_name}', user_type='{data.user_type}', user_id='{data.user_id}',,phone_no={data.phone_no}, device_id='{data.device_id}', password='{pwd}',active_flag='{data.active_flag}',login_flag='{data.login_flag}',modified_by='{data.created_by}', modified_dt='{formatted_dt}'" if data.id>0 else f"comp_id,br_id,user_name,user_type,user_id,device_id,password,phone_no,active_flag,login_flag,created_by, created_dt"
 
-        values = None if data.id>0 else f"{data.comp_id},{data.br_id},'{data.user_name}','{data.user_type}','{data.user_id}','{data.user_id}',{data.device_id},'{pwd}',{data.phone_no},'Y','N','{data.created_by}', '{formatted_dt}'"
+        # values = None if data.id>0 else f"{data.comp_id},{data.br_id},'{data.user_name}','{data.user_type}','{data.user_id}','{data.user_id}',{data.device_id},'{pwd}',{data.phone_no},'Y','N','{data.created_by}', '{formatted_dt}'"
+        values = None if data.id>0 else f"{data.comp_id},{data.br_id},'{data.user_name}','{data.user_type}','{data.user_id}',{data.device_id},'{pwd}',{data.phone_no},'Y','N','{data.created_by}', '{formatted_dt}'"
 
     else:
 
