@@ -237,9 +237,9 @@ async def add__edit_outlet(data:AddEditOutletS):
     # cursor.close()
 
     stock=0
-    fields= f'''select '{data.comp_id}','{res_dt['lastId']}', id, {stock},'{data.created_by}','{formatted_dt} from md_items'''
+    fields= f'''select '{data.comp_id}','{res_dt['lastId']}', id, {stock},'{data.created_by}','{formatted_dt},NULL,NULL from md_items'''
     table_name = "td_stock"
-    save_stock = await db_Insert(table_name, fields, None, None, 0)
+    save_stock = await db_Insert(table_name, fields,None, None, 0, True)
     # =======================================================================================
 
     return res_dt
