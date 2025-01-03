@@ -41,7 +41,7 @@ async def recovery_amount(bill:RecoverBill):
     conn = connect()
     cursor = conn.cursor()
 
-    query = f"SELECT SUM(due_amt) net_amt, SUM(paid_amt) paid_amt FROM td_recovery_new WHERE {bill.comp_id} AND br_id = {bill.br_id} AND phone_no = '{bill.phone_no}'"
+    query = f"SELECT SUM(due_amt) net_amt, SUM(paid_amt) paid_amt FROM td_recovery_new WHERE comp_id={bill.comp_id} AND br_id = {bill.br_id} AND phone_no = '{bill.phone_no}'"
 
     cursor.execute(query)
     records = cursor.fetchall()
