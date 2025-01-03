@@ -226,7 +226,7 @@ async def add__edit_outlet(data:AddEditOutletS):
     conn = connect()
     cursor = conn.cursor()
     stock = 0
-    query = f"insert into td_stock (comp_id,br_id,item_id,stock,created_by,created_dt) select '{data.comp_id}','{data.br_id}', id, {stock},'{data.created_by}','{formatted_dt}' from md_items"
+    query = f"insert into td_stock (comp_id,br_id,item_id,stock,created_by,created_dt) select '{data.comp_id}','{res_dt['lastId']}', id, {stock},'{data.created_by}','{formatted_dt}' from md_items"
    
     print(query)
     cursor.execute(query)
