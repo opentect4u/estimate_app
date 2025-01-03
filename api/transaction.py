@@ -148,6 +148,7 @@ async def register(rcpt:list[Receipt]):
             #         ResData = {"status":1, "data":"Data not inserted in recovery table"}
 
             if rcpt[0].pay_mode == 'R':
+                print('inside credit payyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
                 conn = connect()
                 cursor = conn.cursor()
                 query = f"SELECT curr_due_amt FROM td_recovery_new where comp_id = {rcpt[0].comp_id} AND br_id = {rcpt[0].br_id} AND phone_no = '{rcpt[0].phone_no}' ORDER BY recover_id DESC LIMIT 1"
