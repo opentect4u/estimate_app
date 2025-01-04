@@ -32,9 +32,9 @@ async def add_unit_details(data:AddUnit):
     if ({data.unit_id}.pop())>0:
 
         table_name = "md_unit"
-        fields = f"unit_name = '{data.unit_name}', modified_by='admin', modified_at = '{formatted_dt}' "
+        fields = f"unit_name = '{data.unit_name}', modified_by='{data.user_id}', modified_at = '{formatted_dt}' "
         print(formatted_dt)
-        values =f"{data.unit_id},{data.comp_id},'{data.unit_name}','admin','{formatted_dt}'"
+        values =f"{data.unit_id},{data.comp_id},'{data.unit_name}','{data.user_id}','{formatted_dt}'"
         where = f"comp_id={data.comp_id} and sl_no={data.unit_id}"
         order = f""
         flag = 1
@@ -42,7 +42,7 @@ async def add_unit_details(data:AddUnit):
     else:
         table_name = "md_unit"
         fields = "comp_id, unit_name, created_by, created_at"
-        values =f"{data.comp_id},'{data.unit_name}','admin','{formatted_dt}'"
+        values =f"{data.comp_id},'{data.unit_name}','{data.user_id}','{formatted_dt}'"
         where = f""
         print(data.unit_id)
         order = f""

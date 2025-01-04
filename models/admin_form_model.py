@@ -291,7 +291,7 @@ class AddUnit(BaseModel):
     comp_id:int
     unit_name:str
     unit_id:int
-    # created_by:str
+    user_id:str
 
 # ===========================================================================================================
 # Stock.py
