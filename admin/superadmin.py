@@ -175,7 +175,7 @@ async def add_edit_user(data:AddEditUser):
 # 
 #
 #
-@superadminRouter.get('/S_Admin/user_list')
+@superadminRouter.post('/S_Admin/user_list')
 async def user_list(data:UserList):
     select = "user_name,user_id"
     table_name = "md_user"
