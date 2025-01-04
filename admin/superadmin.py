@@ -179,7 +179,7 @@ async def add_edit_user(data:AddEditUser):
 async def user_list(data:UserList):
     select = "user_name,user_id"
     table_name = "md_user"
-    where = f"comp_id = {data.comp_id} and br_id = '{data.br_id}'"
+    where = f"comp_id = {data.comp_id} and br_id = '{data.br_id}' and user_type='U'"
     order = f''
     flag = 1
     res_dt = await db_select(select,table_name,where,order,flag)
