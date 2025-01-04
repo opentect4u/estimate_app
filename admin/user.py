@@ -72,7 +72,8 @@ async def user_login(data_login:UserLogin):
     res_dt = {}
     select = "a.id,a.user_name,a.user_type,a.user_id,a.phone_no,a.email_id,a.device_id,a.password,a.active_flag,a.login_flag,a.created_by,a.created_dt,a.modified_by,a.modified_dt,b.id br_id,b.branch_name,b.branch_address,b.location,b.contact_person, c.id comp_id, c.company_name,c.mode,c.address,c.web_portal,c.max_user"
     table_name = "md_user a, md_branch b, md_company c"
-    where = f"a.user_id='{data_login.user_id}' AND b.id=a.br_id AND c.id=a.comp_id AND a.active_flag='Y' AND a.user_type!='U' AND a.user_id!='M'"
+    # where = f"a.user_id='{data_login.user_id}' AND b.id=a.br_id AND c.id=a.comp_id AND a.active_flag='Y' AND a.user_type!='U' AND a.user_id!='M'"
+    where = f"a.user_id='{data_login.user_id}' AND b.id=a.br_id AND c.id=a.comp_id AND a.active_flag='Y' AND a.user_type!='U'"
     order = f''
     flag = 0
     result = await db_select(select,table_name,where,order,flag)
@@ -166,6 +167,8 @@ async def user_profile(data:UserProfile):
     flag = 1
     res_dt = await db_select(select,table_name,where,order,flag)
     return res_dt
+
+
 
 @userRouter.post('/store_profile')
 async def user_profile(data:CompId):

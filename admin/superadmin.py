@@ -6,7 +6,7 @@ from config.database import connect
 from pathlib import Path
 from models.master_model import createResponse
 from models.masterApiModel import db_select, db_Insert
-from models.admin_form_model import AddEditLocation,AddEditCompany,AddEditUser,AddEditOutletS,OneOutlet,AddHeaderFooter,AddEditSettings,AddEditUnit,Excel,EditItemDtls,Item,Device_Id
+from models.admin_form_model import AddEditLocation,AddEditCompany,AddEditUser,AddEditOutletS,OneOutlet,AddHeaderFooter,AddEditSettings,AddEditUnit,Excel,EditItemDtls,Item,Device_Id,UserList
 from utils import get_hashed_password,verify_password
 from datetime import datetime
 from typing import Annotated, Union, Optional
@@ -171,7 +171,19 @@ async def add_edit_user(data:AddEditUser):
     
     return res_dt
 
-# =========================================================================================================
+# 
+# 
+#
+#
+@superadminRouter.get('/S_Admin/user_list')
+async def user_list(data:UserList):
+    select = "user_name,user_id"
+    table_name = "md_user"
+    where = f"comp_id = {data.comp_id} and br_id = '{data.br_id}'"
+    order = f''
+    flag = 1
+    res_dt = await db_select(select,table_name,where,order,flag)
+    return res_dt 
 # Manage Outlet
 
 # ----------------company wise branch select-----------------
