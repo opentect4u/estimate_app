@@ -94,6 +94,7 @@ class ItemReportOutlet(BaseModel):
     to_date:date
     comp_id:int
     br_id:int
+    user_id:str
 
 class PayModeReport(BaseModel):
     from_date:date
