@@ -126,11 +126,12 @@ async def user_login(data_login:Login):
     # print(result1[0]["password"], "yyyyyy")
     if cursor.rowcount > 0 :
 
-        if(verify_password(data_login.password)):
+        if(verify_password(data_login.password, result1[0]["password"])):
             res_dt = {"suc": 1, "msg": result1[0], "user" : 1}
         else:
-            res_dt = {"suc": 0, "msg": "Please check your userID or password"}
             
+             res_dt = {"suc": 0, "msg": "Please check your userID or password"}
+           
 
     else:
         res_dt = {"suc": 0, "msg": "No Data Found"}
