@@ -228,11 +228,11 @@ group by created_by,user_name,branch_name
     conn.close()
     cursor.close()
     if records==[]:
-        resData= {"status":0, "data":[]}
+        resData= {"status":0, "msg":[]}
     else:
         resData= {
         "status":1,
-        "data":result
+        "msg":result
         }
     return resData
 
