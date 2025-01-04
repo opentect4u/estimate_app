@@ -21,6 +21,7 @@ import ProductwiseEstimate from "./Screens/OutletAdmin/Reports/ProductwiseEstima
 import ReportsComp from "./Screens/OutletAdmin/Reports/ReportsComp";
 import UserwiseEstimate from "./Screens/OutletAdmin/Reports/UserwiseEstimate";
 import CancelledEstimate from "./Screens/OutletAdmin/Reports/CancelledEstimate";
+import DueEstimate from "./Screens/OutletAdmin/Reports/DueEstimate";
 
 const CategorywiseItemsComp = lazy(() =>
   import("./Screens/SuperAdmin/CategorywiseItems/CategorywiseItemsComp")
@@ -513,6 +514,10 @@ const router = createBrowserRouter([
                   {
                     path: "cancelledestimate",
                     element: <CancelledEstimate />,
+                  },
+                  {
+                    path: "dueestimate",
+                    element: <DueEstimate />,
                   },
                 ],
               },

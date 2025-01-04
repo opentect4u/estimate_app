@@ -217,4 +217,12 @@ export const reportHeaders = {
       { name: "net_amt", value: "Net Amt" },
     ],
   },
+  dueestimate: {
+    title: "Due Estimate",
+    headers: [
+      { name: "cust_name", value: "Customer Name" },
+      { name: "phone_no", value: "Phone No." },
+      { name: "due_amt", value: "Due Amount" },
+    ],
+  },
 };

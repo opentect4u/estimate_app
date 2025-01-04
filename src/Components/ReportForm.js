@@ -4,12 +4,13 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
 import { url } from "../Address/baseURL";
+import moment from "moment";
 
 function ReportForm({ title, onPress, flag, outlet }) {
   console.log(url);
   const [d, setD] = useState([]);
   const initialValues = {
-    from_dt: "",
+    from_dt: flag === 777 ? moment(new Date()).format("YYYY-MM-DD") : "",
     to_dt: "",
     outlet: "",
     userlist: "",
@@ -36,6 +37,10 @@ function ReportForm({ title, onPress, flag, outlet }) {
     to_dt: Yup.string().required("To date is required"),
     userlist: Yup.string().required("User name is required"),
   });
+  const validationSchemaDueOutlet = Yup.object({
+    from_dt: Yup.string().required("From date is required"),
+    userlist: Yup.string().required("User name is required"),
+  });
   const validationSchemaPay = Yup.object({
     from_dt: Yup.string().required("From date is required"),
     to_dt: Yup.string().required("To date is required"),
@@ -60,6 +65,8 @@ function ReportForm({ title, onPress, flag, outlet }) {
         ? validationSchemaItem
         : flag == 666
         ? validationSchemaUserOutlet
+        : flag == 777
+        ? validationSchemaDueOutlet
         : validationSchema,
 
     validateOnMount: true,
@@ -113,6 +120,19 @@ function ReportForm({ title, onPress, flag, outlet }) {
           console.log(d);
         });
     }
+
+    if (flag === 777) {
+      axios
+        .post(url + "/admin/S_Admin/user_list", {
+          comp_id: localStorage.getItem("comp_id"),
+          br_id: localStorage.getItem("br_id"),
+        })
+        .then((response) => {
+          console.log(response);
+          setD(response?.data?.msg);
+          console.log(d);
+        });
+    }
   }, []);
 
   return (
@@ -123,7 +143,7 @@ function ReportForm({ title, onPress, flag, outlet }) {
         </h2>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-            <div className="w-full">
+            <div className={flag == 777 ? "sm:col-span-2" : "w-full"}>
               <label
                 htmlFor="brand"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -139,6 +159,7 @@ function ReportForm({ title, onPress, flag, outlet }) {
                 onBlur={formik.handleBlur}
                 placeholder="Product brand"
                 required=""
+                disabled={flag === 777}
               />
               {formik.errors.from_dt && formik.touched.from_dt ? (
                 <div className="text-red-500 text-sm">
@@ -146,30 +167,32 @@ function ReportForm({ title, onPress, flag, outlet }) {
                 </div>
               ) : null}
             </div>
-            <div className="w-full">
-              <label
-                htmlFor="price"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                To
-              </label>
-              <input
-                type="date"
-                name="to_dt"
-                id="to_dt"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="$2999"
-                value={formik.values.to_dt}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                required=""
-              />
-              {formik.errors.to_dt && formik.touched.to_dt ? (
-                <div className="text-red-500 text-sm">
-                  {formik.errors.to_dt}
-                </div>
-              ) : null}
-            </div>
-            {flag !== 666 && (
+            {flag !== 777 && (
+              <div className="w-full">
+                <label
+                  htmlFor="price"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  To
+                </label>
+                <input
+                  type="date"
+                  name="to_dt"
+                  id="to_dt"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="$2999"
+                  value={formik.values.to_dt}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  required=""
+                />
+                {formik.errors.to_dt && formik.touched.to_dt ? (
+                  <div className="text-red-500 text-sm">
+                    {formik.errors.to_dt}
+                  </div>
+                ) : null}
+              </div>
+            )}
+            {flag !== 666 && flag !== 777 && (
               <div className={flag == 0 ? "sm:col-span-2" : "w-full"}>
                 <label
                   htmlFor="outlet"
@@ -198,7 +221,7 @@ function ReportForm({ title, onPress, flag, outlet }) {
                 ) : null}
               </div>
             )}
-            {flag === 666 && (
+            {(flag === 666 || flag === 777) && (
               <div className="sm:col-span-2">
                 <label
                   htmlFor="userlist"
