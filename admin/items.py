@@ -50,7 +50,7 @@ async def add_edit_items(
     item_name:str = Form(...),
     unit_id:int = Form(...), 
     price:float = Form(...),
-    selling_price:float = Form(...),  
+    mrp:float = Form(...),  
     catg_id:int = Form(...),
     brand_id:int = Form(...),
     created_by:str = Form(...),
@@ -72,7 +72,7 @@ async def add_edit_items(
         res_dt = await db_Insert(table_name,fields,values,where,flag)
         if res_dt["suc"] > 0:
             table_name2 = "md_item_rate"
-            fields2 = f"price = {price}, selling_price = {selling_price}, modified_by = '{created_by}', modified_dt = '{formatted_dt}'"
+            fields2 = f"price = {price}, mrp = {mrp}, modified_by = '{created_by}', modified_dt = '{formatted_dt}'"
             values2 = None
             where2 = f"item_id = {item_id}"
             flag2 = 1
