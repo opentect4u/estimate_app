@@ -53,7 +53,7 @@ export default function ProfileScreen() {
   const tabsStore = [
     { left: "Address:", right: loginStore?.address },
     { left: "Location:", right: loginStore?.branch_address },
-    { left: "Outlet Name:", right: loginStore?.branch_name },
+    // { left: "Outlet Name:", right: loginStore?.branch_name },
     // { left: "Proprietor Name:", right: loginStore?.contact_person },
     // { left: "Email:", right: loginStore?.email_id },
     // { left: "Mobile Number:", right: loginStore?.phone_no },
@@ -70,7 +70,7 @@ export default function ProfileScreen() {
             ? "User"
             : "Admin",
     },
-    { left: "User ID:", right: loginStore?.user_id },
+    // { left: "User ID:", right: loginStore?.user_id },
     { left: "Mode:", right: loginStore?.mode === "C" ? "Calculator Mode" : "Normal Mode" },
   ]
 
