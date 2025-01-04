@@ -32,7 +32,7 @@ async def item_list(data:CompId):
 
 @itemRouter.post('/item_details')
 async def item_details(data:ItemId):
-    select = "a.id,a.comp_id,a.catg_id,a.brand_id,a.item_name,a.item_img,a.unit_id,b.price,b.selling_price,b.discount,b.cgst,b.sgst"
+    select = "a.id,a.comp_id,a.catg_id,a.brand_id,a.item_name,a.item_img,a.unit_id,b.price,b.mrp,b.discount,b.cgst,b.sgst"
     table_name = "md_items a , md_item_rate b"
     where = f"a.id = b.item_id AND a.id = {data.item_id}"
     order = f''
