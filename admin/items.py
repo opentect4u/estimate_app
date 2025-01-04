@@ -150,6 +150,7 @@ async def categorywise_item_list(data:CatgId):
 async def add_edit_category(
     comp_id: str = Form(...),
     catg_id: str = Form(...),
+    user_id: str = Form(...),
     category_name: str = Form(...),
     file: Optional[UploadFile] = File(None)
     ):
@@ -161,8 +162,8 @@ async def add_edit_category(
     table_name = "md_category"
     catg_pic = f", catg_picture = '/uploads/{fileName}'" if fileName != None else ''
     catg_pic1 = f",'/uploads/{fileName}'" if fileName != None else ', ""'
-    fields = f"category_name ='{category_name}' {catg_pic}, modified_by = 'admin', modified_at = '{formatted_dt}'" if int(catg_id)>0 else "comp_id,category_name,catg_picture,created_by,created_at"
-    values = f"{comp_id},'{category_name}' {catg_pic1}, 'admin','{formatted_dt}'"
+    fields = f"category_name ='{category_name}' {catg_pic}, modified_by = '{user_id}', modified_at = '{formatted_dt}'" if int(catg_id)>0 else "comp_id,category_name,catg_picture,created_by,created_at"
+    values = f"{comp_id},'{category_name}' {catg_pic1}, '{user_id}','{formatted_dt}'"
     where = f"comp_id={comp_id} and sl_no={catg_id}" if int(catg_id) >0 else None
     flag = 1 if int(catg_id)>0 else 0
     res_dt = await db_Insert(table_name,fields,values,where,flag)
