@@ -154,6 +154,25 @@ class DueReport(BaseModel):
     br_id:int
     date:date
 
+class DueReportOutlet(BaseModel):
+    comp_id:int
+    br_id:int
+    date:date
+    user_id:str
+class UserwiseReportOutlet(BaseModel):
+    from_date:date
+    to_date:date
+    comp_id:int
+    br_id:int
+    user_id:str
+
+class CancelReportOutlet(BaseModel):
+    from_date:date
+    to_date:date
+    comp_id:int
+    br_id:int
+    user_id:str
+
 class dashboard(BaseModel):
     comp_id:int
     from_date:date

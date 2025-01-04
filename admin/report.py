@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from config.database import connect
 from models.master_model import createResponse
 from models.masterApiModel import db_select, db_Insert
-from models.admin_form_model import UserList,SaleReport,CollectionReport,PayModeReport,UserWiseReport,GSTstatement,RefundReport,CreditReport,ItemReport,ItemReportOutlet,CancelReport,DaybookReport,CustomerLedger,RecveryReport,DueReport,dashboard
+from models.admin_form_model import UserList,SaleReport,CollectionReport,PayModeReport,UserWiseReport,GSTstatement,RefundReport,CreditReport,ItemReport,ItemReportOutlet,CancelReport,CancelReportOutlet,DaybookReport,CustomerLedger,RecveryReport,DueReport,DueReportOutlet,dashboard,UserwiseReportOutlet
 from datetime import date
 reportRouter = APIRouter()
 
@@ -115,6 +115,126 @@ async def userwise_sale_report(data:UserWiseReport):
     res_dt = await db_select(select,table_name,where,order,flag)
     
     return res_dt
+
+
+
+@reportRouter.post('/userwise_report_outlet')
+async def userwise_report(item_rep:UserwiseReportOutlet):
+    conn = connect()
+    cursor = conn.cursor()
+
+    query = f'''select created_by,user_name,branch_name,
+    sum(receipt_no),
+sum(Quantity)Quantity,
+(sum(cash_gross_sale) + sum(credit_gross_sale))gross_sale,
+(sum(cash_round_off)  + sum(credit_round_off))round_off,
+(sum(cash_net_sale)   + sum(credit_net_sale))net_sale,
+sum(cash_net_sale) cash_sale,
+sum(credit_net_sale)credit_sale
+from (
+    SELECT a.created_by,c.user_name,d.branch_name,
+    count(distinct a.receipt_no) receipt_no,
+    sum(distinct a.amount)as cash_gross_sale,
+    sum(a.round_off) as cash_round_off,
+    sum(distinct a.net_amt) cash_net_sale,
+    0 credit_gross_sale,
+    0 credit_round_off,
+    0 credit_net_sale,
+    sum(b.qty)Quantity
+    FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
+    where a.receipt_no = b.receipt_no
+    and   a.created_by = '{item_rep.user_id}'
+    and   a.br_id = {item_rep.br_id}
+    and a.comp_id = {item_rep.comp_id} 
+    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
+    and a.pay_mode in ('C','U')
+    and b.receipt_no In (select receipt_no from td_item_sale where cancel_flag = 0) 
+    group by a.created_by,c.user_name,d.branch_name
+    UNION
+    SELECT a.created_by,c.user_name,d.branch_name,
+    count(distinct a.receipt_no) receipt_no,
+    0 cash_gross_sale,
+    0 cash_round_off,
+    0 cash_net_sale,
+    sum(distinct a.amount)as credit_gross_sale,
+    sum(a.round_off) as credit_round_off,
+    sum(distinct a.net_amt) credit_net_sale,
+    sum(b.qty)Quantity
+    FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
+    where a.receipt_no = b.receipt_no
+    and   a.br_id = {item_rep.br_id}
+    and   c.user_id='{item_rep.user_id}'
+    and a.comp_id = {item_rep.comp_id} 
+    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
+    and a.pay_mode = 'R'
+    and b.receipt_no In (select receipt_no from td_item_sale where cancel_flag = 0) 
+    group by a.created_by,c.user_name,d.branch_name)a
+group by created_by,user_name,branch_name
+   ''' if item_rep.br_id==0 else f'''select created_by,user_name,branch_name,
+    sum(receipt_no),
+sum(Quantity)Quantity,
+(sum(cash_gross_sale) + sum(credit_gross_sale))gross_sale,
+(sum(cash_round_off)  + sum(credit_round_off))round_off,
+(sum(cash_net_sale)   + sum(credit_net_sale))net_sale,
+sum(cash_net_sale) cash_sale,
+sum(credit_net_sale)credit_sale
+from (
+    SELECT a.created_by,c.user_name,d.branch_name,
+    count(distinct a.receipt_no) receipt_no,
+    sum(distinct a.amount)as cash_gross_sale,
+    sum(a.round_off) as cash_round_off,
+    sum(distinct a.net_amt) cash_net_sale,
+    0 credit_gross_sale,
+    0 credit_round_off,
+    0 credit_net_sale,
+    sum(b.qty)Quantity
+    FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
+    where a.receipt_no = b.receipt_no
+    and   a.br_id = d.id
+    and   c.user_id='{item_rep.user_id}'
+    and a.comp_id = {item_rep.comp_id} 
+    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
+    and a.br_id = {item_rep.br_id}
+    and a.pay_mode in ('C','U')
+    and b.cancel_flag = 0
+    group by a.created_by,c.user_name,d.branch_name
+    UNION
+    SELECT a.created_by,c.user_name,d.branch_name,
+    count(distinct a.receipt_no) receipt_no,
+    0 cash_gross_sale,
+    0 cash_round_off,
+    0 cash_net_sale,
+    sum(distinct a.amount)as credit_gross_sale,
+    sum(a.round_off) as credit_round_off,
+    sum(distinct a.net_amt) credit_net_sale,
+    sum(b.qty)Quantity
+    FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
+    where a.receipt_no = b.receipt_no
+    and   a.br_id = d.id
+    and   c.user_id='{item_rep.user_id}'
+    and a.comp_id = {item_rep.comp_id} 
+    and a.br_id = {item_rep.br_id}
+    and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
+    and a.pay_mode = 'R'
+    and b.cancel_flag = 0
+    group by a.created_by,c.user_name,d.branch_name)a
+group by created_by,user_name,branch_name
+   '''
+   
+    print(query)
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if records==[]:
+        resData= {"status":0, "data":[]}
+    else:
+        resData= {
+        "status":1,
+        "data":result
+        }
+    return resData
 
 # =================================================================================================
 # GST Statement
@@ -314,6 +434,28 @@ async def productwise_report(item_rep:ItemReportOutlet):
         }
     return resData
 
+
+
+
+@reportRouter.post('/due_report_outlet')
+async def due_report(data:DueReportOutlet):
+    conn = connect()
+    cursor = conn.cursor()
+    query = f"select ifnull(b.cust_name,'NA')cust_name, a.phone_no, Sum(due_amt) - Sum(paid_amt)due_amt from td_recovery_new a,md_customer b where a.comp_id = b.comp_id and a.phone_no = b.phone_no and a.comp_id = {data.comp_id} and a.br_id = {data.br_id} and a.recover_dt <= '{data.date}' and a.created_by='{data.user_id}' GROUP BY b.cust_name,a.phone_no having due_amt>0"
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if records==[]:
+        resData= {"status":0, "msg":[]}
+    else:
+        resData= {
+        "status":1,
+        "msg":result
+        }
+    return resData
+
 #=================================================================================================
 # Cancel Report
 
@@ -334,6 +476,33 @@ async def cancel_report(data:CancelReport):
     res_dt = await db_select(select,table_name,where,order,flag)
     
     return res_dt
+
+
+
+
+@reportRouter.post('/cancel_report_outlet')
+async def cancel_report(data:CancelReportOutlet):
+    conn = connect()
+    cursor = conn.cursor()
+    
+    # query=f"select a.cust_name, a.phone_no, a.receipt_no, a.trn_date, count(b.receipt_no)no_of_items, a.price, a.discount_amt, a.cgst_amt, a.sgst_amt, a.round_off, a.net_amt, a.pay_mode, a.created_by from td_receipt a,td_item_sale b where a.receipt_no = b.receipt_no and b.comp_id = {data.comp_id} AND b.br_id = {data.br_id} and a.receipt_no In (select receipt_no from td_receipt_cancel_new where date(cancelled_dt) between '{data.from_date}' and '{data.to_date}') group by a.cust_name, a.phone_no, a.receipt_no, a.trn_date,a.price, a.discount_amt, a.cgst_amt, a.sgst_amt, a.round_off, a.net_amt, a.pay_mode, a.created_by Order by a.trn_date,a.receipt_no"
+
+    query = f"select a.receipt_no, a.trn_date, count(b.receipt_no)no_of_items, a.price, a.net_amt, a.pay_mode, a.created_by from td_receipt a,td_item_sale b where a.receipt_no = b.receipt_no and b.comp_id = {data.comp_id} AND b.br_id = {data.br_id} and a.receipt_no In (select receipt_no from td_receipt_cancel_new where date(cancelled_dt) between '{data.from_date}' and '{data.to_date}') and a.created_by='{data.user_id}' group by a.receipt_no, a.trn_date,a.price, a.net_amt, a.pay_mode, a.created_by Order by a.trn_date,a.receipt_no"
+
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if records==[]:
+        resData= {"status":0, "msg":[]}
+    else:
+        resData= {
+        "status":1,
+        "msg":result
+        }
+    return resData
+
 
 #==========================================================================================================
 # Daybook Report
