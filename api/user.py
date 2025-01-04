@@ -115,24 +115,22 @@ async def user_login(data_login:Login):
     cursor.close()
 
 
-    conn1 = connect()
-    cursor1 = conn1.cursor()
-    query1= F"SELECT login_flag from md_user WHERE device_id='{result1[0]["device_id"]}' and active_flag='Y'"
-    cursor1.execute(query1)
-    records1 = cursor1.fetchall()
-    result2 = createResponse(records1, cursor1.column_names, 1)
-    conn1.close()
-    cursor1.close()
+    # conn1 = connect()
+    # cursor1 = conn1.cursor()
+    # query1= F"SELECT login_flag from md_user WHERE device_id='{result1[0]["device_id"]}' and active_flag='Y'"
+    # cursor1.execute(query1)
+    # records1 = cursor1.fetchall()
+    # result2 = createResponse(records1, cursor1.column_names, 1)
+    # conn1.close()
+    # cursor1.close()
     # print(result1[0]["password"], "yyyyyy")
     if cursor.rowcount > 0 :
 
-        if(verify_password(data_login.password, result1[0]["password"]) and result2[0]['login_flag']=='N'):
+        if(verify_password(data_login.password)):
             res_dt = {"suc": 1, "msg": result1[0], "user" : 1}
         else:
-            if result2[0]['login_flag']=='N':
-               res_dt = {"suc": 0, "msg": "Please check your userID or password"}
-            else:
-               res_dt = {"suc": 0, "msg": "A user with the same device ID has already logged in"}
+            res_dt = {"suc": 0, "msg": "Please check your userID or password"}
+            
 
     else:
         res_dt = {"suc": 0, "msg": "No Data Found"}
