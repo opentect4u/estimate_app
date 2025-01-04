@@ -221,7 +221,7 @@ const HomeScreen = () => {
         ))}
       </div> */}
 
-      {userType !== "S" ? (
+      {userType === "S" ? (
         <div className="grid grid-cols-5 gap-5 my-10 align-middle -z-50 text-lg">
           {/* <div className="col-span-2 bg-white z-10 rounded-2xl flex justify-center items-center shadow-xl h-fit p-10">
             <Chart
@@ -247,10 +247,12 @@ const HomeScreen = () => {
               }}
             />
           </div> */}
-          Admin Dashboard
+          Superuser Dashboard
         </div>
+      ) : userType === "M" ? (
+        <div className="mt-5 text-2xl">Outlet Dashboard</div>
       ) : (
-        <div className="mt-5 text-2xl">Superuser Dashboard</div>
+        <div className="mt-5 text-2xl">Admin Dashboard</div>
       )}
     </>
 

@@ -94,6 +94,7 @@ function CategoryAdd() {
       data.append("comp_id", comp);
       data.append("catg_id", params.id);
       data.append("category_name", catgName);
+      data.append("user_id", localStorage.getItem("user_id"));
       callApi(`/admin/add_edit_category`, 1, data);
     }
   };

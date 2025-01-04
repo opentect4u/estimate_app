@@ -179,4 +179,42 @@ export const reportHeaders = {
     ],
     span: 3,
   },
+
+  productwiseestimate: {
+    title: "Productwise Estimate",
+    headers: [
+      { name: "item_name", value: "Item Name" },
+      { name: "category_name", value: "Category" },
+      { name: "item_id", value: "Item ID" },
+      { name: "tot_item_price", value: "Total Item Price" },
+      { name: "tot_item_qty", value: "Total Quantity" },
+      { name: "unit_name", value: "Unit" },
+      { name: "unit_price", value: "Unit Price" },
+    ],
+  },
+  userwiseestimate: {
+    title: "Userwise Estimate",
+    headers: [
+      { name: "Quantity", value: "Quantity" },
+      { name: "cash_sale", value: "Cash Sale" },
+      { name: "created_by", value: "User ID" },
+      { name: "gross_sale", value: "Gross Sale" },
+      { name: "net_sale", value: "Net Sale" },
+      { name: "round_off", value: "Round Off" },
+      { name: "sum(receipt_no)", value: "Total Receipts" },
+      { name: "user_name", value: "User Name" },
+    ],
+  },
+  cancelledestimate: {
+    title: "Cancelled Estimate",
+    headers: [
+      { name: "receipt_no", value: "Receipt No." },
+      { name: "trn_date", value: "Txn. Date" },
+      { name: "created_by", value: "User ID" },
+      { name: "price", value: "Price" },
+      { name: "pay_mode", value: "Pay Mode" },
+      { name: "no_of_items", value: "No. of Items" },
+      { name: "net_amt", value: "Net Amt" },
+    ],
+  },
 };

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ReportForm.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -31,6 +31,11 @@ function ReportForm({ title, onPress, flag, outlet }) {
     outlet: Yup.string().required("Outlet is required"),
     userlist: Yup.string().required("User name is required"),
   });
+  const validationSchemaUserOutlet = Yup.object({
+    from_dt: Yup.string().required("From date is required"),
+    to_dt: Yup.string().required("To date is required"),
+    userlist: Yup.string().required("User name is required"),
+  });
   const validationSchemaPay = Yup.object({
     from_dt: Yup.string().required("From date is required"),
     to_dt: Yup.string().required("To date is required"),
@@ -53,6 +58,8 @@ function ReportForm({ title, onPress, flag, outlet }) {
         ? validationSchemaPay
         : flag == 3
         ? validationSchemaItem
+        : flag == 666
+        ? validationSchemaUserOutlet
         : validationSchema,
 
     validateOnMount: true,
@@ -92,6 +99,21 @@ function ReportForm({ title, onPress, flag, outlet }) {
         });
     }
   };
+
+  useEffect(() => {
+    if (flag === 666) {
+      axios
+        .post(url + "/admin/S_Admin/user_list", {
+          comp_id: localStorage.getItem("comp_id"),
+          br_id: localStorage.getItem("br_id"),
+        })
+        .then((response) => {
+          console.log(response);
+          setD(response?.data?.msg);
+          console.log(d);
+        });
+    }
+  }, []);
 
   return (
     <section className="glassmorphicReport bg-white bg-opacity-65 bg-blend-luminosity dark:bg-gray-900">
@@ -147,33 +169,63 @@ function ReportForm({ title, onPress, flag, outlet }) {
                 </div>
               ) : null}
             </div>
-            <div className={flag == 0 ? "sm:col-span-2" : "w-full"}>
-              <label
-                htmlFor="outlet"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Outlet
-              </label>
-              <select
-                id="outlet"
-                value={formik.values.outlet}
-                onChange={handleChangeWithAPI}
-                name="outlet"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                onBlur={formik.handleBlur}>
-                <option selected>Select outlet</option>
-                <option value="0">All outlets</option>
-                {outlet?.map((item, i) => (
-                  <option key={i} value={item?.id}>
-                    {item?.branch_name}
-                  </option>
-                ))}
-              </select>
-              {formik.errors.outlet && formik.touched.outlet ? (
-                <div className="text-red-500 text-sm">
-                  {formik.errors.outlet}
-                </div>
-              ) : null}
-            </div>
+            {flag !== 666 && (
+              <div className={flag == 0 ? "sm:col-span-2" : "w-full"}>
+                <label
+                  htmlFor="outlet"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Outlet
+                </label>
+                <select
+                  id="outlet"
+                  value={formik.values.outlet}
+                  onChange={handleChangeWithAPI}
+                  name="outlet"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  onBlur={formik.handleBlur}>
+                  <option selected>Select outlet</option>
+                  <option value="0">All outlets</option>
+                  {outlet?.map((item, i) => (
+                    <option key={i} value={item?.id}>
+                      {item?.branch_name}
+                    </option>
+                  ))}
+                </select>
+                {formik.errors.outlet && formik.touched.outlet ? (
+                  <div className="text-red-500 text-sm">
+                    {formik.errors.outlet}
+                  </div>
+                ) : null}
+              </div>
+            )}
+            {flag === 666 && (
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="userlist"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  User List
+                </label>
+                <select
+                  id="userlist"
+                  value={formik.values.userlist}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  name="userlist"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                  <option selected="">Select user</option>
+                  {d?.map((item) => (
+                    <option value={item?.user_id}>{item?.user_name}</option>
+                  ))}
+                </select>
+                {formik.errors.userlist &&
+                formik.touched.userlist &&
+                flag == 1 ? (
+                  <div className="text-red-500 text-sm">
+                    {formik.errors.userlist}
+                  </div>
+                ) : null}
+              </div>
+            )}
             {flag == 1 && (
               <div className="w-full">
                 <label

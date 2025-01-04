@@ -81,7 +81,7 @@ function AddBrand() {
       console.log(rsp);
     }
     // setDataSet(response?.data?.msg)
-    if (response?.data?.suc == 0 || response?.data?.msg.length <= 0) {
+    if (response?.data?.suc == 0) {
       Message("error", "Something went wrong!");
     } else {
       if (isCalled && response?.data?.suc == 1) {

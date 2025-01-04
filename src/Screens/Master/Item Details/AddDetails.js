@@ -205,9 +205,8 @@ function AddDetails() {
       data.append("item_id", +params.id);
       data.append("item_name", formik.values.i_name);
       data.append("unit_id", formik.values.i_unit);
-      data.append("price", formik.values.i_price);
-      data.append("price", formik.values.i_price);
-      data.append("selling_price", formik.values.i_selling_price);
+      data.append("price", formik.values.i_selling_price);
+      data.append("mrp", formik.values.i_price);
       data.append("catg_id", +formik.values.i_cat);
       data.append("brand_id", +formik.values.i_brand_id);
       data.append("created_by", localStorage.getItem("user_id"));
@@ -251,8 +250,8 @@ function AddDetails() {
 
       setValues({
         i_name: response?.data?.msg[0]?.item_name,
-        i_price: response?.data?.msg[0]?.price,
-        i_selling_price: response?.data?.msg[0]?.selling_price,
+        i_price: response?.data?.msg[0]?.mrp,
+        i_selling_price: response?.data?.msg[0]?.price,
         i_brand_id: response?.data?.msg[0]?.brand_id,
         i_unit: response?.data?.msg[0]?.unit_id,
         i_cat: response?.data?.msg[0]?.catg_id,
@@ -366,7 +365,7 @@ function AddDetails() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   id="i_selling_price"
-                  disabled={params.id > 0 ? true : false}
+                  // disabled={params.id > 0 ? true : false}
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Selling Price"
                   required=""

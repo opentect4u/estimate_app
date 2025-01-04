@@ -68,4 +68,9 @@ export const pathMap = {
   categoryedit: "Add/Edit categories",
   pioreport: "Products in Estimate",
   employeewisereport: "Employeewise Report",
+  outletadmin: "Outlet",
+  reports: "Reports",
+  productwiseestimate: "Productwise Estimate",
+  userwiseestimate: "Userwise Estimate",
+  cancelledestimate: "Cancelled Estimate",
 };

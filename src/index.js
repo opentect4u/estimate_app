@@ -16,6 +16,11 @@ import AddBrand from "./Screens/Master/Brand/AddBrand";
 import BrandDetailsComp from "./Screens/Master/Brand/BrandDetailsComp";
 import PioReport from "./Screens/Reports/PioReport";
 import EmployeewiseSaleReport from "./Screens/Reports/EmployeewiseSaleReport";
+import OutletAdminComp from "./Screens/OutletAdmin/OutletAdminComp";
+import ProductwiseEstimate from "./Screens/OutletAdmin/Reports/ProductwiseEstimate";
+import ReportsComp from "./Screens/OutletAdmin/Reports/ReportsComp";
+import UserwiseEstimate from "./Screens/OutletAdmin/Reports/UserwiseEstimate";
+import CancelledEstimate from "./Screens/OutletAdmin/Reports/CancelledEstimate";
 
 const CategorywiseItemsComp = lazy(() =>
   import("./Screens/SuperAdmin/CategorywiseItems/CategorywiseItemsComp")
@@ -485,6 +490,31 @@ const router = createBrowserRouter([
               {
                 path: "managelocations",
                 element: <ManageLocations />,
+              },
+            ],
+          },
+          {
+            path: "outletadmin",
+
+            element: <OutletAdminComp />,
+            children: [
+              {
+                path: "reports",
+                element: <ReportsComp />,
+                children: [
+                  {
+                    path: "productwiseestimate",
+                    element: <ProductwiseEstimate />,
+                  },
+                  {
+                    path: "userwiseestimate",
+                    element: <UserwiseEstimate />,
+                  },
+                  {
+                    path: "cancelledestimate",
+                    element: <CancelledEstimate />,
+                  },
+                ],
               },
             ],
           },

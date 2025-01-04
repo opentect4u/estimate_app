@@ -7,7 +7,7 @@ import DescriptionComp from "../../Components/DescriptionComp";
 import { reportHeaders } from "../../Assets/Data/TemplateConstants";
 import { calculate } from "./Calculations";
 
-function ReportTemplate({ templateData, template, _url }) {
+function ReportTemplate({ templateData, template, _url, flag = 0 }) {
   const { response, callApi } = useAPI();
   const [resp, setRestp] = useState();
   const [isReport, setIsReport] = useState(false);
@@ -48,19 +48,31 @@ function ReportTemplate({ templateData, template, _url }) {
     setLocation(resp?.filter((e) => e?.id == data.outlet)[0]?.branch_name);
     comp = localStorage.getItem("comp_id");
     setCalled(true);
-    callApi(_url, 1, {
-      from_date: data.from_dt,
-      to_date: data.to_dt,
-      br_id: +data.outlet,
-      comp_id: +comp,
-    });
+
+    if (flag !== 666) {
+      callApi(_url, 1, {
+        from_date: data.from_dt,
+        to_date: data.to_dt,
+        br_id: +data.outlet,
+        comp_id: +comp,
+      });
+    } else {
+      callApi(_url, 1, {
+        from_date: data.from_dt,
+        to_date: data.to_dt,
+        br_id: localStorage.getItem("br_id"),
+        user_id: data.userlist,
+        comp_id: +comp,
+      });
+    }
   };
+
   return (
     <div>
       {!isReport && (
         <ReportForm
           title={templateData.title}
-          flag={0}
+          flag={flag}
           onPress={(data) => onPress(data)}
           outlet={resp}
         />
@@ -71,7 +83,7 @@ function ReportTemplate({ templateData, template, _url }) {
             title={templateData.title}
             from={from}
             to={to}
-            location={location ? location : "All outlets"}
+            location={location ? location : location == 0 ? "All outlets" : ""}
             backPress={() => setIsReport(false)}
             headers={templateData.headers}
             data={dataSet}

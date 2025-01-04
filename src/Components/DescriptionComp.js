@@ -192,7 +192,9 @@ function DescriptionComp({
                 <div className="text-blue-900 font-bold">{title}</div>
               )
             }
-            items={item}
+            items={
+              location === "" ? item?.filter((item, i) => item.key !== 4) : item
+            }
           />
         </div>
 

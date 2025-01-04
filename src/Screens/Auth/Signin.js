@@ -34,7 +34,13 @@ function Signin() {
       }, 1000);
     } else {
       // navigate("home/report/daybook");
-      navigate("home/report/pioreport");
+      if (localStorage.getItem("user_type") == "A") {
+        navigate("home/report/pioreport");
+      } else if (localStorage.getItem("user_type") == "M") {
+        navigate("home/outletadmin/reports/productwiseestimate");
+      } else {
+        navigate("home/");
+      }
     }
   }, []);
   useEffect(() => {
@@ -53,9 +59,18 @@ function Signin() {
       localStorage.setItem("comp_id", response?.data?.msg[0].comp_id);
       localStorage.setItem("phone_no", response?.data?.msg[0].phone_no);
       localStorage.setItem("email_id", response?.data?.msg[0].email_id);
+      localStorage.setItem("br_id", response?.data?.msg[0].br_id);
+      localStorage.setItem("user_type", response?.data?.msg[0].user_type);
       setCalled(false);
       // navigate("home/report/daybook");
-      navigate("home");
+      // navigate("home");
+      if (localStorage.getItem("user_type") == "A") {
+        navigate("home/report/pioreport");
+      } else if (localStorage.getItem("user_type") == "M") {
+        navigate("home/outletadmin/reports/productwiseestimate");
+      } else {
+        navigate("home/");
+      }
     } else {
       if (called) Message("error", "Incorrect credentials!");
       setCalled(false);
@@ -73,11 +88,10 @@ function Signin() {
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string()
-      .required("Email is required")
-      .email("Not a correct a email format"),
+    email: Yup.string().required("Username is required"),
     password: Yup.string().required("Password is required"),
   });
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -189,13 +203,15 @@ function Signin() {
                 </div>
                 <form onSubmit={formik.handleSubmit} className="w-full py-6">
                   <div className="pt-6 block">
-                    <label className="text-sm text-gray-600">Your email</label>
+                    <label className="text-sm text-gray-600">
+                      Your username
+                    </label>
                     <input
                       type="text"
                       name="email"
                       value={formik.values.email}
                       className="block border-gray-300 text-[13px] pt-2 p-1 rounded-lg h- w-full border "
-                      placeholder="name@company.com"
+                      placeholder="username"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                     />

@@ -69,6 +69,7 @@ function Unit() {
         unit_id: 0,
         comp_id: +comp,
         unit_name: data,
+        user_id: localStorage.getItem("user_id"),
       });
     else Message("error", "Unit is required!");
     // callApi('/admin/unit_list',1,{comp_id:+comp});
@@ -87,6 +88,7 @@ function Unit() {
         unit_id: e.rowData.sl_no,
         comp_id: +comp,
         unit_name: newValue,
+        user_id: localStorage.getItem("user_id"),
       });
       switch (field) {
         case "unit_name":
