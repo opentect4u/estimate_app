@@ -234,8 +234,8 @@ async def add_edit_brand(data:AddEditBrand):
     formatted_dt = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
     table_name = "md_brand"
    
-    fields = f"brand_name ='{data.brand_name}', catg_id={data.catg_id}, modified_by = '{data.created_by}', modified_dt = '{formatted_dt}'" if data.brand_id>0 else "brand_name,catg_id,created_by,created_dt"
-    values = f"'{data.brand_name}', {data.catg_id}, '{data.created_by}', '{formatted_dt}'"
+    fields = f"brand_name ='{data.brand_name}', modified_by = '{data.created_by}', modified_dt = '{formatted_dt}'" if data.brand_id>0 else "brand_name,created_by,created_dt"
+    values = f"'{data.brand_name}', '{data.created_by}', '{formatted_dt}'"
     where = f"brand_id={data.brand_id}" if data.brand_id>0 else None
     flag = 1 if data.brand_id>0 else 0
     res_dt = await db_Insert(table_name,fields,values,where,flag)
