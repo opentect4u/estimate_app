@@ -246,12 +246,12 @@ async def add_edit_brand(data:AddEditBrand):
 
 @itemRouter.post('/brand_dtls')
 async def brand_dtls(data:BrandId):
-    select = f"a.brand_id, a.brand_name, a.catg_id, b.category_name"
-    table_name = "md_brand a, md_category b"
-    if data.brand_id==0 and data.catg_id==0:
-        where = f"a.catg_id=b.sl_no"
+    select = f"brand_id, brand_name"
+    table_name = "md_brand"
+    if data.brand_id==0:
+        where = f""
     else:
-        where = f"a.catg_id=b.sl_no and a.brand_id = {data.brand_id} and a.catg_id={data.catg_id}" if data.brand_id>0  else f"a.catg_id=b.sl_no and a.catg_id={data.catg_id}"      
+        where = f"brand_id = {data.brand_id}" if data.brand_id>0  else f""      
     order = f''
     flag = 1
     res_dt = await db_select(select,table_name,where,order,flag)

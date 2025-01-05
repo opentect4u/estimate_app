@@ -435,8 +435,6 @@ async def productwise_report(item_rep:ItemReportOutlet):
     return resData
 
 
-
-
 @reportRouter.post('/due_report_outlet')
 async def due_report(data:DueReportOutlet):
     conn = connect()
