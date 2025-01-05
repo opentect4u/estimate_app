@@ -35,16 +35,14 @@ function BrandDetailsView() {
   useEffect(() => {
     // comp = localStorage.getItem("comp_id");
     callApi(`/admin/brand_dtls`, 1, {
-      catg_id: 0,
+      // catg_id: 0,
       brand_id: 0,
     });
   }, []);
 
   const onPress = (data) => {
     console.log(data);
-    navigation(
-      "/home/master/brand/brandedit/" + data.brand_id + "/" + data.catg_id
-    );
+    navigation("/home/master/brand/brandedit/" + data.brand_id);
   };
 
   useEffect(() => {
@@ -59,7 +57,7 @@ function BrandDetailsView() {
       <HeaderLayout
         title={"Manage Brands"}
         btnText={"Add brand"}
-        onPress={() => onPress({ brand_id: 0, catg_id: 0 })}
+        onPress={() => onPress({ brand_id: 0 })}
       />
       <section class="dark:bg-gray-900 p-3 ">
         <div class="mx-auto w-full">
@@ -70,12 +68,12 @@ function BrandDetailsView() {
                 setSearch={(val) => setSearch(val)}
                 title={"Manage Brands"}
                 btnText={"Add Brand"}
-                onclick={() => onPress({ brand_id: 0, catg_id: 0 })}
+                onclick={() => onPress({ brand_id: 0 })}
                 flag={1}
                 headers={[
                   // { name: "id", value: "#" },
                   { name: "brand_name", value: "Brand" },
-                  { name: "category_name", value: "Category" },
+                  // { name: "category_name", value: "Category" },
                 ]}
                 data={dataSet}
               />

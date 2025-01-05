@@ -73,4 +73,6 @@ export const pathMap = {
   productwiseestimate: "Productwise Estimate",
   userwiseestimate: "Userwise Estimate",
   cancelledestimate: "Cancelled Estimate",
+  brand: "Brand",
+  brandedit: "Add/Edit Brand",
 };

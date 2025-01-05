@@ -62,7 +62,7 @@ function AddBrand() {
     if (params.id > 0)
       callApi("/admin/brand_dtls", 1, {
         brand_id: +params.id,
-        catg_id: +params.id2,
+        // catg_id: +params.id2,
       });
     // setDataSet(response?.data?.msg)
   }, [isCalled]);
@@ -73,7 +73,7 @@ function AddBrand() {
       console.log(response);
       const rsp = {
         sh_brand_name: response?.data?.msg[0]?.brand_name,
-        sh_catg_id: response?.data?.msg[0]?.catg_id,
+        // sh_catg_id: response?.data?.msg[0]?.catg_id,
       };
       setValues(rsp);
       //  setBill(response?.data?.msg[0].bill_address)
@@ -96,7 +96,7 @@ function AddBrand() {
 
   const initialValues = {
     sh_brand_name: "",
-    sh_catg_id: "",
+    // sh_catg_id: "",
   };
 
   const onSubmit = (values) => {
@@ -107,14 +107,14 @@ function AddBrand() {
     callApi("/admin/add_edit_brand", 1, {
       brand_id: +params?.id,
       brand_name: values?.sh_brand_name,
-      catg_id: +values?.sh_catg_id,
+      // catg_id: +values?.sh_catg_id,
       created_by: localStorage.getItem("user_id"),
     });
   };
 
   const validationSchema = Yup.object({
     sh_brand_name: Yup.string().required("Brand Name is required."),
-    sh_catg_id: Yup.string().required("Category is required."),
+    // sh_catg_id: Yup.string().required("Category is required."),
   });
 
   const [formValues, setValues] = useState(initialValues);
@@ -137,7 +137,7 @@ function AddBrand() {
           </h2>
           <form onSubmit={formik.handleSubmit}>
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-              <div>
+              <div className="sm:col-span-2">
                 <label
                   for="sh_brand_name"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -160,7 +160,7 @@ function AddBrand() {
                   </div>
                 ) : null}
               </div>
-              <div>
+              {/* <div>
                 <label
                   for="sh_catg_id"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -179,15 +179,13 @@ function AddBrand() {
                       {item.category_name}
                     </option>
                   ))}
-                  {/* <option value="Y">Yes</option>
-                  <option value="N">No</option> */}
                 </select>
                 {formik.errors.sh_catg_id && formik.touched.sh_catg_id ? (
                   <div className="text-red-500 text-sm">
                     {formik.errors.sh_catg_id}
                   </div>
                 ) : null}
-              </div>
+              </div> */}
             </div>
             <div className="flex justify-center">
               {params.id == 0 && (

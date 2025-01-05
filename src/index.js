@@ -658,7 +658,7 @@ const router = createBrowserRouter([
                     element: <BrandDetailsView />,
                   },
                   {
-                    path: "brandedit/:id/:id2",
+                    path: "brandedit/:id",
                     element: <AddBrand />,
                   },
                 ],

@@ -641,6 +641,7 @@ function AddDetails() {
               aspect={CROP_AREA_ASPECT}
               crop={crop}
               zoom={zoom}
+              zoomWithScroll={true}
               cropSize={{ height: 450, width: 450 }}
               rotation={rotation}
               onCropChange={setCrop}
