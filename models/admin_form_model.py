@@ -499,5 +499,5 @@ class AddEditBrand(BaseModel):
     created_by:str
 
 class BrandId(BaseModel):
-    catg_id:int
+    # catg_id:int
     brand_id:int
