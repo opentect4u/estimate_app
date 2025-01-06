@@ -125,11 +125,11 @@ function Header() {
                   <Avatar />
                   Store Profile
                 </MenuItem>
-                <MenuItem
+                {/* <MenuItem
                   className="text-blue-900 hover:text-blue-900"
                   onClick={() => handleCloseProfile("", 2)}>
                   <Avatar /> User Profile
-                </MenuItem>
+                </MenuItem> */}
                 <Divider />
                 {/* <MenuItem >
           <ListItemIcon>

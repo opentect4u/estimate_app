@@ -539,72 +539,72 @@ function SidebarComp() {
         />
       ),
       children: [
-        {
-          key: "unit",
-          icon: (
-            <MoneyCollectOutlined
-              className={
-                location.pathname.includes("master/unit")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("master/unit")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"master/unit"}>Unit</Link>
-            </div>
-          ),
-        },
-        {
-          key: "category",
-          icon: (
-            <AppstoreOutlined
-              className={
-                location.pathname.includes("master/category")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("master/category")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"master/category/view"}>Category</Link>
-            </div>
-          ),
-        },
-        {
-          key: "brand",
-          icon: (
-            <MoneyCollectOutlined
-              className={
-                location.pathname.includes("master/brand/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }
-            />
-          ),
-          label: (
-            <div
-              className={
-                location.pathname.includes("master/brand/view")
-                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
-                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
-              }>
-              <Link to={"master/brand/view"}>Brand</Link>
-            </div>
-          ),
-        },
+        // {
+        //   key: "unit",
+        //   icon: (
+        //     <MoneyCollectOutlined
+        //       className={
+        //         location.pathname.includes("master/unit")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }
+        //     />
+        //   ),
+        //   label: (
+        //     <div
+        //       className={
+        //         location.pathname.includes("master/unit")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }>
+        //       <Link to={"master/unit"}>Unit</Link>
+        //     </div>
+        //   ),
+        // },
+        // {
+        //   key: "category",
+        //   icon: (
+        //     <AppstoreOutlined
+        //       className={
+        //         location.pathname.includes("master/category")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }
+        //     />
+        //   ),
+        //   label: (
+        //     <div
+        //       className={
+        //         location.pathname.includes("master/category")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }>
+        //       <Link to={"master/category/view"}>Category</Link>
+        //     </div>
+        //   ),
+        // },
+        // {
+        //   key: "brand",
+        //   icon: (
+        //     <MoneyCollectOutlined
+        //       className={
+        //         location.pathname.includes("master/brand/view")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }
+        //     />
+        //   ),
+        //   label: (
+        //     <div
+        //       className={
+        //         location.pathname.includes("master/brand/view")
+        //           ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+        //           : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+        //       }>
+        //       <Link to={"master/brand/view"}>Brand</Link>
+        //     </div>
+        //   ),
+        // },
         {
           key: "itemdetails",
           icon: (

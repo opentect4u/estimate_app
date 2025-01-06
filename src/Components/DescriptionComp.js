@@ -193,7 +193,9 @@ function DescriptionComp({
               )
             }
             items={
-              location === "" ? item?.filter((item, i) => item.key !== 4) : item
+              location === ""
+                ? item?.filter((item, i) => +item.key !== 4)
+                : item
             }
           />
         </div>
