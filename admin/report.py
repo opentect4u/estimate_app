@@ -242,6 +242,7 @@ from (
     sum(b.qty)Quantity
     FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
     where a.receipt_no = b.receipt_no
+    and   c.user_id='{item_rep.user_id}'
     and   a.br_id = {item_rep.br_id}
     and a.comp_id = {item_rep.comp_id} 
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
@@ -261,7 +262,6 @@ from (
     FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
     where a.receipt_no = b.receipt_no
     and   a.br_id = {item_rep.br_id}
-    and   c.user_id='{item_rep.user_id}'
     and a.comp_id = {item_rep.comp_id} 
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
     and a.pay_mode = 'R'
@@ -289,7 +289,6 @@ from (
     FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
     where a.receipt_no = b.receipt_no
     and   a.br_id = d.id
-    and   c.user_id='{item_rep.user_id}'
     and a.comp_id = {item_rep.comp_id} 
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
     and a.br_id = {item_rep.br_id}
@@ -309,7 +308,6 @@ from (
     FROM  td_receipt a,td_item_sale b,md_user c,md_branch d
     where a.receipt_no = b.receipt_no
     and   a.br_id = d.id
-    and   c.user_id='{item_rep.user_id}'
     and a.comp_id = {item_rep.comp_id} 
     and a.br_id = {item_rep.br_id}
     and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' 
