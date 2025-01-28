@@ -52,7 +52,7 @@ export default function ProfileScreen() {
 
   const tabsStore = [
     { left: "Address:", right: loginStore?.address },
-    { left: "Location:", right: loginStore?.branch_address },
+    // { left: "Location:", right: loginStore?.branch_address },
     // { left: "Outlet Name:", right: loginStore?.branch_name },
     // { left: "Proprietor Name:", right: loginStore?.contact_person },
     // { left: "Email:", right: loginStore?.email_id },
