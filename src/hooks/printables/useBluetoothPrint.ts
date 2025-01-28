@@ -1839,17 +1839,17 @@ export const useBluetoothPrint = () => {
       `[L]ROUND OFF[R]${roundingOffCalculate(netTotal, 0)}\n`;
 
     if (paymentMode === "C") {
-      text += `[L]CASH RECEIVED[R]${cashAmount}\n` +
+      text += `[L]RECEIVED[R]${cashAmount}\n` +
         `[L]RETURN[R]${returnedAmt}\n`;
     }
     if (paymentMode === "R") {
-      text += `[L]CASH RECEIVED[R]${cashAmount}\n` +
-        `[L]DUE AMOUNT[R]${Math.abs(returnedAmt)}\n`;
+      text += `[L]RECEIVED[R]${cashAmount}\n` +
+        `[L]DUE[R]${Math.abs(returnedAmt)}\n`;
     }
 
-    text += `[L]Pay Mode[R]${paymentMode === "C" ? "Cash" : paymentMode === "R" ? "Credit" : paymentMode === "U" ? "UPI" : "Err"}\n` +
+    text += `[L]Mode[R]${paymentMode === "C" ? "CR" : paymentMode === "R" ? "Credit" : paymentMode === "U" ? "UPI" : "Err"}\n` +
 
-      `[L]GRAND AMT[R]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
+      `[L]GRAND TOTAL[R]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
       `[C]==============X===============\n\n\n` +
       `[C]                                \n\n`;
 
@@ -1906,15 +1906,15 @@ export const useBluetoothPrint = () => {
       `[L]ROUND OFF[R]${roundingOffCalculate(netTotal, 0)}\n`;
 
     if (paymentMode === "C") {
-      text += `[L]CASH RECEIVED[R]${cashAmount}\n` +
+      text += `[L]RECEIVED[R]${cashAmount}\n` +
         `[L]RETURN[R]${returnedAmt}\n`;
     }
     if (paymentMode === "R") {
-      text += `[L]CASH RECEIVED[R]${cashAmount}\n` +
-        `[L]DUE AMOUNT[R]${Math.abs(returnedAmt)}\n`;
+      text += `[L]RECEIVED[R]${cashAmount}\n` +
+        `[L]DUE[R]${Math.abs(returnedAmt)}\n`;
     }
 
-    text += `[L]GRAND AMT[R]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
+    text += `[L]GRAND TOTAL[R]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
       `[C]==============X===============\n\n\n` +
       `[C]                                \n\n`;
 

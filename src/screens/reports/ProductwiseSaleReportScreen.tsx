@@ -46,8 +46,8 @@ function ProductwiseSaleReportScreen() {
   const [isLoading, setIsLoading] = useState(() => false)
   const [isDisabled, setIsDisabled] = useState(() => false)
 
-  const formattedFromDate = formattedDate(fromDate)
-  const formattedToDate = formattedDate(toDate)
+  const formattedFromDate = formattedDate(new Date())
+  const formattedToDate = formattedDate(new Date())
 
   const handleGetSaleReport = async (
     fromDate: string,
@@ -129,7 +129,7 @@ function ProductwiseSaleReportScreen() {
             Productwise Estimates
           </HeaderImage>
         </View>
-        <View
+        {/* <View
           style={{
             padding: normalize(10),
             flexDirection: "row",
@@ -181,7 +181,7 @@ function ProductwiseSaleReportScreen() {
               setOpenToDate(false)
             }}
           />
-        </View>
+        </View> */}
 
         <View
           style={{

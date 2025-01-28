@@ -45,7 +45,7 @@ function DueReportScreen() {
     const [isDisabled, setIsDisabled] = useState(() => false)
 
     // const formattedFromDate = formattedDate(fromDate)
-    const formattedToDate = formattedDate(toDate)
+    const formattedToDate = formattedDate(new Date())
 
     const handleGetDueReport = async (
         // fromDate: string,
@@ -114,10 +114,10 @@ function DueReportScreen() {
                 </View>
                 <View
                     style={{
-                        padding: normalize(10),
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        alignItems: "center",
+                        // padding: normalize(10),
+                        // flexDirection: "row",
+                        // justifyContent: "space-around",
+                        // alignItems: "center",
                     }}>
                     {/* <ButtonPaper
                         textColor={theme.colors.primary}
@@ -125,12 +125,12 @@ function DueReportScreen() {
                         mode="text">
                         FROM: {fromDate?.toLocaleDateString("en-GB")}
                     </ButtonPaper> */}
-                    <ButtonPaper
+                    {/* <ButtonPaper
                         textColor={theme.colors.primary}
                         onPress={() => setOpenToDate(true)}
                         mode="text">
                         DATE: {toDate?.toLocaleDateString("en-GB")}
-                    </ButtonPaper>
+                    </ButtonPaper> */}
 
                     {/* <DatePicker
                         modal
@@ -146,7 +146,7 @@ function DueReportScreen() {
                             setOpenFromDate(false)
                         }}
                     /> */}
-                    <DatePicker
+                    {/* <DatePicker
                         modal
                         mode="date"
                         maximumDate={new Date(toDate)}
@@ -160,7 +160,7 @@ function DueReportScreen() {
                         onCancel={() => {
                             setOpenToDate(false)
                         }}
-                    />
+                    /> */}
                 </View>
 
                 <View

@@ -60,8 +60,8 @@ function SearchBillsByDateScreen() {
   const [gstType, setGstType] = useState<"I" | "E">()
   const [discountType, setDiscountType] = useState<"P" | "A">()
 
-  const formattedFromDate = formattedDate(fromDate)
-  const formattedToDate = formattedDate(toDate)
+  const formattedFromDate = formattedDate(new Date())
+  const formattedToDate = formattedDate(new Date())
 
   const [isLoading, setIsLoading] = useState(() => false)
   const [isDisabled, setIsDisabled] = useState(() => false)
@@ -271,7 +271,7 @@ function SearchBillsByDateScreen() {
           </HeaderImage>
         </View>
 
-        <View
+        {/* <View
           style={{
             padding: 10,
             flexDirection: "row",
@@ -322,7 +322,7 @@ function SearchBillsByDateScreen() {
               setOpenToDate(false)
             }}
           />
-        </View>
+        </View> */}
 
         <View
           style={{
