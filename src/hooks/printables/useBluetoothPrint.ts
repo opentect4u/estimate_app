@@ -1820,38 +1820,39 @@ export const useBluetoothPrint = () => {
     let text =
       `[C]ESTIMATE\n` +
       `[C]=============================\n` +
-      `[L]RCPT. NO.[R]${rcptNo?.toString()}\n` +
-      `[L]RCPT. DATE[R]${new Date().toLocaleDateString("en-GB")}\n` +
+      `[L]   RCPT. NO.\n` +
+      `[L]   ${rcptNo?.toString()}\n` +
+      `[L]   DATE[L]${new Date().toLocaleDateString("en-GB")}\n` +
       `[C]=============================\n` +
-      `[L]Item[C]Qty[R]Amount\n` +
+      `[L]   Item[C]Qty[L]Amount\n` +
       `[C]=============================\n`;
 
     for (const item of addedProducts) {
       totalQuantities += +item?.quantity
-      text += `[L]${item?.item_name?.slice(0, 10)}[C]${item?.quantity}[R]${+item?.price * +item?.quantity}\n`
+      text += `[L]   ${item?.item_name?.slice(0, 10)}[C]${item?.quantity}[L]${+item?.price * +item?.quantity}\n`
     }
 
     text += `[C]=============================\n` +
 
       // `[L]Item[C]Qty[R]Amount\n` +
-      `[L]${addedProducts?.length}[C]${totalQuantities}[R]${netTotal?.toFixed(2)}\n` +
+      `[L]   ${addedProducts?.length}[C]${totalQuantities}[L]${netTotal?.toFixed(2)}\n` +
       `[C]=============================\n` +
-      `[L]ROUND OFF[R]${roundingOffCalculate(netTotal, 0)}\n`;
+      `[L]   ROUND OFF[L]${roundingOffCalculate(netTotal, 0)}\n`;
 
     if (paymentMode === "C") {
-      text += `[L]RECEIVED[R]${cashAmount}\n` +
-        `[L]RETURN[R]${returnedAmt}\n`;
+      text += `[L]   RECEIVED[L]${cashAmount}\n` +
+        `[L]   RETURN[L]${returnedAmt}\n`;
     }
     if (paymentMode === "R") {
-      text += `[L]RECEIVED[R]${cashAmount}\n` +
-        `[L]DUE[R]${Math.abs(returnedAmt)}\n`;
+      text += `[L]   RECEIVED[L]${cashAmount}\n` +
+        `[L]   DUE[L]${Math.abs(returnedAmt)}\n`;
     }
 
-    text += `[L]Mode[R]${paymentMode === "C" ? "CR" : paymentMode === "R" ? "Credit" : paymentMode === "U" ? "UPI" : "Err"}\n` +
+    text += `[L]   Mode[L]${paymentMode === "C" ? "CR" : paymentMode === "R" ? "Credit" : paymentMode === "U" ? "UPI" : "Err"}\n` +
 
-      `[L]GRAND TOTAL[R]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
-      `[C]==============X===============\n\n\n` +
-      `[C]                                \n\n`;
+      `[L]   GRAND TOTAL[L]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
+      `[C]============X============\n\n\n` +
+      `[C]                           \n\n`;
 
     await ThermalPrinterModule.printBluetooth({
       payload: text,
@@ -1886,37 +1887,38 @@ export const useBluetoothPrint = () => {
     let text =
       `[C]ESTIMATE ${cancelFlag ? "(CANCELLED)" : "(DUPLICATE)"}\n` +
       // `[C]==========DUPLICATE==========\n` +
-      `[C]=============================\n` +
-      `[L]RCPT. NO.[R]${rcptNo?.toString()}\n` +
-      `[L]RCPT. DATE[R]${new Date().toLocaleDateString("en-GB")}\n` +
-      `[C]=============================\n` +
-      `[L]Item[C]Qty[R]Amount\n` +
-      `[C]=============================\n`;
+      `[C]========================\n` +
+      `[L]   RCPT. NO.\n` +
+      `[L]   ${rcptNo?.toString()}\n` +
+      `[L]   DATE[L]${new Date().toLocaleDateString("en-GB")}\n` +
+      `[C]========================\n` +
+      `[L]   Item[C]Qty[L]Amt\n` +
+      `[C]========================\n`;
 
     for (const item of addedProducts) {
       totalQuantities += +item?.qty
-      text += `[L]${item?.item_name?.slice(0, 10)}[C]${item?.qty}[R]${+item?.price * +item?.qty}\n`
+      text += `[L]   ${item?.item_name?.slice(0, 10)}[C]${item?.qty}[L]${+item?.price * +item?.qty}\n`
     }
 
-    text += `[C]=============================\n` +
+    text += `[C]========================\n` +
 
       // `[L]Item[C]Qty[R]Amount\n` +
-      `[L]${addedProducts?.length}[C]${totalQuantities}[R]${netTotal?.toFixed(2)}\n` +
-      `[C]=============================\n` +
-      `[L]ROUND OFF[R]${roundingOffCalculate(netTotal, 0)}\n`;
+      `[L]   ${addedProducts?.length}[C]${totalQuantities}[L]${netTotal?.toFixed(2)}\n` +
+      `[C]========================\n` +
+      `[L]   ROUND OFF[L]${roundingOffCalculate(netTotal, 0)}\n`;
 
     if (paymentMode === "C") {
-      text += `[L]RECEIVED[R]${cashAmount}\n` +
-        `[L]RETURN[R]${returnedAmt}\n`;
+      text += `[L]   RECEIVED[L]${cashAmount}\n` +
+        `[L]   RETURN[L]${returnedAmt}\n`;
     }
     if (paymentMode === "R") {
-      text += `[L]RECEIVED[R]${cashAmount}\n` +
-        `[L]DUE[R]${Math.abs(returnedAmt)}\n`;
+      text += `[L]   RECEIVED[L]${cashAmount}\n` +
+        `[L]   DUE[L]${Math.abs(returnedAmt)}\n`;
     }
 
-    text += `[L]GRAND TOTAL[R]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
-      `[C]==============X===============\n\n\n` +
-      `[C]                                \n\n`;
+    text += `[L]   GRAND TOTAL[L]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
+      `[C]============X============\n\n\n` +
+      `[C]                            \n\n`;
 
     await ThermalPrinterModule.printBluetooth({
       payload: text,
@@ -1939,13 +1941,14 @@ export const useBluetoothPrint = () => {
     let text =
       `[C]PRODUCTWISE ESTIMATES\n` +
       `[C]PRINT AT: ${new Date().toLocaleString("en-GB")}\n` +
-      `[C]=============================\n` +
-      `[L]FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}[R]TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
-      `[C]=============================\n` +
+      `[C]========================\n` +
+      `[L]   FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}\n` +
+      `[L]   TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
+      `[C]========================\n` +
       // `[L]RCPT. DATE[R]${new Date().toLocaleDateString("en-GB")}\n` +
-      `[L]Item[R]Quantity\n` +
-      `[L]Unit Price[R]Net\n` +
-      `[C]=============================\n`;
+      `[L]   Item[L]Qty\n` +
+      `[L]   Unit Price[L]Net\n` +
+      `[C]========================\n`;
 
     let totQty = 0;
     let totNet = 0;
@@ -1955,18 +1958,18 @@ export const useBluetoothPrint = () => {
       totQty += item?.tot_item_qty;
       totNet += item?.tot_item_price;
 
-      text += `[L]${item?.item_name}[R]${item?.tot_item_qty} ${item?.unit_name?.charAt(0)}\n` +
-        `[L]${item?.unit_price}[R]${item?.tot_item_price}\n` +
-        `[C]-----------------------------\n`;
+      text += `[L]   ${item?.item_name}[L]${item?.tot_item_qty} ${item?.unit_name?.charAt(0)}\n` +
+        `[L]   ${item?.unit_price}[L]${item?.tot_item_price}\n` +
+        `[C]------------------------\n`;
     }
 
-    text += `[C]=============================\n` +
-      `[L]Total Qty[R]${totQty}\n` +
-      `[L]Total Amt[R]${totNet}\n` +
-      `[L]No of Items[R]${reportData?.length}\n` +
+    text += `[C]========================\n` +
+      `[L]   Total Qty[L]${totQty}\n` +
+      `[L]   Total Amt[L]${totNet?.toFixed(2)}\n` +
+      `[L]   No of Items[L]${reportData?.length}\n` +
       // `[L]Cash Receive[R]${reportData[0]?.tot_received_cash}\n` +
-      `[C]==============X===============\n\n\n` +
-      `[C]                                \n\n`;
+      `[C]============X============\n\n\n` +
+      `[C]                           \n\n`;
 
     await ThermalPrinterModule.printBluetooth({
       payload: text,
@@ -1991,24 +1994,25 @@ export const useBluetoothPrint = () => {
     let text =
       `[C]ESTIMATES REPORT\n` +
       `[C]PRINT AT: ${new Date().toLocaleString("en-GB")}\n` +
-      `[C]=============================\n` +
-      `[L]FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}[R]TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
-      `[C]=============================\n` +
+      `[C]========================\n` +
+      `[L]   FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}` +
+      `[L]   TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
+      `[C]========================\n` +
       // `[L]RCPT. DATE[R]${new Date().toLocaleDateString("en-GB")}\n` +
-      `[L]Rcpt No[C]Mode[R]Qty\n` +
-      `[L]Price[R]Total\n` +
-      `[C]=============================\n`;
+      `[L]   Rcpt No[C]Mode[L]Qty\n` +
+      `[L]   Price[L]Total\n` +
+      `[C]========================\n`;
 
     for (const item of reportData) {
-      text += `[L]${item?.receipt_no?.toString()?.slice(-5)}[C]${item?.pay_mode === "C" ? "Cash" : item?.pay_mode === "U" ? "UPI" : item?.pay_mode === "R" ? "Credit" : "Err"}[R]${item?.no_of_items}\n` +
-        `[L]${item?.price}[R]${item?.net_amt}\n` +
-        `[C]-----------------------------\n`;
+      text += `   [L]${item?.receipt_no?.toString()?.slice(-5)}[C]${item?.pay_mode === "C" ? "Cash" : item?.pay_mode === "U" ? "UPI" : item?.pay_mode === "R" ? "Credit" : "Err"}[L]${item?.no_of_items}\n` +
+        `[L]   ${item?.price}[L]${item?.net_amt}\n` +
+        `[C]------------------------\n`;
     }
 
-    text += `[C]=============================\n` +
-      `[L]Rows Count[R]${reportData?.length}\n` +
-      `[C]==============X===============\n\n\n` +
-      `[C]                                \n\n`;
+    text += `[C]========================\n` +
+      `[L]   Rows Count[L]${reportData?.length}\n` +
+      `[C]============X============\n\n\n` +
+      `[C]                           \n\n`;
 
     await ThermalPrinterModule.printBluetooth({
       payload: text,
@@ -2083,27 +2087,28 @@ export const useBluetoothPrint = () => {
     let text =
       `[C]CANCELLED REPORT\n` +
       `[C]PRINT AT: ${new Date().toLocaleString("en-GB")}\n` +
-      `[C]=============================\n` +
-      `[L]FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}[R]TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
-      `[C]=============================\n` +
+      `[C]========================\n` +
+      `[L]   FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}\n` +
+      `[L]   TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
+      `[C]========================\n` +
       // `[L]RCPT. DATE[R]${new Date().toLocaleDateString("en-GB")}\n` +
-      `[L]Sl.[C]Qty[C]Price[R]Net\n` +
-      `[C]=============================\n`;
+      `[L]   Sl.[C]Qty[C]Price[L]Net\n` +
+      `[C]========================\n`;
 
     let i = 1
     let totalNet = 0
     for (const item of reportData) {
       totalNet += item?.net_amt;
 
-      text += `[L]${i++}[C]${item?.no_of_items}[C]${item?.price}[R]${item?.net_amt}\n` +
-        `[C]-----------------------------\n`;
+      text += `[L]   ${i++}[C]${item?.no_of_items}[C]${item?.price}[L]${item?.net_amt}\n` +
+        `[C]------------------------\n`;
     }
 
-    text += `[C]=============================\n` +
-      `[L]Rows Count[R]${reportData?.length}\n` +
-      `[L]Total Cancelled[R]${totalNet}\n` +
-      `[C]==============X===============\n\n\n` +
-      `[C]                                \n\n`;
+    text += `[C]========================\n` +
+      `[L]   Rows Count[L]${reportData?.length}\n` +
+      `[L]   Total Cncld[L]${totalNet}\n` +
+      `[C]============X============\n\n\n` +
+      `[C]                           \n\n`;
 
     await ThermalPrinterModule.printBluetooth({
       payload: text,
@@ -2223,13 +2228,14 @@ export const useBluetoothPrint = () => {
     let text =
       `[C]USERWISE REPORT\n` +
       `[C]PRINT AT: ${new Date().toLocaleString("en-GB")}\n` +
-      `[C]=============================\n` +
-      `[L]FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}[R]TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
-      `[C]=============================\n` +
+      `[C]========================\n` +
+      `[L]   FROM: ${new Date(fromDate)?.toLocaleDateString("en-GB")}\n` +
+      `[L]   TO: ${new Date(toDate)?.toLocaleDateString("en-GB")}\n` +
+      `[C]========================\n` +
       // `[L]RCPT. DATE[R]${new Date().toLocaleDateString("en-GB")}\n` +
-      `[L]User[C]Rcpts[R]Net\n` +
-      `[L]Cash[R]Credit\n` +
-      `[C]=============================\n`;
+      `[L]   User[C]Rcpts[L]Net\n` +
+      `[L]   Cash[L]Credit\n` +
+      `[C]========================\n`;
 
     let totalNet = 0;
     let totalCan = 0;
@@ -2237,15 +2243,15 @@ export const useBluetoothPrint = () => {
     for (const item of reportData) {
       // totalDue += item?.cancelled_amt
 
-      text += `[L]${item?.user_name?.slice(0, 5)}[C]${item["sum(receipt_no)"]}[C]${item?.net_sale}\n` +
-        `[L]${item?.cash_sale}[R]${item?.credit_sale}\n`;
+      text += `[L]   ${item?.user_name?.slice(0, 5)}[C]${item["sum(receipt_no)"]}[C]${item?.net_sale}\n` +
+        `[L]   ${item?.cash_sale}[L]${item?.credit_sale}\n`;
     }
 
-    // text += `[C]=============================\n` +
+    // text += `[C]========================\n` +
     // `[L]Rows Count[R]${reportData?.length}\n` +
     // `[L]Total Due[R]${totalDue}\n` +
-    text += `[C]==============X===============\n\n\n` +
-      `[C]                                \n\n`;
+    text += `[C]============X============\n\n\n` +
+      `[C]                           \n\n`;
 
     await ThermalPrinterModule.printBluetooth({
       payload: text,
@@ -2268,22 +2274,22 @@ export const useBluetoothPrint = () => {
     let text =
       `[C]DUE REPORT\n` +
       `[C]PRINT AT: ${new Date().toLocaleString("en-GB")}\n` +
-      `[C]=============================\n` +
+      `[C]========================\n` +
       `[C]DATE: ${new Date(date)?.toLocaleDateString("en-GB")}\n` +
-      `[C]=============================\n` +
+      `[C]========================\n` +
       // `[L]RCPT. DATE[R]${new Date().toLocaleDateString("en-GB")}\n` +
-      `[L]Sl.[C]Name[C]Phone[R]Due\n` +
-      `[C]=============================\n`;
+      `[L]   Name[C]Phone[L]Due\n` +
+      `[C]========================\n`;
 
     let i = 1
     for (const item of reportData) {
-      text += `[L]${i++}[C]${item?.cust_name?.slice(0, 5)}[C]${item?.phone_no}[R]${item?.due_amt}\n`;
+      text += `[L]   ${item?.cust_name?.slice(0, 5)}[C]${item?.phone_no}[L]${item?.due_amt}\n`;
     }
 
-    text += `[C]=============================\n` +
-      `[L]Rows Count[R]${reportData?.length}\n` +
-      `[C]==============X===============\n\n\n` +
-      `[C]                                \n\n`;
+    text += `[C]========================\n` +
+      `[L]   Rows Count[L]${reportData?.length}\n` +
+      `[C]============X============\n\n\n` +
+      `[C]                           \n\n`;
 
     await ThermalPrinterModule.printBluetooth({
       payload: text,
