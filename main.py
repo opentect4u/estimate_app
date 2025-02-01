@@ -14,7 +14,7 @@ origins = [
 ]
 
 if __name__ == "__main__":
-   uvicorn.run("main:app", host="0.0.0.0", port=3001, reload=True)
+   uvicorn.run("main:app", host="0.0.0.0", port=3002, reload=True)
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,6 +26,10 @@ app.add_middleware(
 
 app.include_router(apiRouter)
 app.include_router(adminRouter)
+
+# 01/02/2025
+
+app.include_router(adminRouter, prefix="/v2/admin")   
 
 @app.get('/')
 def index():
