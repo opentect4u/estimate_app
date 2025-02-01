@@ -28,8 +28,8 @@ app.include_router(apiRouter)
 app.include_router(adminRouter)
 
 # 01/02/2025
-
-app.include_router(adminRouter, prefix="/v2/admin")   
+app.include_router(apiRouter, prefix="/v2")
+app.include_router(adminRouter, prefix="/v2")
 
 @app.get('/')
 def index():
