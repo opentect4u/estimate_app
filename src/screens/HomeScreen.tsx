@@ -150,7 +150,7 @@ function HomeScreen() {
   const onRefresh = useCallback(() => {
     setRefreshing(true)
     handleGetReceiptSettings()
-    handleGetBillSummary()
+    // handleGetBillSummary()
     handleGetRecentBills()
     setTimeout(() => {
       setRefreshing(false)
@@ -280,25 +280,25 @@ function HomeScreen() {
     })
   }
 
-  const handleGetBillSummary = async () => {
-    await fetchBillSummary(
-      formattedDate,
-      loginStore.comp_id,
-      loginStore.br_id,
-      loginStore.user_id,
-    )
-      .then(res => {
-        setTotalBills(res?.data[0]?.total_bills)
-        setAmountCollected(res?.data[0]?.amount_collected)
-      })
-      .catch(err => {
-        ToastAndroid.show(
-          "Check your internet connection or something went wrong in the server.",
-          ToastAndroid.SHORT,
-        )
-        console.log("handleGetBillSummary - HomeScreen", err, formattedDate)
-      })
-  }
+  // const handleGetBillSummary = async () => {
+  //   await fetchBillSummary(
+  //     formattedDate,
+  //     loginStore.comp_id,
+  //     loginStore.br_id,
+  //     loginStore.user_id,
+  //   )
+  //     .then(res => {
+  //       setTotalBills(res?.data[0]?.total_bills)
+  //       setAmountCollected(res?.data[0]?.amount_collected)
+  //     })
+  //     .catch(err => {
+  //       ToastAndroid.show(
+  //         "Check your internet connection or something went wrong in the server.",
+  //         ToastAndroid.SHORT,
+  //       )
+  //       console.log("handleGetBillSummary - HomeScreen", err, formattedDate)
+  //     })
+  // }
 
   const handleGetRecentBills = async () => {
     await fetchRecentBills(
@@ -336,7 +336,7 @@ function HomeScreen() {
   }
 
   useEffect(() => {
-    handleGetBillSummary()
+    // handleGetBillSummary()
     handleGetRecentBills()
 
     handleGetVersion()
@@ -393,7 +393,7 @@ function HomeScreen() {
       setVisible(false)
     })
 
-    handleGetBillSummary()
+    // handleGetBillSummary()
     handleGetRecentBills()
   }
 
@@ -472,11 +472,10 @@ function HomeScreen() {
         </Portal>
 
         <View style={{ alignItems: "center", marginTop: -10 }}>
-          <SurfacePaper
+          {/* <SurfacePaper
             smallWidthEnabled
             borderRadiusEnabled={false}
             paddingEnabled
-            // heading="Summary"
             elevation={1}
             backgroundColor={theme.colors.peachContainer}
             style={{
@@ -484,22 +483,6 @@ function HomeScreen() {
               borderTopLeftRadius: normalize(30),
             }}>
             <View style={{ width: "100%", padding: normalize(15) }}>
-              {/* <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}>
-                <View>
-                  <Text variant="titleLarge" style={{
-                    color: theme.colors.onPeachContainer
-                  }}>Total Bills</Text>
-                </View>
-                <View>
-                  <Text variant="titleLarge" style={{
-                    color: theme.colors.onPeachContainer
-                  }}>{totalBills}</Text>
-                </View>
-              </View> */}
               <View
                 style={{
                   flexDirection: "row",
@@ -517,7 +500,7 @@ function HomeScreen() {
                 </View>
               </View>
             </View>
-          </SurfacePaper>
+          </SurfacePaper> */}
 
           <SurfacePaper
             smallWidthEnabled

@@ -1820,8 +1820,8 @@ export const useBluetoothPrint = () => {
     let text =
       `[C]ESTIMATE\n` +
       `[C]=============================\n` +
-      `[L]   RCPT. NO.\n` +
-      `[L]   ${rcptNo?.toString()}\n` +
+      // `[L]   RCPT. NO.\n` +
+      // `[L]   ${rcptNo?.toString()}\n` +
       `[L]   DATE[L]${new Date().toLocaleDateString("en-GB")}\n` +
       `[C]=============================\n` +
       `[L]   Item[C]Qty[L]Amount\n` +
@@ -1829,7 +1829,8 @@ export const useBluetoothPrint = () => {
 
     for (const item of addedProducts) {
       totalQuantities += +item?.quantity
-      text += `[L]   ${item?.item_name?.slice(0, 10)}[C]${item?.quantity}[L]${+item?.price * +item?.quantity}\n`
+      text += `[L]   ${item?.item_name?.slice(0, 12)}[C]${item?.quantity}[L]${+item?.price * +item?.quantity}\n` +
+        `[C]                            \n`;
     }
 
     text += `[C]=============================\n` +
@@ -1837,18 +1838,18 @@ export const useBluetoothPrint = () => {
       // `[L]Item[C]Qty[R]Amount\n` +
       `[L]   ${addedProducts?.length}[C]${totalQuantities}[L]${netTotal?.toFixed(2)}\n` +
       `[C]=============================\n` +
-      `[L]   ROUND OFF[L]${roundingOffCalculate(netTotal, 0)}\n`;
+      `[L]   ROUND OFF[L]${roundingOffCalculate(netTotal, 0)}\n` +
 
-    if (paymentMode === "C") {
-      text += `[L]   RECEIVED[L]${cashAmount}\n` +
-        `[L]   RETURN[L]${returnedAmt}\n`;
-    }
-    if (paymentMode === "R") {
-      text += `[L]   RECEIVED[L]${cashAmount}\n` +
-        `[L]   DUE[L]${Math.abs(returnedAmt)}\n`;
-    }
+      // if (paymentMode === "C") {
+      //   text += `[L]   RECEIVED[L]${cashAmount}\n` +
+      //     `[L]   RETURN[L]${returnedAmt}\n`;
+      // }
+      // if (paymentMode === "R") {
+      //   text += `[L]   RECEIVED[L]${cashAmount}\n` +
+      //     `[L]   DUE[L]${Math.abs(returnedAmt)}\n`;
+      // }
 
-    text += `[L]   Mode[L]${paymentMode === "C" ? "CR" : paymentMode === "R" ? "Credit" : paymentMode === "U" ? "UPI" : "Err"}\n` +
+      // text += `[L]   Mode[L]${paymentMode === "C" ? "CR" : paymentMode === "R" ? "Credit" : paymentMode === "U" ? "UPI" : "Err"}\n` +
 
       `[L]   GRAND TOTAL[L]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
       `[C]============X============\n\n\n` +
@@ -1888,8 +1889,8 @@ export const useBluetoothPrint = () => {
       `[C]ESTIMATE ${cancelFlag ? "(CANCELLED)" : "(DUPLICATE)"}\n` +
       // `[C]==========DUPLICATE==========\n` +
       `[C]========================\n` +
-      `[L]   RCPT. NO.\n` +
-      `[L]   ${rcptNo?.toString()}\n` +
+      // `[L]   RCPT. NO.\n` +
+      // `[L]   ${rcptNo?.toString()}\n` +
       `[L]   DATE[L]${new Date().toLocaleDateString("en-GB")}\n` +
       `[C]========================\n` +
       `[L]   Item[C]Qty[L]Amt\n` +
@@ -1897,7 +1898,8 @@ export const useBluetoothPrint = () => {
 
     for (const item of addedProducts) {
       totalQuantities += +item?.qty
-      text += `[L]   ${item?.item_name?.slice(0, 10)}[C]${item?.qty}[L]${+item?.price * +item?.qty}\n`
+      text += `[L]   ${item?.item_name?.slice(0, 12)}[C]${item?.qty}[L]${+item?.price * +item?.qty}\n` +
+        `[C]                            \n`;
     }
 
     text += `[C]========================\n` +
@@ -1907,14 +1909,14 @@ export const useBluetoothPrint = () => {
       `[C]========================\n` +
       `[L]   ROUND OFF[L]${roundingOffCalculate(netTotal, 0)}\n`;
 
-    if (paymentMode === "C") {
-      text += `[L]   RECEIVED[L]${cashAmount}\n` +
-        `[L]   RETURN[L]${returnedAmt}\n`;
-    }
-    if (paymentMode === "R") {
-      text += `[L]   RECEIVED[L]${cashAmount}\n` +
-        `[L]   DUE[L]${Math.abs(returnedAmt)}\n`;
-    }
+    // if (paymentMode === "C") {
+    //   text += `[L]   RECEIVED[L]${cashAmount}\n` +
+    //     `[L]   RETURN[L]${returnedAmt}\n`;
+    // }
+    // if (paymentMode === "R") {
+    //   text += `[L]   RECEIVED[L]${cashAmount}\n` +
+    //     `[L]   DUE[L]${Math.abs(returnedAmt)}\n`;
+    // }
 
     text += `[L]   GRAND TOTAL[L]${grandTotalCalculate(netTotal, 0).toFixed(2)}\n` +
       `[C]============X============\n\n\n` +
