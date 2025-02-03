@@ -17,7 +17,7 @@ import { Dialog } from "primereact/dialog";
 
 const CROP_AREA_ASPECT = 1 / 1;
 
-function AddDetails() {
+function AddDetailsBranchwise() {
   const params = useParams();
   const { response, callApi } = useAPI();
   const navigation = useNavigate();
@@ -99,7 +99,7 @@ function AddDetails() {
     if (params.id > 0)
       callApi("/admin/item_details", 1, {
         item_id: +params.id,
-        br_id: 0,
+        br_id: +params.id2,
       });
     // setDataSet(response?.data?.msg)
   }, [isCalled]);
@@ -137,7 +137,7 @@ function AddDetails() {
         setCalled(false);
         DurationMessage();
         setTimeout(() => {
-          navigation("/home/master/itemdetails/view");
+          navigation("/home/master/itemdetailsbranchwise/view");
         }, 3500);
       }
     }
@@ -205,7 +205,7 @@ function AddDetails() {
       var data = new FormData();
       if (croppedImage) data.append("file", file);
       data.append("comp_id", 1);
-      data.append("br_id", 0);
+      data.append("br_id", +params?.id2);
       data.append("item_id", +params.id);
       data.append("item_name", formik.values.i_name);
       data.append("unit_id", formik.values.i_unit);
@@ -316,6 +316,7 @@ function AddDetails() {
                   Item Name
                 </label>
                 <input
+                  disabled={params.id2 > 0 ? true : false}
                   type="text"
                   name="i_name"
                   id="i_name"
@@ -411,6 +412,7 @@ function AddDetails() {
                   Category
                 </label>
                 <select
+                  disabled={params.id2 > 0 ? true : false}
                   id="i_cat"
                   name="i_cat"
                   value={formik.values.i_cat}
@@ -441,6 +443,7 @@ function AddDetails() {
                   Brand
                 </label>
                 <select
+                  disabled={params.id2 > 0 ? true : false}
                   id="i_brand_id"
                   name="i_brand_id"
                   value={formik.values.i_brand_id}
@@ -471,6 +474,7 @@ function AddDetails() {
                   Unit
                 </label>
                 <select
+                  disabled={params.id2 > 0 ? true : false}
                   id="i_unit"
                   name="i_unit"
                   value={formik.values.i_unit}
@@ -499,6 +503,7 @@ function AddDetails() {
                   Upload file
                 </label>
                 <input
+                  disabled={params.id2 > 0 ? true : false}
                   class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                   aria-describedby="file_input_help"
                   id="file_input"
@@ -532,75 +537,6 @@ function AddDetails() {
               ) : (
                 ""
               )}
-              {/* <div>
-                <label
-                  for="i_discount"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Discount
-                </label>
-                <input
-                  type="number"
-                  name="i_discount"
-                  id="i_discount"
-                  value={formik.values.i_discount}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="12"
-                  required=""
-                />
-                {formik.errors.i_discount && formik.touched.i_discount ? (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.i_discount}
-                  </div>
-                ) : null}
-              </div>
-              <div class="w-full">
-                <label
-                  for="i_cgst"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  CGST
-                </label>
-                <input
-                  type="number"
-                  name="i_cgst"
-                  id="i_cgst"
-                  value={formik.values.i_cgst}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="CGST"
-                  required=""
-                />
-                {formik.errors.i_cgst && formik.touched.i_cgst ? (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.i_cgst}
-                  </div>
-                ) : null}
-              </div>
-              <div class="w-full">
-                <label
-                  for="i_sgst"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  SGST
-                </label>
-                <input
-                  type="number"
-                  name="i_sgst"
-                  id="i_sgst"
-                  value={formik.values.i_sgst}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="SGST"
-                  required=""
-                />
-                {formik.errors.i_sgst && formik.touched.i_sgst ? (
-                  <div className="text-red-500 text-sm">
-                    {formik.errors.i_sgst}
-                  </div>
-                ) : null}
-              </div> */}
             </div>
             <div className="flex justify-center">
               {params.id == 0 && (
@@ -668,4 +604,4 @@ function AddDetails() {
   );
 }
 
-export default AddDetails;
+export default AddDetailsBranchwise;

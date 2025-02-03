@@ -623,7 +623,31 @@ function SidebarComp() {
                   ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
                   : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
               }>
-              <Link to={"master/itemdetails/view"}>Item Details</Link>
+              <Link to={"master/itemdetails/view"}>Global Items</Link>
+            </div>
+          ),
+        },
+        {
+          key: "itemdetailsbranchwise",
+          icon: (
+            <ProfileOutlined
+              className={
+                location.pathname.includes("master/itemdetailsbranchwise/view")
+                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+              }
+            />
+          ),
+          label: (
+            <div
+              className={
+                location.pathname.includes("master/itemdetailsbranchwise/view")
+                  ? " font-semibold flex items-center p-2 my-2 rounded-lg dark:text-white  hover:duration-100  dark:hover:bg-gray-700 group"
+                  : "flex items-center p-2  rounded-lg dark:text-white  hover:duration-100   dark:hover:bg-gray-700 group"
+              }>
+              <Link to={"master/itemdetailsbranchwise/view"}>
+                Shopwise Items
+              </Link>
             </div>
           ),
         },

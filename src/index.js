@@ -22,6 +22,9 @@ import ReportsComp from "./Screens/OutletAdmin/Reports/ReportsComp";
 import UserwiseEstimate from "./Screens/OutletAdmin/Reports/UserwiseEstimate";
 import CancelledEstimate from "./Screens/OutletAdmin/Reports/CancelledEstimate";
 import DueEstimate from "./Screens/OutletAdmin/Reports/DueEstimate";
+import ItemDetailsBranchwise from "./Screens/Master/ItemDetailsBranchwise/ItemDetailsBranchwise";
+import ItemDetailsViewBranchwise from "./Screens/Master/ItemDetailsBranchwise/ItemDetailsViewBranchwise";
+import AddDetailsBranchwise from "./Screens/Master/ItemDetailsBranchwise/AddDetailsBranchwise";
 
 const CategorywiseItemsComp = lazy(() =>
   import("./Screens/SuperAdmin/CategorywiseItems/CategorywiseItemsComp")
@@ -675,6 +678,21 @@ const router = createBrowserRouter([
                   {
                     path: "adddetails/:id",
                     element: <AddDetails />,
+                  },
+                ],
+              },
+              {
+                path: "itemdetailsbranchwise",
+
+                element: <ItemDetailsBranchwise />,
+                children: [
+                  {
+                    path: "view",
+                    element: <ItemDetailsViewBranchwise />,
+                  },
+                  {
+                    path: "adddetailsbranchwise/:id/:id2",
+                    element: <AddDetailsBranchwise />,
                   },
                 ],
               },

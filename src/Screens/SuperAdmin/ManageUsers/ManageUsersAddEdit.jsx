@@ -24,7 +24,7 @@ function ManageShopsAddEdit() {
   const [c_bill, setBill] = useState("");
   const [outlets, setOutlets] = useState(() => []);
   const [shops, setShops] = useState(() => []);
-  const [count_device,setCountDevice] = useState(0)
+  const [count_device, setCountDevice] = useState(0);
   const [userTypeText, setUserTypeText] = useState(() => "");
 
   var comp, userId;
@@ -349,7 +349,7 @@ function ManageShopsAddEdit() {
                     : userTypeText === "EMAIL"
                     ? "User ID (Email)"
                     : "User ID"} */}
-                     {"User ID"}
+                  {"User ID"}
                 </label>
                 <input
                   disabled={userTypeText === "NONE"}
@@ -369,9 +369,7 @@ function ManageShopsAddEdit() {
                   //     ? "abc@email.com"
                   //     : "Choose User Type"
                   // }
-                  placeholder={
-                   "Enter User ID"
-                  }
+                  placeholder={"Enter User ID"}
                   required=""
                 />
                 {/* <div className="text-blue-600 text-xs">
@@ -618,18 +616,18 @@ function ManageShopsAddEdit() {
                     id="u_device_id"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     onChange={formik.handleChange}
-                    onBlur={
-                      e=>{
-                        formik.handleBlur(e)
-                        if(formik.values.u_device_id)
-                        axios.post(`${url}/admin/S_Admin/check_device_id`,{device_id:formik.values.u_device_id}).then(res=>{
-                          console.log(res)
-                          setCountDevice(res?.data?.msg[0].count)
-                        
-                        
-                        })
-                      }
-                    }
+                    onBlur={(e) => {
+                      formik.handleBlur(e);
+                      if (formik.values.u_device_id)
+                        axios
+                          .post(`${url}/admin/S_Admin/check_device_id`, {
+                            device_id: formik.values.u_device_id,
+                          })
+                          .then((res) => {
+                            console.log(res);
+                            setCountDevice(res?.data?.msg[0].count);
+                          });
+                    }}
                     value={formik.values.u_device_id}
                     placeholder="Enter Device ID"
                     required=""
@@ -640,10 +638,11 @@ function ManageShopsAddEdit() {
                     </div>
                   ) : null}
 
-{count_device>0 && <div className="text-red-500 text-sm">
+                  {count_device > 0 && (
+                    <div className="text-red-500 text-sm">
                       Device ID already allotted
                     </div>
-}
+                  )}
                 </div>
               </>
             </div>
