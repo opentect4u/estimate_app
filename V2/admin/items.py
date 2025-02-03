@@ -75,7 +75,7 @@ async def add_edit_items(
             table_name2 = "md_item_rate"
             fields2 = f"price = {price}, mrp = {mrp}, br_id={br_id}, modified_by = '{created_by}', modified_dt = '{formatted_dt}'"
             values2 = None
-            where2 = f"item_id = {item_id} and br_id={br_id}"
+            where2 = f"item_id = {item_id} and br_id={br_id}" if br_id>0 else f"item_id = {item_id}"
             flag2 = 1
             res_dt2 = await db_Insert(table_name2,fields2,values2,where2,flag2)
 
