@@ -61,7 +61,7 @@ async def add_edit_items(
     formatted_dt = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
     item_img_add = f",'/uploads/{fileName}'" if fileName != None else ', ""'
     item_img_edit = f", item_img = '/uploads/{fileName}'" if fileName != None else ''
-
+    print('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
     if item_id > 0:
 
         table_name = "md_items"
