@@ -71,6 +71,8 @@ async def add_edit_items(
         where = f"id = {item_id}"
         flag = 1
         res_dt = await db_Insert(table_name,fields,values,where,flag)
+        print("I am inside item_id>0")
+
         if res_dt["suc"] > 0:
             table_name2 = "md_item_rate"
             fields2 = f"price = {price}, mrp = {mrp}, br_id={br_id}, modified_by = '{created_by}', modified_dt = '{formatted_dt}'"
@@ -96,6 +98,7 @@ async def add_edit_items(
             where1 = None
             flag1 = 0
             res_dt1= await db_Insert(table_name1,fields1,values1,where1,flag1)
+
             if res_dt1["suc"] > 0:
                 select = "id"
                 table_name = "md_branch"
