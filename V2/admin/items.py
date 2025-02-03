@@ -91,8 +91,8 @@ async def add_edit_items(
         # print(res_dt['lastId'],"uuuuuuuuu")
         if res_dt["suc"] > 0:
             table_name1 = "md_item_rate"
-            fields1 = "item_id,price,mrp,br_id,created_by,created_dt"
-            values1 = f"{res_dt['lastId']},{price},{mrp},{br_id},'{created_by}','{formatted_dt}'"
+            fields1 = "item_id,price,mrp,br_id,created_by,created_dt" if br_id>0 else "item_id,price,mrp,created_by,created_dt"
+            values1 = f"{res_dt['lastId']},{price},{mrp},{br_id},'{created_by}','{formatted_dt}'" if br_id>0 else f"{res_dt['lastId']},{price},{mrp},'{created_by}','{formatted_dt}'"
             where1 = None
             flag1 = 0
             res_dt1= await db_Insert(table_name1,fields1,values1,where1,flag1)
