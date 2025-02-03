@@ -76,6 +76,7 @@ async def user_login(data_login:UserLogin):
     where = f"a.user_id='{data_login.user_id}' AND b.id=a.br_id AND c.id=a.comp_id AND a.active_flag='Y' AND a.user_type!='U'"
     order = f''
     flag = 0
+
     result = await db_select(select,table_name,where,order,flag)
     if(result['suc'] > 0 and result['suc'] < 2):
         if(verify_password(data_login.password, result['msg']['password'])):
