@@ -64,6 +64,7 @@ async def add_edit_items(
     item_img_edit = f", item_img = '/uploads/{fileName}'" if fileName != None else ''
 
     if item_id > 0:
+        print("I am inside item_id>0")
 
         table_name = "md_items"
         fields = f"item_name ='{item_name}' {item_img_edit}, catg_id = {catg_id}, brand_id = {brand_id}, unit_id = {unit_id}, modified_by = '{created_by}', modified_dt = '{formatted_dt}'"
@@ -71,7 +72,6 @@ async def add_edit_items(
         where = f"id = {item_id}"
         flag = 1
         res_dt = await db_Insert(table_name,fields,values,where,flag)
-        print("I am inside item_id>0")
 
         if res_dt["suc"] > 0:
             table_name2 = "md_item_rate"
