@@ -109,6 +109,7 @@ async def user_login(data_login:Login):
     cursor = conn.cursor()
     query = F"SELECT a.id,a.user_name,a.user_type,a.user_id,a.phone_no,a.email_id,a.device_id,a.password,a.active_flag,a.login_flag,a.created_by,a.created_dt,a.modified_by,a.modified_dt,b.id br_id,b.branch_name,b.branch_address,b.location,b.contact_person, c.id comp_id, c.company_name,c.mode,c.address,c.web_portal,c.max_user FROM md_user a, md_branch b, md_company c WHERE a.user_id='{data_login.user_id}' AND b.id=a.br_id AND c.id=a.comp_id AND a.active_flag='Y' AND a.user_type !='M'"
     cursor.execute(query)
+    print('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG',query)
     records = cursor.fetchall()
     result1 = createResponse(records, cursor.column_names, 1)
     conn.close()
