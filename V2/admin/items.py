@@ -1,7 +1,7 @@
 from fastapi import APIRouter, File, UploadFile, Depends, Form
 from models.master_model import createResponse
 from models.masterApiModel import db_select, db_Insert
-from models.admin_form_model import CompId,ItemId,AddEditItem,CatgId,UpdateCategory,AddEditBrand,BrandId
+from models.admin_form_model import CompId,ItemId,ItemIDLocal,AddEditItem,CatgId,UpdateCategory,AddEditBrand,BrandId
 from datetime import datetime
 from typing import Annotated, Union, Optional
 import os
@@ -31,10 +31,10 @@ async def item_list(data:CompId):
 # All details of a perticualr Item
 
 @itemRouter.post('/item_details')
-async def item_details(data:ItemId):
+async def item_details(data:ItemIDLocal):
     select = "a.id,a.comp_id,a.catg_id,a.brand_id,a.item_name,a.item_img,a.unit_id,b.price,b.mrp,b.discount,b.cgst,b.sgst"
     table_name = "md_items a , md_item_rate b"
-    where = f"a.id = b.item_id AND a.id = {data.item_id}"
+    where = f"a.id = b.item_id AND a.id = {data.item_id}" if data.br_id==0 else f"a.id = b.item_id AND a.id = {data.item_id} AND b.br_id = {data.br_id}"
     order = f''
     flag = 1
     res_dt = await db_select(select,table_name,where,order,flag)

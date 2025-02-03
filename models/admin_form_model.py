@@ -244,6 +244,10 @@ class GeneralSettings(BaseModel):
 class ItemId(BaseModel):
     item_id:int
 
+class ItemIDLocal(BaseModel):
+    br_id:int
+    item_id:int
+
 class AddEditItem(BaseModel):
     comp_id:int
     # br_id:int
