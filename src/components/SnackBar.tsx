@@ -14,9 +14,10 @@ type SnackBarProps = {
     disableNext?: boolean
     hideCart?: boolean
     disableCart?: boolean
+    totQty?: number
 }
 
-const SnackBar = ({ handleBtn1Press, handleBtn2Press, handleBtn3Press, totAmt, cartItemQty, disableNext, hideCart = false, disableCart }: SnackBarProps) => {
+const SnackBar = ({ handleBtn1Press, handleBtn2Press, handleBtn3Press, totAmt, cartItemQty, disableNext, hideCart = false, disableCart, totQty = 0 }: SnackBarProps) => {
     const theme = usePaperColorScheme()
     return (
         <View style={{
@@ -75,6 +76,19 @@ const SnackBar = ({ handleBtn1Press, handleBtn2Press, handleBtn3Press, totAmt, c
                 <Text style={{ color: theme.colors.onVanilla, textAlign: "center", paddingHorizontal: 15, flexWrap: "wrap" }}>•</Text>
                 <Text style={{ color: theme.colors.onVanilla, textAlign: "center", paddingHorizontal: 15, flexWrap: "wrap" }}>₹{totAmt}</Text>
             </View>
+
+            {totQty ? <View style={{
+                backgroundColor: theme.colors.vanillaSecondary,
+                height: 50,
+                alignItems: "center",
+                justifyContent: "center",
+                minWidth: 50,
+                gap: -5
+            }}>
+                <Text variant="bodyMedium" ellipsizeMode='tail' numberOfLines={2} style={{ color: theme.colors.onVanilla, textAlign: "center", paddingHorizontal: 5, flexWrap: "wrap" }}>Total Qty</Text>
+                <Text style={{ color: theme.colors.onVanilla, textAlign: "center", paddingHorizontal: 5, flexWrap: "wrap" }}>•</Text>
+                <Text style={{ color: theme.colors.onVanilla, textAlign: "center", paddingHorizontal: 5, flexWrap: "wrap" }}>{totQty}</Text>
+            </View> : null}
 
             <View style={{
                 backgroundColor: theme.colors.vanilla,

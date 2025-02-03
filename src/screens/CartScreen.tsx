@@ -517,7 +517,7 @@ function CartScreen() {
                 top: "87.2%",
                 alignSelf: "center"
             }}>
-                <SnackBar totAmt={totalPrice?.toFixed(2)} handleBtn1Press={handlePressBillScreen} handleBtn2Press={handleClear} disableNext={!totalPrice} hideCart />
+                <SnackBar totAmt={totalPrice?.toFixed(2)} handleBtn1Press={handlePressBillScreen} handleBtn2Press={handleClear} disableNext={!totalPrice} hideCart totQty={addedProductsList.reduce((total, product) => total + product?.quantity, 0)} />
             </View>
 
             <DialogBox

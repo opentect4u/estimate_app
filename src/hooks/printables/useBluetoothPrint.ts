@@ -2285,7 +2285,8 @@ export const useBluetoothPrint = () => {
 
     let i = 1
     for (const item of reportData) {
-      text += `[L]   ${item?.cust_name?.slice(0, 5)}[C]${item?.phone_no}[L]${item?.due_amt}\n`;
+      text += `[L]   ${item?.cust_name?.slice(0, 5)}[C]${item?.phone_no}[L]${item?.due_amt}\n` +
+        `[C]                     \n`;
     }
 
     text += `[C]========================\n` +

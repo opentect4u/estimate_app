@@ -37,7 +37,7 @@ import { imgNotFound } from "../resources/images"
 // import slikCut from "../resources/images/test_images/sc.jpg"
 
 // import { ADDRESSES } from "../config/api_list"
-import { BASE_URL } from "../config/config"
+import { BASE_URL, BASE_URL_ITEM_IMG } from "../config/config"
 
 function CategoryProductsScreen() {
     const theme = usePaperColorScheme()
@@ -535,7 +535,7 @@ function CategoryProductsScreen() {
                                                             padding: 5
                                                         }}>
                                                             <Image
-                                                                source={item?.item_img ? { uri: `${BASE_URL}${item?.item_img}` } : imgNotFound}
+                                                                source={item?.item_img ? { uri: `${BASE_URL_ITEM_IMG}${item?.item_img}` } : imgNotFound}
                                                                 style={{ height: 80, width: 80 }}
                                                             />
                                                         </View>
