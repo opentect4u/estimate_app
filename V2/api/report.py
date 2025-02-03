@@ -660,7 +660,6 @@ async def userwise_report(item_rep:UserwiseReport):
 #     group by created_by,user_name,branch_name
 #    '''
     query = f'''  
-
 select created_by,user_name,branch_name,
     sum(receipt_no),
 sum(Quantity)Quantity,
@@ -712,7 +711,6 @@ from (
     and b.cancel_flag = 0
     group by a.created_by,c.user_name,d.branch_name)a
     group by created_by,user_name,branch_name;
-
    '''
    
     print(query)
