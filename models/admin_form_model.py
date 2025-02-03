@@ -10,6 +10,10 @@ from typing import Annotated, Union, Optional, List
 class CompId(BaseModel):
     comp_id:int
 
+class ItemList(BaseModel):
+    comp_id:int
+    br_id:int
+
 # ======================================================================================================
 # Models Used in user.py
 

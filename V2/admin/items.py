@@ -54,6 +54,7 @@ async def add_edit_items(
     catg_id:int = Form(...),
     brand_id:int = Form(...),
     created_by:str = Form(...),
+    br_id:int = Form(...),
     file: Optional[UploadFile] = File(None)
 ):
     fileName = None if not file else await uploadfile(file)
@@ -90,8 +91,8 @@ async def add_edit_items(
         # print(res_dt['lastId'],"uuuuuuuuu")
         if res_dt["suc"] > 0:
             table_name1 = "md_item_rate"
-            fields1 = "item_id,price,mrp,created_by,created_dt"
-            values1 = f"{res_dt['lastId']},{price},{mrp},'{created_by}','{formatted_dt}'"
+            fields1 = "item_id,price,mrp,br_id,created_by,created_dt"
+            values1 = f"{res_dt['lastId']},{price},{mrp},{br_id},'{created_by}','{formatted_dt}'"
             where1 = None
             flag1 = 0
             res_dt1= await db_Insert(table_name1,fields1,values1,where1,flag1)
