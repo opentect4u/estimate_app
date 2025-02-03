@@ -63,6 +63,7 @@ async def add_edit_items(
     item_img_add = f",'/uploads/{fileName}'" if fileName != None else ', ""'
     item_img_edit = f", item_img = '/uploads/{fileName}'" if fileName != None else ''
     print(f'item_id={item_id}')
+    print("SSSSSSSSSSSSSSSSS")
     if item_id > 0:
         print("I am inside item_id>0")
 
