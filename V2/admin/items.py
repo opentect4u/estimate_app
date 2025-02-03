@@ -76,7 +76,7 @@ async def add_edit_items(
 
         if res_dt["suc"] > 0:
             table_name2 = "md_item_rate"
-            fields2 = f"price = {price}, mrp = {mrp}, br_id={br_id}, modified_by = '{created_by}', modified_dt = '{formatted_dt}'"
+            fields2 = f"price = {price}, mrp = {mrp}, br_id={br_id}, modified_by = '{created_by}', modified_dt = '{formatted_dt}'" if br_id>0 else f"price = {price}, mrp = {mrp}, modified_by = '{created_by}', modified_dt = '{formatted_dt}'"
             values2 = None
             where2 = f"item_id = {item_id} and br_id={br_id}" if br_id>0 else f"item_id = {item_id}"
             flag2 = 1
