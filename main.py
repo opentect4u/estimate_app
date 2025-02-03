@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from api.main import router as apiRouter
 from admin.main import router as adminRouter
+from v2.api.main import router as apiRouter
+from v2.admin.main import router as adminRouter
 from fastapi.staticfiles import StaticFiles
 
 # testing git
@@ -28,8 +30,8 @@ app.include_router(apiRouter)
 app.include_router(adminRouter)
 
 # 01/02/2025
-app.include_router(apiRouter, prefix="/v2")
-app.include_router(adminRouter, prefix="/v2")
+app.include_router(apiRouter, prefix="/v2/api")
+app.include_router(adminRouter, prefix="/v2/admin")
 
 @app.get('/')
 def index():
