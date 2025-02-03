@@ -82,7 +82,8 @@ async def add_edit_items(
             res_dt2 = await db_Insert(table_name2,fields2,values2,where2,flag2)
 
     else:
-
+        print("I am inside item_id==0")
+        
         table_name = "md_items"
         fields = "catg_id, item_name, item_img, brand_id, unit_id, created_by, created_dt"
         values =f"{catg_id},'{item_name}' {item_img_add}, {brand_id},{unit_id},'{created_by}','{formatted_dt}'"
