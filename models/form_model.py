@@ -106,6 +106,7 @@ class CancelReport(BaseModel):
     to_date:date
     comp_id:int
     br_id:int
+    user_id:str
 
 class DaybookReport(BaseModel):
     from_date:date
@@ -118,6 +119,7 @@ class ItemReport(BaseModel):
     to_date:date
     comp_id:int
     br_id:int
+    user_id:str
 
 class UserwiseReport(BaseModel):
     from_date:date
@@ -373,6 +375,7 @@ class DueReport(BaseModel):
     comp_id:int
     br_id:int
     date:date
+    user_id:str
 
 class CalReceipt(BaseModel):
     comp_id:int

@@ -338,7 +338,7 @@ async def cancel_report(data:CancelReport):
     
     # query=f"select a.cust_name, a.phone_no, a.receipt_no, a.trn_date, count(b.receipt_no)no_of_items, a.price, a.discount_amt, a.cgst_amt, a.sgst_amt, a.round_off, a.net_amt, a.pay_mode, a.created_by from td_receipt a,td_item_sale b where a.receipt_no = b.receipt_no and b.comp_id = {data.comp_id} AND b.br_id = {data.br_id} and a.receipt_no In (select receipt_no from td_receipt_cancel_new where date(cancelled_dt) between '{data.from_date}' and '{data.to_date}') group by a.cust_name, a.phone_no, a.receipt_no, a.trn_date,a.price, a.discount_amt, a.cgst_amt, a.sgst_amt, a.round_off, a.net_amt, a.pay_mode, a.created_by Order by a.trn_date,a.receipt_no"
 
-    query = f"select a.receipt_no, a.trn_date, count(b.receipt_no)no_of_items, a.price, a.net_amt, a.pay_mode, a.created_by from td_receipt a,td_item_sale b where a.receipt_no = b.receipt_no and b.comp_id = {data.comp_id} AND b.br_id = {data.br_id} and a.receipt_no In (select receipt_no from td_receipt_cancel_new where date(cancelled_dt) between '{data.from_date}' and '{data.to_date}') group by a.receipt_no, a.trn_date,a.price, a.net_amt, a.pay_mode, a.created_by Order by a.trn_date,a.receipt_no"
+    query = f"select a.receipt_no, a.trn_date, count(b.receipt_no)no_of_items, a.price, a.net_amt, a.pay_mode, a.created_by from td_receipt a,td_item_sale b where a.receipt_no = b.receipt_no and b.comp_id = {data.comp_id} AND b.br_id = {data.br_id} and a.created_by='{data.user_id}' and a.receipt_no In (select receipt_no from td_receipt_cancel_new where date(cancelled_dt) between '{data.from_date}' and '{data.to_date}') group by a.receipt_no, a.trn_date,a.price, a.net_amt, a.pay_mode, a.created_by Order by a.trn_date,a.receipt_no"
     print(query)
     cursor.execute(query)
     
@@ -459,7 +459,7 @@ async def recovery_report(data:RecveryReport):
 async def due_report(data:DueReport):
     conn = connect()
     cursor = conn.cursor()
-    query = f"select ifnull(b.cust_name,'NA')cust_name, a.phone_no, Sum(due_amt) - Sum(paid_amt)due_amt from td_recovery_new a,md_customer b where a.comp_id = b.comp_id and a.phone_no = b.phone_no and a.comp_id = {data.comp_id} and a.br_id = {data.br_id} and a.recover_dt <= '{data.date}' GROUP BY b.cust_name,a.phone_no having due_amt>0"
+    query = f"select ifnull(b.cust_name,'NA')cust_name, a.phone_no, Sum(due_amt) - Sum(paid_amt)due_amt from td_recovery_new a,md_customer b where a.comp_id = b.comp_id and a.phone_no = b.phone_no and a.comp_id = {data.comp_id} and a.br_id = {data.br_id} and a.recover_dt <= '{data.date}' and   a.created_by = '{data.user_id}' GROUP BY b.cust_name,a.phone_no having due_amt>0"
     print(query)
     cursor.execute(query)
     records = cursor.fetchall()
@@ -508,7 +508,7 @@ async def Productwise_report(item_rep:ItemReport):
  and   c.br_id = {item_rep.br_id}
  and   a.trn_date BETWEEN  '{item_rep.from_date}' and '{item_rep.to_date}'
  and   a.cancel_flag = 0 
- and   a.created_by = '{created_by}'
+ and   a.created_by = '{item_rep.user_id}'
  group by b.item_name,a.item_id,d.unit_name,e.category_name,c.price;'''
     # query = f"SELECT b.item_name,a.item_id,d.unit_name as unit_name,SUM(a.qty)as tot_item_qty,c.price as unit_price,sum(a.price*a.qty)as tot_item_price from td_item_sale a, md_items b, md_item_rate c,md_unit d where a.item_id = b.id and a.item_id=c.item_id  and b.unit_id = d.sl_no and a.comp_id = {item_rep.comp_id} and a.br_id = {item_rep.br_id} and a.trn_date BETWEEN '{item_rep.from_date}' and '{item_rep.to_date}' and a.cancel_flag = 0 group by b.item_name,a.item_id,d.unit_name,c.price"
     print(query)
