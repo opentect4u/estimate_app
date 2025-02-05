@@ -5,6 +5,8 @@ from typing import Annotated, Union, Optional
 class CreatePIN(BaseModel):
     PIN:str
     phone_no:str
+class SessionData(BaseModel):
+    id: str
 
 class UserLogin(BaseModel):
     user_id:str

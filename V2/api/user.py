@@ -1,13 +1,16 @@
 from fastapi import APIRouter
 from config.database import connect
 from models.master_model import createResponse
-from models.form_model import LoginFlag, UserLogin,LoginStatus,CreatePIN,Login
+from models.form_model import LoginFlag, UserLogin,LoginStatus,CreatePIN,Login,SessionData
 # from models.otp_model import generateOTP
 from utils import get_hashed_password
 from utils import get_hashed_password,verify_password
-
+from uuid import uuid4
+from global_var import global_var as g_var
+import threading
 # testing git
 userRouter = APIRouter()
+lock = threading.Lock()
 
 
 # Verify Phone no and active status
@@ -87,6 +90,10 @@ async def OTP(phone_no:int):
 
 @userRouter.post('/update_login_status')
 async def update_login_status(data:LoginStatus):
+    session = uuid4()
+    # data = SessionData(id=data.user_id)
+    # await backend.create(session, data)
+    # cookie.attach_to_response(response, session)
     conn = connect()
     cursor = conn.cursor()
     query = f"update md_user set login_flag = 'Y' where user_id = '{data.user_id}'"
@@ -115,7 +122,8 @@ async def user_login(data_login:Login):
     conn.close()
     cursor.close()
     print('router info',userRouter)
-
+    with lock:
+        g_var = data_login.user_id
     # conn1 = connect()
     # cursor1 = conn1.cursor()
     # query1= F"SELECT login_flag from md_user WHERE device_id='{result1[0]["device_id"]}' and active_flag='Y'"
