@@ -126,7 +126,7 @@ async def user_login(data_login:Login):
     with lock:
         g_variable = data_login.user_id
 
-        print(g_variable)
+    print('g_var in login',g_variable)
     # conn1 = connect()
     # cursor1 = conn1.cursor()
     # query1= F"SELECT login_flag from md_user WHERE device_id='{result1[0]["device_id"]}' and active_flag='Y'"
