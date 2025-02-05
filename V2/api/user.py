@@ -6,7 +6,7 @@ from models.form_model import LoginFlag, UserLogin,LoginStatus,CreatePIN,Login,S
 from utils import get_hashed_password
 from utils import get_hashed_password,verify_password
 from uuid import uuid4
-from V2.global_variable.global_var import g_variable
+from V2.global_variable.global_var import g_variable,setGlobal
 import threading
 # testing git
 userRouter = APIRouter()
@@ -122,11 +122,12 @@ async def user_login(data_login:Login):
     conn.close()
     cursor.close()
     print('router info',userRouter)
-    global g_variable
-    with lock:
-        g_variable = data_login.user_id
+    # global g_variable
+    # with lock:
+    #     g_variable = data_login.user_id
 
-    print('g_var in login',g_variable)
+    # print('g_var in login',g_variable)
+    setGlobal(data_login.user_id)
     # conn1 = connect()
     # cursor1 = conn1.cursor()
     # query1= F"SELECT login_flag from md_user WHERE device_id='{result1[0]["device_id"]}' and active_flag='Y'"
