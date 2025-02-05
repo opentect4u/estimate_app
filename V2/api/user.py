@@ -6,7 +6,7 @@ from models.form_model import LoginFlag, UserLogin,LoginStatus,CreatePIN,Login,S
 from utils import get_hashed_password
 from utils import get_hashed_password,verify_password
 from uuid import uuid4
-from V2.global_variable.global_var import g_variable,setGlobal
+from V2.global_variable.global_var import setGlobal
 import threading
 # testing git
 userRouter = APIRouter()

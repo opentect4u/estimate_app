@@ -5,3 +5,6 @@ def setGlobal(value):
     g_variable=value
 
     print("gggggggggggg", g_variable)
+
+def getGlobal():
+    return g_variable
