@@ -114,7 +114,7 @@ async def user_login(data_login:Login):
     result1 = createResponse(records, cursor.column_names, 1)
     conn.close()
     cursor.close()
-
+    print('router info',userRouter)
 
     # conn1 = connect()
     # cursor1 = conn1.cursor()
