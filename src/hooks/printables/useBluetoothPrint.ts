@@ -1819,25 +1819,25 @@ export const useBluetoothPrint = () => {
 
     let text =
       `[C]ESTIMATE\n` +
-      `[C]=============================\n` +
+      `[C]============================\n` +
       // `[L]   RCPT. NO.\n` +
       // `[L]   ${rcptNo?.toString()}\n` +
       `[L]   DATE[L]${new Date().toLocaleDateString("en-GB")}\n` +
-      `[C]=============================\n` +
-      `[L]   Item[C]Qty[L]Amount\n` +
-      `[C]=============================\n`;
+      `[C]============================\n` +
+      `[L]   Item[C]Qty[L]Amt\n` +
+      `[C]============================\n`;
 
     for (const item of addedProducts) {
       totalQuantities += +item?.quantity
-      text += `[L]   ${item?.item_name?.slice(0, 12)}[C]${item?.quantity}[L]${+item?.price * +item?.quantity}\n` +
+      text += `[L]   ${item?.item_name?.slice(0, 12)}[C]${item?.quantity}[L]${(+item?.price * +item?.quantity)?.toFixed(2)}\n` +
         `[C]                            \n`;
     }
 
-    text += `[C]=============================\n` +
+    text += `[C]============================\n` +
 
       // `[L]Item[C]Qty[R]Amount\n` +
       `[L]   ${addedProducts?.length}[C]${totalQuantities}[L]${netTotal?.toFixed(2)}\n` +
-      `[C]=============================\n` +
+      `[C]============================\n` +
       `[L]   ROUND OFF[L]${roundingOffCalculate(netTotal, 0)}\n` +
 
       // if (paymentMode === "C") {
@@ -1898,7 +1898,7 @@ export const useBluetoothPrint = () => {
 
     for (const item of addedProducts) {
       totalQuantities += +item?.qty
-      text += `[L]   ${item?.item_name?.slice(0, 12)}[C]${item?.qty}[L]${+item?.price * +item?.qty}\n` +
+      text += `[L]   ${item?.item_name?.slice(0, 12)}[C]${item?.qty}[L]${(+item?.price * +item?.qty)?.toFixed(2)}\n` +
         `[C]                            \n`;
     }
 

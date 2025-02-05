@@ -68,6 +68,7 @@ function ProductwiseSaleReportScreen() {
       to_date: toDate,
       comp_id: companyId,
       br_id: branchId,
+      user_id: loginStore?.user_id
     }
     setIsDisabled(true)
     setIsLoading(true)

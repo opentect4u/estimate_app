@@ -484,6 +484,7 @@ export type DueReportCredentials = {
   "comp_id": number
   "br_id": number
   "date": string
+  "user_id"?: string
 }
 
 export type DueReportResponse = {
@@ -638,7 +639,7 @@ export type BasicReportCredentials = {
   "to_date": string
   "comp_id": number
   "br_id": number
-  // "user_id": string
+  "user_id"?: string
 }
 
 export type CancelledBillsReportResponse = {

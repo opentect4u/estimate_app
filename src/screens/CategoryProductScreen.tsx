@@ -533,7 +533,7 @@ function CategoryProductScreen() {
                                 alignSelf: "center",
                                 borderRadius: 18,
                                 textAlign: "center"
-                            }}>Price: {params?.product?.price} × {getQuantity(params?.product?.item_id)} = ₹{+params?.product?.price * +getQuantity(params?.product?.item_id)}</Text>
+                            }}>Price: {params?.product?.price} × {getQuantity(params?.product?.item_id)} = ₹{(+params?.product?.price * +getQuantity(params?.product?.item_id))?.toFixed(2)}</Text>
                             {/* <Text variant="headlineMedium" style={{
                                 backgroundColor: theme.colors.vanilla,
                                 padding: 10,

@@ -20,7 +20,7 @@ import useLogout from "../hooks/api/useLogout"
 import useCategories from "../hooks/api/useCategories"
 import useSendOtp2 from "../hooks/api/useSendOtp2"
 import { AppStoreContext } from "../models/custom_types"
-import RNEzetapSdk from "react-native-ezetap-sdk"
+// import RNEzetapSdk from "react-native-ezetap-sdk"
 import DeviceInfo from "react-native-device-info"
 
 export const AppStore = createContext<AppStoreContext>(null)
@@ -181,19 +181,20 @@ const AppContext = ({ children }) => {
   //   })
   // }
 
-  const isLoggedIn = () => {
-    if (loginStorage.getAllKeys().length === 0) {
-      console.log("IF - isLoggedIn")
-      setIsLogin(false)
-    } else {
-      console.log("ELSE - isLoggedIn")
-      setIsLogin(true)
-    }
-  }
+  // const isLoggedIn = () => {
+  //   if (loginStorage.getAllKeys().length === 0) {
+  //     console.log("IF - isLoggedIn") 
+  //     setIsLogin(false)
+  //   } else {
+  //     console.log("ELSE - isLoggedIn")
+  //     setIsLogin(true)
+  //   }
+  // }
 
   useEffect(() => {
-    if (appState.current === "active") {
-      isLoggedIn()
+    if (appState.current === "inactive") {
+      // isLoggedIn()
+      handleLogout()
     }
   }, [])
 

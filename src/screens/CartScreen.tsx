@@ -453,7 +453,7 @@ function CartScreen() {
                                                 }}>₹{item?.price}</Text>
                                                 <Text style={{
                                                     color: theme.colors.purple
-                                                }}>Total: ₹{+item?.price * +item?.quantity}</Text>
+                                                }}>Total: ₹{(+item?.price * +item?.quantity)?.toFixed(2)}</Text>
                                             </View>}
                                             right={props => {
                                                 return <AddRemove value={getQuantity(item?.item_id)} add={() => add(item)} remove={() => remove(item)} key={item?.item_id} isAddDisabled={receiptSettings?.stock_flag === "Y" && getQuantity(item?.item_id) === item?.stock} />

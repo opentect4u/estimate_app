@@ -60,7 +60,7 @@ function DueReportScreen() {
             comp_id: companyId,
             br_id: branchId,
             date: toDate,
-            // user_id: userId,
+            user_id: loginStore?.user_id,
         }
         await fetchDueReport(dueReportCredObject)
             .then(res => {

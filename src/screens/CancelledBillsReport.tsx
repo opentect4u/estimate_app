@@ -70,7 +70,7 @@ function CancelledBillsReportScreen() {
       to_date: toDate,
       comp_id: loginStore?.comp_id,
       br_id: loginStore?.br_id,
-      // user_id: loginStore?.user_id
+      user_id: loginStore?.user_id
     }
 
     setIsDisabled(true)
