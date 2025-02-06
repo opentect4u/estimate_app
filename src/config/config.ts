@@ -1,9 +1,11 @@
 // export const BASE_URL = "http://192.168.1.238:3001"
 // export const BASE_URL = "http://202.21.38.178:3001"
 
+// server
 // export const BASE_URL_ITEM_IMG = "http://98.130.88.168:3001"
 // export const BASE_URL = "http://98.130.88.168:3001/v2"
 
+// uat
 export const BASE_URL_ITEM_IMG = "http://202.21.38.178:3001"
 export const BASE_URL = "http://202.21.38.178:3001/v2"
 
