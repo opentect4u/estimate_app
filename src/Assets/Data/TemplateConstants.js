@@ -167,6 +167,15 @@ export const reportHeaders = {
     ],
     span: 2,
   },
+  billwiseestimate: {
+    title: "Billwise Report",
+    headers: [
+      { name: "receipt_no", value: "Receipt No." },
+      { name: "qty", value: "Quantity" },
+      { name: "net_amt", value: "Net Amount" },
+    ],
+    span: 1,
+  },
   customerledger: {
     title: "Customer Ledger",
     headers: [

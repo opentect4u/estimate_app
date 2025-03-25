@@ -91,6 +91,11 @@ export function calculate(data, flag) {
     data?.forEach((e) => (due_amt += e.due_amt));
 
     totals.push(due_amt.toFixed(2));
+  } else if (flag == "billwiseestimate") {
+    data?.forEach((e) => (qty += +e.qty));
+    data?.forEach((e) => (net_amt += +e.net_amt));
+
+    totals.push(qty.toFixed(2), net_amt.toFixed(2));
   } else if (flag == "customerledger") {
     data?.forEach((e) => (paid_amt += e.paid_amt));
     data?.forEach((e) => (due_amt += e.due_amt));

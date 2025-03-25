@@ -25,6 +25,7 @@ import DueEstimate from "./Screens/OutletAdmin/Reports/DueEstimate";
 import ItemDetailsBranchwise from "./Screens/Master/ItemDetailsBranchwise/ItemDetailsBranchwise";
 import ItemDetailsViewBranchwise from "./Screens/Master/ItemDetailsBranchwise/ItemDetailsViewBranchwise";
 import AddDetailsBranchwise from "./Screens/Master/ItemDetailsBranchwise/AddDetailsBranchwise";
+import BillwiseEstimate from "./Screens/OutletAdmin/Reports/BillwiseEstimate";
 
 const CategorywiseItemsComp = lazy(() =>
   import("./Screens/SuperAdmin/CategorywiseItems/CategorywiseItemsComp")
@@ -521,6 +522,10 @@ const router = createBrowserRouter([
                   {
                     path: "dueestimate",
                     element: <DueEstimate />,
+                  },
+                  {
+                    path: "billwiseestimate",
+                    element: <BillwiseEstimate />,
                   },
                 ],
               },
