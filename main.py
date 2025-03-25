@@ -30,8 +30,8 @@ app.include_router(apiRouter)
 app.include_router(adminRouter)
 
 # 01/02/2025
-app.include_router(apiRouterV2, prefix="/v2")
-app.include_router(adminRouterV2, prefix="/v2")
+app.include_router(apiRouterV2, prefix="/v2/api")
+app.include_router(adminRouterV2, prefix="/v2/admin")
 
 
 

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from config.database import connect
 from models.master_model import createResponse
-from models.form_model import DashBoard,SaleReport,GSTStatement,GSTSummary,ItemReport,RefundBillReport,BillList,SearchByItem,CreditReport,CancelReport,DaybookReport,SearchByRcpt,SearchByName,UserwiseReport,CustomerLedger,RecveryReport,DueReport,CreditCust
+from models.form_model import DashBoard,SaleReport,GSTStatement,GSTSummary,ItemReport,RefundBillReport,BillList,SearchByItem,CreditReport,CancelReport,DaybookReport,SearchByRcpt,SearchByName,UserwiseReport,CustomerLedger,RecveryReport,DueReport,CreditCust,BillwiseReport,DueReportMobileAPI
 from V2.global_variable.global_var import getGlobal
 # testing git
 repoRouter = APIRouter()
@@ -209,6 +209,31 @@ async def search_bill_by_phone(bill:BillList):
     return resData
 
 #======================================================================================================
+# Billwise Report 
+@repoRouter.post('/billwise_report')
+async def search_bill_by_phone(bill:BillwiseReport):
+    conn = connect()
+    cursor = conn.cursor()
+    query = f" SELECT r.receipt_no,r.net_amt,sum(s.qty) as qty FROM `td_receipt` r join td_item_sale s on s.receipt_no=r.receipt_no where s.created_by='{bill.user_id}' and s.trn_date BETWEEN '{bill.from_date}' and '{bill.from_date}';          "
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if cursor.rowcount>0:
+        resData = {
+            "status":1,
+            "data":result
+        }
+    else:
+        resData = {
+            "status":0,
+            "data":[]
+        }
+
+    return resData
+
+#--------------------------------------------------------------------------------------------------------
 # Search Bills by item name
 
 @repoRouter.post('/billsearch_by_item')
@@ -456,7 +481,7 @@ async def recovery_report(data:RecveryReport):
 # Due report 
 
 @repoRouter.post('/due_report')
-async def due_report(data:DueReport):
+async def due_report(data:DueReportMobileAPI):
     conn = connect()
     cursor = conn.cursor()
     query = f"select ifnull(b.cust_name,'NA')cust_name, a.phone_no, Sum(due_amt) - Sum(paid_amt)due_amt from td_recovery_new a,md_customer b where a.comp_id = b.comp_id and a.phone_no = b.phone_no and a.comp_id = {data.comp_id} and a.br_id = {data.br_id} and a.recover_dt <= '{data.date}' and a.created_by = '{data.user_id}' GROUP BY b.cust_name,a.phone_no having due_amt>0"

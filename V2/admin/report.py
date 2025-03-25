@@ -2,8 +2,9 @@ from fastapi import APIRouter
 from config.database import connect
 from models.master_model import createResponse
 from models.masterApiModel import db_select, db_Insert
-from models.admin_form_model import UserList,SaleReport,CollectionReport,PayModeReport,UserWiseReport,GSTstatement,RefundReport,CreditReport,ItemReport,ItemReportOutlet,CancelReport,CancelReportOutlet,DaybookReport,CustomerLedger,RecveryReport,DueReport,DueReportOutlet,dashboard,UserwiseReportOutlet
+from models.admin_form_model import UserList,SaleReport,CollectionReport,PayModeReport,UserWiseReport,GSTstatement,RefundReport,CreditReport,ItemReport,ItemReportOutlet,CancelReport,CancelReportOutlet,DaybookReport,CustomerLedger,RecveryReport,DueReport,DueReportOutlet,dashboard,UserwiseReportOutlet,BillwiseReport
 from datetime import date
+# import pandas as pd
 reportRouter = APIRouter()
 
 #======================================================================================================
@@ -529,6 +530,34 @@ async def productwise_report(item_rep:ItemReportOutlet):
         "msg":result
         }
     return resData
+
+
+# billwise report 
+@reportRouter.post('/billwise_report')
+async def search_bill_by_phone(bill:BillwiseReport):
+    conn = connect()
+    cursor = conn.cursor()
+    query = f" SELECT r.receipt_no,r.net_amt,sum(s.qty) as qty FROM `td_receipt` r join td_item_sale s on s.receipt_no=r.receipt_no where s.created_by='{bill.user_id}' and s.trn_date BETWEEN '{bill.from_date}' and '{bill.to_date}'" if bill.user_id>0 else f" SELECT r.receipt_no,r.net_amt,sum(s.qty) as qty FROM `td_receipt` r join td_item_sale s on s.receipt_no=r.receipt_no where s.trn_date BETWEEN '{bill.from_date}' and '{bill.to_date}'"
+    cursor.execute(query)
+    records = cursor.fetchall()
+    result = createResponse(records, cursor.column_names, 1)
+    conn.close()
+    cursor.close()
+    if cursor.rowcount>0:
+        resData = {
+            "status":1,
+            "data":result
+        }
+    else:
+        resData = {
+            "status":0,
+            "data":[]
+        }
+
+    return resData
+
+
+#==================================================
 
 
 @reportRouter.post('/due_report_outlet')

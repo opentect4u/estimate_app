@@ -377,6 +377,13 @@ class DueReport(BaseModel):
     date:date
     user_id:str
 
+class DueReportMobileAPI(BaseModel):
+    comp_id:int
+    br_id:int
+    date:date
+    user_id:str
+
+
 class CalReceipt(BaseModel):
     comp_id:int
     br_id:int
@@ -401,5 +408,9 @@ class AddEditTXN(BaseModel):
 
 class CreditCust(BaseModel):
     comp_id:int
+    user_id:str
+
+class BillwiseReport(BaseModel):
+    from_date:date
     user_id:str
     
