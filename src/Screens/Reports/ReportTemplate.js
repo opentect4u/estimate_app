@@ -49,23 +49,6 @@ function ReportTemplate({ templateData, template, _url, flag = 0 }) {
     comp = localStorage.getItem("comp_id");
     setCalled(true);
 
-    // if (flag !== 666) {
-    //   callApi(_url, 1, {
-    //     from_date: data.from_dt,
-    //     to_date: data.to_dt,
-    //     br_id: +data.outlet,
-    //     comp_id: +comp,
-    //   });
-    // } else {
-    //   callApi(_url, 1, {
-    //     from_date: data.from_dt,
-    //     to_date: data.to_dt,
-    //     br_id: localStorage.getItem("br_id"),
-    //     user_id: data.userlist,
-    //     comp_id: +comp,
-    //   });
-    // }
-
     if (flag === 666) {
       console.log("in 666=============");
       callApi(_url, 1, {
